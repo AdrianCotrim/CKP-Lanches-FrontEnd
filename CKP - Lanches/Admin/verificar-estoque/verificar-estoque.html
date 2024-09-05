@@ -125,7 +125,7 @@
                 <!--TABELA-->
 
                 <div class="tabela-responsiva">
-                    <table class="table table-hover">
+                    <table id="estoque" class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Nome</th>
@@ -214,6 +214,44 @@
                             </div>
                         </footer>
                     </div>
+                </div>
+
+                <!-- JANELA PARA ALTERAR ITEM -->
+
+                <div id="alterarProduto" class="modal">
+                    <div class="modalContainer">
+
+                        <header class="container-fluid">
+                            <span><i class="fa-solid fa-list-check"></i></span>
+                            <h2>Alterar Produto</h2>
+                        </header>
+
+                        <form class="grid-form">
+                            <div class="grupo-form">
+                                <label for="nome">Alterar nome:</label>
+                                <input id="nome" placeholder="Ex: Pão" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="descricao">Alterar descrição:</label>
+                                <input id="descricao" placeholder="Ex: Para lanches" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="QtdMinima">Alterar quantidade mínima:</label>
+                                <input id="QtdMinima" placeholder="Ex: 10,15,20..." type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="quantidade">Alterar quantidade:</label>
+                                <input id="quantidade" placeholder="Ex: 10,15,20..." type="text">
+                            </div>
+                        </form>
+
+                        <footer class="container">
+                            <div class="row justify-content-evenly">
+                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--verde">Concluir</button>
+                            </div>
+                        </footer>
+
                 </div>
 
                 <!--LISTA DE COMPRAS-->

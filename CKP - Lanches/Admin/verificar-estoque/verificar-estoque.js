@@ -19,8 +19,26 @@ span.onclick = function () {
     modal.style.display = "none";
 }
 
+// Alterar Produto
+var estoque = document.getElementById('estoque')
+var modalAlterarProd = document.getElementById("alterarProduto")
 
-//gerar PDF - Lista de compras
+estoque.addEventListener('click', (event) => {
+    if(event.target.nodeName == 'TD'){
+        modalAlterarProd.style.display  = 'flex'
+    }
+})
+
+modalAlterarProd.addEventListener('click', (event) => {
+    if(event.target.textContent == 'Concluir'){
+        modalAlterarProd.style.display = 'none'
+    }
+    if(event.target.textContent == 'Cancelar'){
+        modalAlterarProd.style.display = 'none'
+    }
+})
+
+// Gerar PDF - Lista de compras
 
 document.getElementById('listaCompras').addEventListener('click', async () => {
     const iframe = document.getElementById('pdfContent');
@@ -37,4 +55,4 @@ document.getElementById('listaCompras').addEventListener('click', async () => {
 });
 
 
-//gerar PDF - Relatório de movimentações
+// Gerar PDF - Relatório de movimentações

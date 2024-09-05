@@ -1,0 +1,16 @@
+.botoes span{
+    font-size: 4vh;
+    color: var(--cinza-texto);
+    
+    transition: 200ms;
+}
+
+.botoes{
+    gap: 3vh;
+}
+
+.botoes span:hover{
+    transform: scale(1.2);
+    color: var(--cinza-hover);
+}
+

@@ -1,6 +1,6 @@
 // Obtém o modais
 var modalAddInsumo = document.getElementById("adicionarInsumo");
-var modalAltInsumo = document.getElementById("alterarInsumo")
+
 
 // Obtém o botão que abre o modal
 var btn = document.getElementById("addProduto");
@@ -10,7 +10,7 @@ var span = document.getElementById("cancelar");
 var span2 = document.getElementById("confirmar");
 
 // Quando o usuário clicar no botão, abre o modal
-btn.onclick = function () {
+btn.onclick = () => {
     modalAddInsumo.style.display = "flex";
 }
 
@@ -23,21 +23,22 @@ span2.onclick = function () {
     modalAddInsumo.style.display = "none";
 }
 
-// Alterar Produto
+// Alterar Insumo
 var estoque = document.getElementById('estoque')
+var modalAltInsumo = document.getElementById('alterarInsumo')
 
 estoque.addEventListener('click', (event) => {
     if(event.target.nodeName == 'TD'){
-        modalAlterarProd.style.display  = 'flex'
-    }
+        modalAltInsumo.style.display = 'flex'
+    }   
 })
 
-modalAlterarProd.addEventListener('click', (event) => {
+modalAltInsumo.addEventListener('click', (event) => {
     if(event.target.textContent == 'Concluir'){
-        modalAlterarProd.style.display = 'none'
+        modalAltInsumo.style.display = 'none'
     }
     if(event.target.textContent == 'Cancelar'){
-        modalAlterarProd.style.display = 'none'
+        modalAltInsumo.style.display = 'none'
     }
 })
 

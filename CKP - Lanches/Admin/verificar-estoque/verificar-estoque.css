@@ -33,3 +33,7 @@
 input {
     width: 100%; 
 }
+
+#lista-de-compras{
+    display: none;
+}

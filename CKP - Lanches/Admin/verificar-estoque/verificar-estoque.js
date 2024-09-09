@@ -52,6 +52,7 @@ modalAltInsumo.addEventListener('click', (event) => {
     }
     if(event.target.textContent == 'Cancelar'){
         modalAltInsumo.style.display = 'none'
+    }
     if (event.target.nodeName == 'TD') {
         modalAlterarProd.style.display = 'flex'
     }

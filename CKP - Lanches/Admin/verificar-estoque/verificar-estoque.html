@@ -115,8 +115,7 @@
                             <span class="me-2" id="listaCompras" onclick="imprimirTabela()"><i
                                     class="fa-solid fa-cart-plus"></i></span>
                             <span class="me-2"><i class="fa-solid fa-file-lines"></i></span>
-                            <button id="addProduto" class="botao botao--vermelho"><i class="fas fa-plus"></i> Adicionar
-                                produto</button>
+                            <button id="addProduto" class="botao botao--vermelho"><i class="fas fa-plus"></i> Adicionar</button>
                         </div>
                     </div>
                 </div>
@@ -129,35 +128,29 @@
                             <tr>
                                 <th>Nome</th>
                                 <th>ID</th>
-                                <th>Quantidade</th>
                                 <th>Descrição</th>
+                                <th>Qtd Mínima</th>
+                                <th>Quantidade</th>
+                                <th>Data Validade</th>
                             </tr>
                         </thead>
                         <tbody>
 
                             <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
+                                <td>Pão</td>
+                                <td>5</td>
+                                <td>Para lanches</td>
+                                <td>20</td>
+                                <td>33</td>
+                                <td>10/10/2024</td>
                             </tr>
                             <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
+                                <td>Tomate</td>
+                                <td>2</td>
+                                <td>Para lanches e salada</td>
+                                <td>15</td>
+                                <td>30</td>
+                                <td>10/10/2024</td>
                             </tr>
 
                         </tbody>
@@ -166,50 +159,41 @@
 
                 <!--JANELA PARA ADICIONAR ITEM-->
 
-                <div id="janelaAddProduto" class="modal">
+                <div id="adicionarInsumo" class="modal">
                     <div class="modalContainer">
+
                         <header class="container-fluid">
-                            <span><i class="fa-solid fa-list-check"></i></span>
-                            <h2>Registrar novo pedido</h2>
+                            <span><i class="fa-solid fa-plus"></i></span>
+                            <h2>Adicionar Insumo</h2>
                         </header>
 
-                        <form class="container">
-
-                            <div class="row container mt-4 justify-content-between conteinerProdutos">
-                                <div class="mb-3 esquerda col-6">
-                                    <select id="lanches" class="select select--modal">
-                                        <option value="" disabled selected>Lanches</option>
-                                        <option value="X-Tudo">X-Tudo</option>
-                                        <option value="X-Nada">X-Nada</option>
-                                        <option value="X-Quasetudo">X-Quasetudo</option>
-                                        <option value="X-Salada">X-Salada</option>
-                                    </select>
-                                    <br>
-                                    <select id="bebidas" class="select select--modal">
-                                        <option value="" disabled selected>Bebidas</option>
-                                        <option value="Coca-Cola">Coca-Cola</option>
-                                        <option value="Pepsi">Pepsi</option>
-                                        <option value="Fanta Uva">Fanta Uva</option>
-                                        <option value="Fanta Laranja">Fanta Laranja</option>
-                                    </select>
-                                </div>
-
-                                <div class="item-list direita col-6 text-end" id="itemList">
-
-                                </div>
-
+                        <form class="grid-form">
+                            <div class="grupo-form">
+                                <label for="nome">Nome do insumo:</label>
+                                <input id="nome" placeholder="Ex: Tomate" type="text">
                             </div>
-
-                            <div class="container-textarea pt-3">
-                                <textarea placeholder="Obs: (ex: tirar a cebola)" class="col-11"></textarea>
+                            <div class="grupo-form">
+                                <label for="descricao">Descrição:</label>
+                                <input id="descricao" placeholder="Ex: Para salada" type="text">
                             </div>
-
+                            <div class="grupo-form">
+                                <label for="qtdMinima">Quantidade mínima:</label>
+                                <input id="qtdMinima" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="quantidade">Quantidade inicial:</label>
+                                <input id="quantidade" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="dataValidade">Data de Validade:</label>
+                                <input id="dataValidade" placeholder="Ex: xx/xx/xxxx" type="text">
+                            </div>
                         </form>
 
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Concluir</button>
+                                <button id="cancelar" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
                     </div>
@@ -217,30 +201,30 @@
 
                 <!-- JANELA PARA ALTERAR ITEM -->
 
-                <div id="alterarProduto" class="modal">
+                <div id="alterarInsumo" class="modal">
                     <div class="modalContainer">
 
                         <header class="container-fluid">
-                            <span><i class="fa-solid fa-list-check"></i></span>
-                            <h2>Alterar Produto</h2>
+                            <span><i class="fas fa-edit"></i></span>
+                            <h2>Alterar Insumo</h2>
                         </header>
 
                         <form class="grid-form">
                             <div class="grupo-form">
                                 <label for="nome">Alterar nome:</label>
-                                <input id="nome" placeholder="Ex: Pão" type="text">
+                                <input id="nomeAlterar" value="" placeholder="Ex: Tomate" type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="descricao">Alterar descrição:</label>
-                                <input id="descricao" placeholder="Ex: Para lanches" type="text">
+                                <input id="descricaoAlterar" placeholder="Ex: Para salada" type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="QtdMinima">Alterar quantidade mínima:</label>
-                                <input id="QtdMinima" placeholder="Ex: 10,15,20..." type="text">
+                                <input id="QtdMinimaAlterar" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="quantidade">Alterar quantidade:</label>
-                                <input id="quantidade" placeholder="Ex: 10,15,20..." type="text">
+                                <input id="quantidadeAlterar" placeholder="" type="text">
                             </div>
                         </form>
 
@@ -250,11 +234,6 @@
                                 <button class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
-
-                    </div>
-                </div>
-            </main>
-        </div>
     </div>
 
     <!--LISTA DE COMPRAS-->

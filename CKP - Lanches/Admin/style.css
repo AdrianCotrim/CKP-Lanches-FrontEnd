@@ -35,16 +35,19 @@
 
 /* Estilos para a tela de loading */
 #loading-screen {
-    position: fixed; /* Fixa o overlay em relação à tela */
+    position: fixed;
+    /* Fixa o overlay em relação à tela */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Fundo preto semi-transparente */
+    background: rgba(0, 0, 0, 0.6);
+    /* Fundo preto semi-transparente */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 9999; /* Faz com que a tela de loading fique sobre os outros conteúdos */
+    z-index: 9999;
+    /* Faz com que a tela de loading fique sobre os outros conteúdos */
 }
 
 .loader {
@@ -93,8 +96,13 @@
 
 /* Animação de carregamento */
 @keyframes loading {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
 }
 
 /* Animação de efeito de luz piscando no texto */
@@ -439,4 +447,10 @@ select {
 
 .fa-user {
     color: var(--vermelho-secundario);
+}
+
+/*RADIO-BUTTON*/
+
+input[type="radio"]{
+    height: 2vh;
 }

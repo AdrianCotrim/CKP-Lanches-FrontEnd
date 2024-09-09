@@ -115,7 +115,7 @@
                             <span class="me-2" id="listaCompras" onclick="imprimirTabela()"><i
                                     class="fa-solid fa-cart-plus"></i></span>
                             <span class="me-2"><i class="fa-solid fa-file-lines"></i></span>
-                            <button id="addProduto" class="botao botao--vermelho"><i class="fas fa-plus"></i> Adicionar</button>
+                            <button id="addInsumo" class="botao botao--vermelho"><i class="fas fa-plus"></i> Adicionar</button>
                         </div>
                     </div>
                 </div>
@@ -134,26 +134,7 @@
                                 <th>Data Validade</th>
                             </tr>
                         </thead>
-                        <tbody>
-
-                            <tr>
-                                <td>Pão</td>
-                                <td>5</td>
-                                <td>Para lanches</td>
-                                <td>20</td>
-                                <td>33</td>
-                                <td>10/10/2024</td>
-                            </tr>
-                            <tr>
-                                <td>Tomate</td>
-                                <td>2</td>
-                                <td>Para lanches e salada</td>
-                                <td>15</td>
-                                <td>30</td>
-                                <td>10/10/2024</td>
-                            </tr>
-
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
 
@@ -185,8 +166,8 @@
                                 <input id="quantidade" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="dataValidade">Data de Validade:</label>
-                                <input id="dataValidade" placeholder="Ex: xx/xx/xxxx" type="text">
+                                <label for="lote">Lote:</label>
+                                <input id="lote" placeholder="Ex: 1,2,3..." type="text">
                             </div>
                         </form>
 
@@ -315,6 +296,9 @@
 
     <script src="verificar-estoque.js"></script>
     <script src="../script.js"></script>
+    <script src="conexao-tabela-estoque.js"></script>
+    <script src="alterar-estoque.js"></script>
+    <script src="adicionar-insumo.js"></script>
 </body>
 
 </html>

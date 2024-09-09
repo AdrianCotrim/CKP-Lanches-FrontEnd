@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="imagex/png" href="/CKP - Lanches/Imagens/ckp-logo.png">
+    <link rel="shortcut icon" type="imagex/png" href="/Imagens/ckp-logo.png">
     <title>CKP - Verificar estoque</title>
 
     <!--STYLESHEETS-->
@@ -58,7 +58,7 @@
 
     <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center topo">
-            <img src="/CKP - Lanches/Imagens/ckp-logo.png" alt="CKP Logo">
+            <img src="/Imagens/ckp-logo.png" alt="CKP Logo">
 
             <div class="dropdown pe-3">
                 <div id="dropdown-content" class="dropdown-content">
@@ -76,22 +76,17 @@
         <div class="col-0 col-sm-2 menu">
             <nav>
                 <ul class="list-unstyled display-4">
-                    <li><a href="/CKP - Lanches/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
+                    <li><a href="/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
                             inicial</a></li>
-                    <li><a href="/CKP - Lanches/Admin/registrar-pedidos/registrar-pedidos.html"><i
-                                class="fas fa-plus pe-3"></i>
+                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
                             Registrar pedidos</a></li>
-                    <li><a href="/CKP - Lanches/Admin/verificar-estoque/verificar-estoque.html"><i
-                                class="fas fa-search pe-3"></i>
+                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
-                    <li><a href="/CKP - Lanches/Admin/historico-de-vendas/historico-vendas.html"><i
-                                class="fas fa-history pe-3"></i>
+                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-3"></i>
                             Histórico de vendas</a></li>
-                    <li><a href="/CKP - Lanches/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i
-                                class="fas fa-utensils pe-3"></i>
+                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-3"></i>
                             Gerenciar cardápio</a></li>
-                    <li><a href="/CKP - Lanches/Admin/administrar-usuarios/adm-usuarios.html"><i
-                                class="fas fa-users pe-3"></i>
+                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-3"></i>
                             Administrar usuários</a></li>
                 </ul>
             </nav>
@@ -106,20 +101,19 @@
             <main class="ps-5 pt-2 pe-5">
                 <div class="row pesquisa pb-4 align-items-center">
                     <form class="label-input d-flex col-4" action="">
-                        <label class="me-2" for="andamento">Filtrar:</label>
-                        <select class="me-2" name="andamento" id="andamento">
-                            <option value="todos">Todos</option>
-                            <option value="preparando">Preparando</option>
-                            <option value="pedido-pronto">Pedido pronto</option>
-                        </select>
+
+                        <label class="me-2" for="search">Pesquisar:</label>
+                        <input placeholder="Nome" class="me-2" name="text" type="text">
 
                         <label class="me-2" for="search">Buscar:</label>
                         <input placeholder="Número" class="me-2" name="text" type="text">
+
                     </form>
 
                     <div class="col-8 d-flex justify-content-end align-items-center">
                         <div class="botoes d-flex align-items-center">
-                            <span class="me-2" id="listaCompras"><i class="fa-solid fa-cart-plus"></i></span>
+                            <span class="me-2" id="listaCompras" onclick="imprimirTabela()"><i
+                                    class="fa-solid fa-cart-plus"></i></span>
                             <span class="me-2"><i class="fa-solid fa-file-lines"></i></span>
                             <button id="addProduto" class="botao botao--vermelho"><i class="fas fa-plus"></i> Adicionar</button>
                         </div>
@@ -240,16 +234,80 @@
                                 <button class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
-                    </div>
-                </div>
-
-                <!--LISTA DE COMPRAS-->
-
-                <iframe id="pdfContent" src="lista-de-compras.html" style="display:none; height: 500vh;"></iframe>
-                </div>
-        </main>
     </div>
-    </div>
+
+    <!--LISTA DE COMPRAS-->
+
+    <table id="lista-de-compras">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Qtde. Mín.</th>
+                <th>Qtde.</th>
+                <th>Desc.</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>Exemplo 1</td>
+                <td>Exemplo 2</td>
+                <td>Exemplo 3</td>
+                <td>Exemplo 4</td>
+                <td><i class="far fa-square"></i></td>
+            </tr>
+            <tr>
+                <td>Exemplo 1</td>
+                <td>Exemplo 2</td>
+                <td>Exemplo 3</td>
+                <td>Exemplo 4</td>
+                <td><i class="far fa-square"></i></td>
+            </tr>
+            <tr>
+                <td>Exemplo 1</td>
+                <td>Exemplo 2</td>
+                <td>Exemplo 3</td>
+                <td>Exemplo 4</td>
+                <td><i class="far fa-square"></i></td>
+            </tr>
+            <tr>
+                <td>Exemplo 1</td>
+                <td>Exemplo 2</td>
+                <td>Exemplo 3</td>
+                <td>Exemplo 4</td>
+                <td><i class="far fa-square"></i></td>
+            </tr>
+            <tr>
+                <td>Exemplo 1</td>
+                <td>Exemplo 2</td>
+                <td>Exemplo 3</td>
+                <td>Exemplo 4</td>
+                <td><i class="far fa-square"></i></td>
+            </tr>
+            <tr>
+                <td>Exemplo 1</td>
+                <td>Exemplo 2</td>
+                <td>Exemplo 3</td>
+                <td>Exemplo 4</td>
+                <td><i class="far fa-square"></i></td>
+            </tr>
+            <tr>
+                <td>Exemplo 1</td>
+                <td>Exemplo 2</td>
+                <td>Exemplo 3</td>
+                <td>Exemplo 4</td>
+                <td><i class="far fa-square"></i></td>
+            </tr>
+            <tr>
+                <td>Exemplo 1</td>
+                <td>Exemplo 2</td>
+                <td>Exemplo 3</td>
+                <td>Exemplo 4</td>
+                <td><i class="far fa-square"></i></td>
+            </tr>
+
+        </tbody>
+    </table>
 
     <script src="verificar-estoque.js"></script>
     <script src="../script.js"></script>

@@ -17,12 +17,13 @@ fetch("http://localhost:8080/insumos", {
         var tr = document.createElement("tr")
         tr.innerHTML = `<td>${element.name}</td>
         <td>${element.id}</td>
-        <td>...</td>
+        <td>${element.description}</td>
         <td>${element.minQuantity}</td>
         <td>${element.quantity}</td>
-        <td>${element.lot.expiration_date}</td>`
+        <td>${element.experation_date}</td>`
         tbody.appendChild(tr)
         console.log(tr)
     });  
 })
+.catch(erro => console.log(erro))
 

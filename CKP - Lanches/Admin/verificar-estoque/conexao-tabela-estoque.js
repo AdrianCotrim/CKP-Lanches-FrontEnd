@@ -22,7 +22,6 @@ fetch("http://localhost:8080/insumos", {
         <td>${element.quantity}</td>
         <td>${element.experation_date}</td>`
         tbody.appendChild(tr)
-        console.log(tr)
     });  
 })
 .catch(erro => console.log(erro))

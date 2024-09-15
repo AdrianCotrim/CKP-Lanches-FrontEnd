@@ -26,12 +26,16 @@ modalAddInsumo.addEventListener('click', (event) => {
         fetch("http://localhost:8080/insumos", {
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Content-Type':'application/json'
             },
             method: 'POST',
-            body: insumo
+            body: JSON.stringify(insumo)
         })
-        .then(response => console.log(response))
+        .then(response =>{
+            console.log(response)
+            window.location.reload()
+    })
         .catch(erro => console.log(erro))
     }
 

@@ -78,15 +78,20 @@
                 <ul class="list-unstyled display-4">
                     <li><a href="/ckp - lanches/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
                             inicial</a></li>
-                    <li><a href="/ckp - lanches/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/registrar-pedidos/registrar-pedidos.html"><i
+                                class="fas fa-plus pe-3"></i>
                             Registrar pedidos</a></li>
-                    <li><a href="/ckp - lanches/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/verificar-estoque/verificar-estoque.html"><i
+                                class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
-                    <li><a href="/ckp - lanches/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/historico-de-vendas/historico-vendas.html"><i
+                                class="fas fa-history pe-3"></i>
                             Histórico de vendas</a></li>
-                    <li><a href="/ckp - lanches/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i
+                                class="fas fa-utensils pe-3"></i>
                             Gerenciar cardápio</a></li>
-                    <li><a href="/ckp - lanches/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/administrar-usuarios/adm-usuarios.html"><i
+                                class="fas fa-users pe-3"></i>
                             Administrar usuários</a></li>
                 </ul>
             </nav>
@@ -116,6 +121,9 @@
                                     class="fa-solid fa-cart-plus"></i></span>
                             <span class="me-2"><i class="fa-solid fa-file-lines"></i></span>
                             <button id="addInsumo" class="botao botao--vermelho"><i class="fas fa-plus"></i> Adicionar</button>
+                            <span class="me-2" id="btnFiltrarMov"><i class="fa-solid fa-file-lines"></i></span>
+                            <button id="addProduto" class="botao botao--vermelho"><i class="fas fa-plus"></i>
+                                Adicionar</button>
                         </div>
                     </div>
                 </div>
@@ -174,11 +182,17 @@
                                 <label for="lote">Lote:</label>
                                 <input id="lote" placeholder="Ex: 1,2,3..." type="text">
                             </div>
+                            <div class="grupo-form">
+                                <label for="dataValidade">Data de Validade:</label>
+                                <input id="dataValidade" placeholder="Ex: dd/mm/aaaa" type="text">
+                            </div>
+                      
                         </form>
 
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button id="cancelar" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="cancelar"
+                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
                                 <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
@@ -203,7 +217,7 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="descricao">Alterar descrição:</label>
-                                <input id="descricaoAlterar" placeholder="Ex: Para salada" type="text">
+                                <input id="emailAlterar" placeholder="Ex: Para salada" type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="qtdMinima">Alterar quantidade mínima:</label>
@@ -214,8 +228,70 @@
                                 <input id="qtdMaximaAlterar" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="quantidade">Alterar quantidade:</label>
-                                <input id="quantidadeAlterar" placeholder="" type="text">
+                                <label for="QtdMinima">Alterar senha:</label>
+                                <input id="senhaAlterar" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="quantidade">Alterar data de nascimento:</label>
+                                <input id="nascAlterar" placeholder="" type="text">
+                            </div>
+                        </form>
+
+                        <footer class="container">
+                            <div class="row justify-content-evenly">
+                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--verde">Concluir</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+
+                <!--JANELA PARA FILTRAR HISTORICO DE MOVIMENTAÇÃO-->
+
+                <div id="filtrarMovimentacao" class="modal">
+                    <div class="modalContainer">
+
+                        <header class="container-fluid">
+                            <span><i class="fa-solid fa-file-alt"></i></span>
+                            <h2>Gerar relatório de movimentação</h2>
+                        </header>
+
+                        <form class="gerar-relatorio">
+                            <div>
+                                <p>Produto:</p>
+                                <div class="input-radio-group">
+                                    <input class="radio" type="radio" name="produto">
+                                    <label for="Todos">Todos</label>
+                                </div>
+                                <div class="input-radio-group">
+                                    <input type="radio" name="produto">
+                                    <input type="text" placeholder="Ex: Tomate">
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="pt-4">Data:</p>
+                                <div class="input-radio-group">
+                                    <input class="radio" type="radio" name="produto">
+                                    <label for="Todos">Todos</label>
+                                </div>
+                                <div class="input-radio-group">
+                                    <input type="radio" name="produto">
+                                    <input type="date">
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="pt-4">Usuário:</p>
+                                <div class="input-radio-group">
+                                    <input class="radio" type="radio" name="produto">
+                                    <label for="Todos">Todos</label>
+                                </div>
+                                <div class="input-radio-group">
+                                    <input type="radio" name="produto">
+                                    <input type="text" placeholder="Usuário">
+                                </div>
                             </div>
                             <div class="grupo-form">
                                 <label for="lote">Alterar lote:</label>
@@ -234,7 +310,7 @@
             </main>
         </div>
     </div>
-    
+
     <!--LISTA DE COMPRAS-->
 
     <table id="lista-de-compras">
@@ -247,64 +323,6 @@
             </tr>
         </thead>
         <tbody>
-
-            <tr>
-                <td>Exemplo 1</td>
-                <td>Exemplo 2</td>
-                <td>Exemplo 3</td>
-                <td>Exemplo 4</td>
-                <td><i class="far fa-square"></i></td>
-            </tr>
-            <tr>
-                <td>Exemplo 1</td>
-                <td>Exemplo 2</td>
-                <td>Exemplo 3</td>
-                <td>Exemplo 4</td>
-                <td><i class="far fa-square"></i></td>
-            </tr>
-            <tr>
-                <td>Exemplo 1</td>
-                <td>Exemplo 2</td>
-                <td>Exemplo 3</td>
-                <td>Exemplo 4</td>
-                <td><i class="far fa-square"></i></td>
-            </tr>
-            <tr>
-                <td>Exemplo 1</td>
-                <td>Exemplo 2</td>
-                <td>Exemplo 3</td>
-                <td>Exemplo 4</td>
-                <td><i class="far fa-square"></i></td>
-            </tr>
-            <tr>
-                <td>Exemplo 1</td>
-                <td>Exemplo 2</td>
-                <td>Exemplo 3</td>
-                <td>Exemplo 4</td>
-                <td><i class="far fa-square"></i></td>
-            </tr>
-            <tr>
-                <td>Exemplo 1</td>
-                <td>Exemplo 2</td>
-                <td>Exemplo 3</td>
-                <td>Exemplo 4</td>
-                <td><i class="far fa-square"></i></td>
-            </tr>
-            <tr>
-                <td>Exemplo 1</td>
-                <td>Exemplo 2</td>
-                <td>Exemplo 3</td>
-                <td>Exemplo 4</td>
-                <td><i class="far fa-square"></i></td>
-            </tr>
-            <tr>
-                <td>Exemplo 1</td>
-                <td>Exemplo 2</td>
-                <td>Exemplo 3</td>
-                <td>Exemplo 4</td>
-                <td><i class="far fa-square"></i></td>
-            </tr>
-
         </tbody>
     </table>
 

@@ -23,7 +23,7 @@ modalAddFunc.addEventListener('click', (event) => {
         }
         console.log(usuario)
         
-        fetch("http://localhost:8080/user", {
+        fetch("http://localhost:8080/userManager", {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',
@@ -34,7 +34,6 @@ modalAddFunc.addEventListener('click', (event) => {
         })
         .then(response =>{
             console.log(response)
-            window.location.reload()
     })
         .catch(erro => console.log(erro))
     }

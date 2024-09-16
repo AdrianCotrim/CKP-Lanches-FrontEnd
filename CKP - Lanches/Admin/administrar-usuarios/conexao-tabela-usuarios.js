@@ -1,7 +1,7 @@
 const token = localStorage.getItem('authToken');
 
 // Traz usuários do banco
-fetch("http://localhost:8080/user", {
+fetch("http://localhost:8080/userManager", {
     headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
@@ -16,7 +16,7 @@ fetch("http://localhost:8080/user", {
     dados.forEach(element => {
         var tr = document.createElement("tr")
         tr.innerHTML = `<td>${element.username}</td>
-        <td>${element.id}</td>
+        <td>${element.userId}</td>
         <td>${element.userEmail}</td>
         <td>${element.role}</td>`
         tr.classList.add("linha");

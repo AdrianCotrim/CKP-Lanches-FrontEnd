@@ -11,12 +11,12 @@ funcionarios.addEventListener('click', (event) => {
         let celulas = Array.from(funcionario.children)
 
         var nome = celulas[0].textContent;
+        var id = celulas[1].textContent;
         var email = celulas[2].textContent;
-        var senha = celulas[3].textContent;
         
         document.getElementById('nomeAlterar').value = nome;
         document.getElementById('emailAlterar').value = email;
-        document.getElementById('senhaAlterar').value = senha;
+        document.getElementById('id').value = id;
     }   
 })
 
@@ -33,7 +33,7 @@ modalAltFunc.addEventListener('click', (event) => {
         }
         const id = parseInt(document.getElementById('id').value);
 
-        fetch(`http://localhost:8080/user/${id}`, {
+        fetch(`http://localhost:8080/userManager/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',

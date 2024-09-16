@@ -156,6 +156,7 @@ ul a:hover {
     background-color: var(--cinza-bg);
     color: var(--cinza-texto);
     height: 4vh;
+    width: 22vh;
 }
 
 .select--modal {

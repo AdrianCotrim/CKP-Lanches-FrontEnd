@@ -108,10 +108,10 @@
                     <form class="label-input d-flex col-4" action="">
 
                         <label class="me-2" for="search">Pesquisar:</label>
-                        <input placeholder="Nome" class="me-2" name="text" type="text">
+                        <input placeholder="Nome" class="me-2" name="text" id="pesquisa-nome" type="text">
 
                         <label class="me-2" for="search">Buscar:</label>
-                        <input placeholder="Número" class="me-2" name="text" type="text">
+                        <input placeholder="Número" class="me-2" name="text" id="pesquisa-numero" type="text">
 
                     </form>
 
@@ -119,6 +119,8 @@
                         <div class="botoes d-flex align-items-center">
                             <span class="me-2" id="listaCompras" onclick="imprimirTabela()"><i
                                     class="fa-solid fa-cart-plus"></i></span>
+                            <span class="me-2"><i class="fa-solid fa-file-lines"></i></span>
+                            <button id="addInsumo" class="botao botao--vermelho"><i class="fas fa-plus"></i> Adicionar</button>
                             <span class="me-2" id="btnFiltrarMov"><i class="fa-solid fa-file-lines"></i></span>
                             <button id="addProduto" class="botao botao--vermelho"><i class="fas fa-plus"></i>
                                 Adicionar</button>
@@ -136,30 +138,12 @@
                                 <th>ID</th>
                                 <th>Descrição</th>
                                 <th>Qtd Mínima</th>
+                                <th>Qtd Máxima</th>
                                 <th>Quantidade</th>
                                 <th>Data Validade</th>
                             </tr>
                         </thead>
-                        <tbody>
-
-                            <tr>
-                                <td>Pão</td>
-                                <td>5</td>
-                                <td>Para lanches</td>
-                                <td>20</td>
-                                <td>33</td>
-                                <td>10/10/2024</td>
-                            </tr>
-                            <tr>
-                                <td>Tomate</td>
-                                <td>2</td>
-                                <td>Para lanches e salada</td>
-                                <td>15</td>
-                                <td>30</td>
-                                <td>10/10/2024</td>
-                            </tr>
-
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
 
@@ -187,13 +171,22 @@
                                 <input id="qtdMinima" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
+                                <label for="qtdMaxima">Quantidade máxima:</label>
+                                <input id="qtdMaxima" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
                                 <label for="quantidade">Quantidade inicial:</label>
                                 <input id="quantidade" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="lote">Lote:</label>
+                                <input id="lote" placeholder="Ex: 1,2,3..." type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="dataValidade">Data de Validade:</label>
                                 <input id="dataValidade" placeholder="Ex: dd/mm/aaaa" type="text">
                             </div>
+                      
                         </form>
 
                         <footer class="container">
@@ -217,13 +210,22 @@
                         </header>
 
                         <form class="grid-form">
+                            <input id="id" value="" type="hidden">
                             <div class="grupo-form">
                                 <label for="nome">Alterar nome:</label>
                                 <input id="nomeAlterar" value="" placeholder="Ex: Tomate" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="descricao">Alterar email:</label>
+                                <label for="descricao">Alterar descrição:</label>
                                 <input id="emailAlterar" placeholder="Ex: Para salada" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="qtdMinima">Alterar quantidade mínima:</label>
+                                <input id="qtdMinimaAlterar" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="qtdMinima">Alterar quantidade máxima:</label>
+                                <input id="qtdMaximaAlterar" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="QtdMinima">Alterar senha:</label>
@@ -291,6 +293,10 @@
                                     <input type="text" placeholder="Usuário">
                                 </div>
                             </div>
+                            <div class="grupo-form">
+                                <label for="lote">Alterar lote:</label>
+                                <input id="loteAlterar" placeholder="" type="text">
+                            </div>
                         </form>
 
                         <footer class="container">
@@ -322,6 +328,10 @@
 
     <script src="verificar-estoque.js"></script>
     <script src="../script.js"></script>
+    <script src="conexao-tabela-estoque.js"></script>
+    <script src="alterar-estoque.js"></script>
+    <script src="adicionar-insumo.js"></script>
+    <script src="pesquisa-estoque.js"></script>
 </body>
 
 </html>

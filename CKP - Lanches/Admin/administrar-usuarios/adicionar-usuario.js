@@ -34,7 +34,7 @@ modalAddFunc.addEventListener('click', (event) => {
         })
         .then(response =>{
             console.log(response)
-            /* window.location.reload() */
+            window.location.reload()
     })
         .catch(erro => console.log(erro))
     }

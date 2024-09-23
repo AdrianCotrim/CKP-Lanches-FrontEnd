@@ -18,7 +18,8 @@ fetch("http://localhost:8080/userManager", {
         tr.innerHTML = `<td>${element.username}</td>
         <td>${element.userId}</td>
         <td>${element.userEmail}</td>
-        <td>${element.role}</td>`
+        <td>${element.role}</td>
+        <td>${element.status}`
         tr.classList.add("linha");
         tbody.appendChild(tr)
     });  

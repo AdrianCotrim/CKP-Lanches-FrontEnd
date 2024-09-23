@@ -13,11 +13,11 @@ pesquisa_nome.addEventListener('input', (event) => {
   }   
 )
 
-pesquisa_numero.addEventListener('input', (event) => {  
+pesquisa_ordenar.addEventListener('input', (event) => {  
 
     const linhas = funcionarios.querySelectorAll('.linha');
     linhas.forEach(linha => {
-        let numero_insumo = linha.querySelector("td:nth-child(2)").textContent;
+        let numero_insumo = linha.querySelector("td:nth-child(3)").textContent;
         if(!numero_insumo.includes(pesquisa_numero.value)) linha.style.display = "none";
         else linha.style.display = "table-row";
     });

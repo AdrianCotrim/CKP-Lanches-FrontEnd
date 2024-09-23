@@ -17,9 +17,11 @@ modalAddFunc.addEventListener('click', (event) => {
 
         const usuario = {
             username: document.getElementById("nome").value,
-            usernamePassword: document.getElementById("senha").value,
+            userPassword: document.getElementById("senha").value,
             userEmail: document.getElementById("email").value,
-            role: document.getElementById("nivelAcesso").value
+            role: document.getElementById("nivelAcesso").value,
+            status: "ATIVO",
+            statusConta: "ATIVO"
         }
         console.log(usuario)
         
@@ -33,8 +35,10 @@ modalAddFunc.addEventListener('click', (event) => {
             body: JSON.stringify(usuario)
         })
         .then(response =>{
-            console.log(response)
-    })
+            //window.location.reload();
+            return response.json();
+        })
+        .then(data => console.log(data))
         .catch(erro => console.log(erro))
     }
 

@@ -44,9 +44,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 mensagemLabel.textContent = message;
             }
         } catch (error) {
-                let message = "Erro no servidor";
+                let message = "Usuário ou Senha incorretos";
                 const mensagemLabel = document.getElementById("mensagem-erro");
-                mensagemLabel.textContent = message;
+                mensagemLabel.textContent = message
         }
     }
 

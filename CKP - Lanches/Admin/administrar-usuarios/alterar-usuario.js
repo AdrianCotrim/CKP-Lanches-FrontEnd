@@ -27,13 +27,15 @@ modalAltFunc.addEventListener('click', (event) => {
         modalAltFunc.style.display = 'none'
         const funcionario = {
             username: document.getElementById("nomeAlterar").value,
-            usernamePassword: document.getElementById("senhaAlterar").value,
+            userPassword: document.getElementById("senhaAlterar").value,
             userEmail: document.getElementById("emailAlterar").value,
-            role: document.getElementById("nivelAcessoAlterar").value
+            role: document.getElementById("nivelAcessoAlterar").value,
+            status: document.getElementById("statusAlterar").value,
+            statusConta: "ATIVO"
         }
         const id = parseInt(document.getElementById('id').value);
 
-        fetch(`http://localhost:8080/userManager/${id}`, {
+        fetch(`http://localhost:8080/userManager`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',
@@ -44,9 +46,11 @@ modalAltFunc.addEventListener('click', (event) => {
         })
         .then(response => {
             console.log(response.json())
-            window.location.reload();
+            //window.location.reload();
     })
-        .catch(erro => console.log(erro))
+        .catch(erro => {
+            console.log(erro)
+    })
     }
 
     // Fecha o modal

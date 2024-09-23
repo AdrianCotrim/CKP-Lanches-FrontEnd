@@ -1,3 +1,7 @@
+.teste{
+    overflow-y: auto;
+}
+
 .produto{
     background-color: var(--cinza-claro);
     height: 45vh;

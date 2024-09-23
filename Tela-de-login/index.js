@@ -35,9 +35,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Redireciona com base na role do usuário
             if (userRole === 'ADMIN') {
-                window.location.href = "/CKP - Lanches/Admin/Tela-inicial/inicio.html";
+                window.location.href = "/Admin/Tela-inicial/inicio.html";
             } else if (userRole === 'USER') {
-                window.location.href = "/CKP - Lanches/Usuario/Tela inicial/inicio.html";
+                window.location.href = "/Usuario/Tela inicial/inicio.html";
             } else {
                 let message = "Usuário ou Senha incorretos";
                 const mensagemLabel = document.getElementById("mensagem-erro");

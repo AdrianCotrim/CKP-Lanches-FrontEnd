@@ -1,0 +1,22 @@
+.produto{
+    background-color: var(--cinza-claro);
+    height: 45vh;
+    border-radius: 2vh;
+}
+
+.card{
+    border: none;
+    background-color: var(--cinza-claro);
+    height: 45vh;
+}
+
+.card img{
+    border-radius: 1vh;
+    height: 22vh;
+}
+
+.produto p{
+    height: 10vh;
+    overflow-y: auto;
+    color: var(--cinza-texto);
+}

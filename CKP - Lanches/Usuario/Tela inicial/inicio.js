@@ -51,9 +51,10 @@ async function iniciar() {
 // IMAGENS
 
 const imagens = [
-  '/Imagens/img1.png',
-  '/Imagens/img2.png',
-  '/Imagens/img3.png',
+  'Imagens/img1.png',
+  'Imagens/img2.png',
+  'Imagens/img3.png',
+  'Imagens/img4.png',
 ]
 
 let index = 0;

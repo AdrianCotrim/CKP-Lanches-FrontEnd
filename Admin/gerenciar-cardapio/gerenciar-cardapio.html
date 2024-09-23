@@ -182,35 +182,32 @@
 
                 <!--JANELA PARA ADICIONAR ITEM-->
 
-                <div id="adicionarInsumo" class="modal">
+                <div style="display: flex;" id="adicionarInsumo" class="modal">
                     <div class="modalContainer">
 
                         <header class="container-fluid">
-                            <span><i class="fa-solid fa-plus"></i></span>
-                            <h2>Adicionar Insumo</h2>
+                            <span><i class="fas fa-utensils"></i></span>
+                            <h2>Adicionar produto</h2>
                         </header>
 
                         <form class="grid-form">
                             <div class="grupo-form">
-                                <label for="nome">Nome do insumo:</label>
-                                <input id="nome" placeholder="Ex: Tomate" type="text">
+                                <label for="nome">Nome do produto:</label>
+                                <input id="nome" placeholder="Ex: X-Tudo" type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="descricao">Descrição:</label>
-                                <input id="descricao" placeholder="Ex: Para salada" type="text">
+                                <input id="descricao" placeholder="Pão, queijo, hambúrguer" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="qtdMinima">Quantidade mínima:</label>
+                                <label for="qtdMinima">Valor:</label>
                                 <input id="qtdMinima" placeholder="" type="text">
                             </div>
-                            <div class="grupo-form">
-                                <label for="qtdMaxima">Quantidade máxima:</label>
-                                <input id="qtdMaxima" placeholder="" type="text">
+                            <div class="">
+                                <label for="qtdMaxima">Anexar imagem:</label>
+                                <input id="qtdMaxima" placeholder="" type="file">
                             </div>
-                            <div class="grupo-form">
-                                <label for="quantidade">Quantidade inicial:</label>
-                                <input id="quantidade" placeholder="" type="text">
-                            </div>
+                            
 
                         </form>
 

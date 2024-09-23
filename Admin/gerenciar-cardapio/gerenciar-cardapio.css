@@ -1,6 +1,5 @@
-section{
+.teste{
     overflow-y: auto;
-    height: calc(70vh - 10vh);
 }
 
 .produto{

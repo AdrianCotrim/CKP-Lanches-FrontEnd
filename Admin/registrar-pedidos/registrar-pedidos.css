@@ -32,3 +32,16 @@ textarea {
 textarea:focus {
     outline: none;
 }
+
+.item p {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.removerUnidade {
+    background-color: red;
+}
+
+.selecionado {
+    font-weight: bold;
+}

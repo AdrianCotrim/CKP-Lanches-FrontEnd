@@ -103,15 +103,15 @@
                 <div class="row pesquisa pb-4">
                     <div class="col-10">
                         <form class=" label-input" action="">
-                            <label class="" for="andamento">Filtrar:</label>
-                            <select class="col-2 select" name="andamento" id="andamento">
+                            <label class="" for="pesquisa-andamento">Filtrar:</label>
+                            <select class="col-2 select" name="pesquisa-andamento" id="pesquisa-andamento">
                                 <option value="todos">Todos</option>
                                 <option value="preparando">Preparando</option>
                                 <option value="pedido-pronto">Pedido pronto</option>
                             </select>
 
                             <label class="">Buscar:</label>
-                            <input placeholder="Número" class="col-2 input" name="text" type="text">
+                            <input id="pesquisa-numero" placeholder="Número" class="col-2 input" name="text" type="text">
                         </form>
                     </div>
                     <button id="registrarPedido" class="botao botao--vermelho"><i class="fas fa-plus"></i>Adicionar</button>
@@ -120,7 +120,7 @@
                 <!--TABELA-->
 
                 <div class="tabela-responsiva">
-                    <table class="table table-hover">
+                    <table id="pedidos" class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Andamento</th>
@@ -131,30 +131,31 @@
                         </thead>
                         <tbody>
 
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
+                            <tr class="linhaPedido">
+                                <td>preparando</td>
+                                <td>1</td>
                                 <td>Exemplo 3</td>
                                 <td>Exemplo 4</td>
                             </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
+                            <tr class="linhaPedido">
+                                <td>pedido-pronto</td>
+                                <td>2</td>
                                 <td>Exemplo 3</td>
                                 <td>Exemplo 4</td>
                             </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
+                            <tr class="linhaPedido">
+                                <td>preparando</td>
+                                <td>3</td>
                                 <td>Exemplo 3</td>
                                 <td>Exemplo 4</td>
                             </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
+                            <tr class="linhaPedido">
+                                <td>pedido-pronto</td>
+                                <td>4</td>
                                 <td>Exemplo 3</td>
                                 <td>Exemplo 4</td>
                             </tr>
+                            
                             
                         </tbody>
                     </table>
@@ -217,8 +218,9 @@
         </div>
     </div>
 
-    <script src="adicionar-pedidos.js"></script>
     <script src="../script.js"></script>
+    <script src="adicionar-pedidos.js"></script>
+    <script src="pesquisa-pedidos.js"></script>
 </body>
 
 </html>

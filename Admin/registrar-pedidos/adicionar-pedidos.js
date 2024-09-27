@@ -1,11 +1,22 @@
 // Modal
 var modalAddPedido = document.getElementById("janelaRegisPedido")
+var modalInfoPedido = document.getElementById("infoPedido")
 var btnAdd = document.getElementById("registrarPedido")
 const obs = document.getElementById('obs')
 
 // Exibe modal na tela
 btnAdd.addEventListener("click", function() {
-    modalAddPedido.style.display = "flex"
+    modalInfoPedido.style.display = "flex"
+})
+
+modalInfoPedido.addEventListener("click", function(event) {
+    if(event.target.textContent == 'Concluir'){
+        modalInfoPedido.style.display = "none"
+        modalAddPedido.style.display = "flex"
+    }
+    if(event.target.textContent == 'Cancelar'){
+        modalInfoPedido.style.display = "none"
+    }
 })
 
 modalAddPedido.addEventListener("click", function(event) {

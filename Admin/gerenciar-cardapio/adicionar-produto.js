@@ -1,7 +1,22 @@
-var btnAdd = document.getElementById("addInsumo")
+let btnAbrirAddProduto = document.getElementById("addInsumo")
+let btnFecharAddProduto = document.getElementById("cancelar")
+let btnAddProduto = document.getElementById("confirmar")
+
+let addProdutoModal = document.getElementById("adicionarInsumo")
+
+
 const cardapio = document.getElementById("cardapio")
 
-btnAdd.addEventListener("click", function(){
+btnAbrirAddProduto.addEventListener("click", function(){
+    addProdutoModal.style.display = "flex";
+})
+
+btnFecharAddProduto.addEventListener("click", function(){
+    addProdutoModal.style.display = "none";
+})
+
+
+btnAddProduto.addEventListener("click", function(){
     console.log("Fui clicado")
     const produto = document.createElement("div")
     produto.classList.add("produto", "col-3", "m-3")
@@ -15,3 +30,26 @@ btnAdd.addEventListener("click", function(){
 
     cardapio.appendChild(produto)
 })  
+
+
+document.getElementById('confirmarAddProduto').addEventListener('click', function(event) {
+    
+    const produtoDTO = {
+        productName: document.getElementById('nome').value,
+        productValue: parseFloat(document.getElementById('valor').value),
+        imagem: document.getElementById('imagem').value,
+        description: document.getElementById('descricao').value
+    }
+    
+    // Aqui você pode enviar o formData para o servidor, se necessário
+    fetch('http://localhost:8080/produtos', {
+        method: 'POST',
+        body: produtoDTO
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Produto cadastrado:', data);
+        // Aqui você pode atualizar o grid de produtos
+    })
+    .catch(error => console.error('Erro ao cadastrar produto:', error));
+});

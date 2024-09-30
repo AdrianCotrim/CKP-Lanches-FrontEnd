@@ -448,9 +448,3 @@ select {
 .fa-user {
     color: var(--vermelho-secundario);
 }
-
-/*RADIO-BUTTON*/
-
-input[type="radio"]{
-    height: 2vh;
-}

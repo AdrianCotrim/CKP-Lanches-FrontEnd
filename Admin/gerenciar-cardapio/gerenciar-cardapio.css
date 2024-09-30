@@ -1,5 +1,6 @@
-.teste{
+.cardapio{
     overflow-y: auto;
+    height: 60vh;
 }
 
 .produto{
@@ -23,4 +24,12 @@
     height: 10vh;
     overflow-y: auto;
     color: var(--cinza-texto);
+}
+
+.grid-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5vh;
+    align-items: center;
+    font-weight: 500;
 }

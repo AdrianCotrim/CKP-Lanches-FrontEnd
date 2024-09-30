@@ -1,6 +1,7 @@
 // Modal
 var modalAddPedido = document.getElementById("janelaRegisPedido")
 var modalInfoPedido = document.getElementById("infoPedido")
+var modalFecharPedido = document.getElementById("fecharPedido")
 var btnAdd = document.getElementById("registrarPedido")
 const obs = document.getElementById('obs')
 
@@ -37,11 +38,12 @@ modalInfoPedido.addEventListener("click", function(event) {
 
 
 modalAddPedido.addEventListener("click", function(event) {
-    if(event.target.textContent == 'Concluir'){
+    if(event.target.textContent == 'Fechar'){
         modalAddPedido.style.display = "none"
     }
     if(event.target.textContent == 'Fechar'){
         modalAddPedido.style.display = "none"
+        modalFecharPedido.style.display = "flex"
     }
 })
 

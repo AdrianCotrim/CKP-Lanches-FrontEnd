@@ -4,13 +4,29 @@ var modalInfoPedido = document.getElementById("infoPedido")
 var btnAdd = document.getElementById("registrarPedido")
 const obs = document.getElementById('obs')
 
+
 // Exibe modal na tela
 btnAdd.addEventListener("click", function() {
     modalInfoPedido.style.display = "flex"
 })
 
+
+// Habilita e desabilita o campo "endereço"
+const endereco = document.getElementById('endereco');
+const tipoPedido = document.getElementById('tipoPedido');
+tipoPedido.addEventListener('change', function() {
+    console.log(this.value);
+    if (this.value === 'entrega') {
+        endereco.disabled = false;
+    } else {
+        endereco.disabled = true;
+        endereco.value = "";
+    } 
+});
+
+
 modalInfoPedido.addEventListener("click", function(event) {
-    if(event.target.textContent == 'Concluir'){
+    if(event.target.textContent == 'Concluir' && tipoPedido.value != ""){
         modalInfoPedido.style.display = "none"
         modalAddPedido.style.display = "flex"
     }
@@ -19,41 +35,40 @@ modalInfoPedido.addEventListener("click", function(event) {
     }
 })
 
+
 modalAddPedido.addEventListener("click", function(event) {
     if(event.target.textContent == 'Concluir'){
         modalAddPedido.style.display = "none"
     }
-    if(event.target.textContent == 'Cancelar'){
+    if(event.target.textContent == 'Fechar'){
         modalAddPedido.style.display = "none"
     }
 })
 
+
+// Adiciona o pedido
 let pedido = []
 
 function addItemToList(item) {
     const produto = {
         name: item,    
-        quantity: 1,
         obs: ""
     }
 
     const itemList = document.getElementById('itemList');
     const itemElement = document.createElement('div');
     const nome = document.createElement('p');
-    const quantidade = document.createElement('p');
-    const removerUnidade = document.createElement('i');
+    const removerProduto = document.createElement('i');
 
     itemElement.classList.add('item');
-    removerUnidade.classList.add('fa-solid');
-    removerUnidade.classList.add('fa-minus');
-    removerUnidade.classList.add('removerUnidade');
+    removerProduto.classList.add('fa-solid');
+    removerProduto.classList.add('fa-x');
+    removerProduto.classList.add('removerProduto');
     nome.textContent = item;
     nome.classList.add('nome')
-    quantidade.textContent = "x" + produto.quantity
 
-    itemElement.appendChild(removerUnidade);
+    itemElement.appendChild(removerProduto);
     itemElement.appendChild(nome);
-    itemElement.appendChild(quantidade);
     itemList.appendChild(itemElement);
 
     pedido.push(produto)
@@ -62,26 +77,10 @@ function addItemToList(item) {
 document.getElementById('lanches').addEventListener('change', function() {
     const selectedItem = this.value;
     if (selectedItem) {
-        if(pedido.some(item => item.name === selectedItem)){
-            let itemIndex = pedido.findIndex(item => item.name === selectedItem)
-            pedido[itemIndex].quantity += 1
-
-            let itemLista = document.querySelectorAll(".item")
-            itemLista.forEach((item) => {
-                var info = item.querySelectorAll("p")
-                if(selectedItem == info[0].textContent){
-                    info[1].textContent = "x" + pedido[itemIndex].quantity
-                }
-            })
-
-            this.value = ''; // Limpa a seleção
-        }
-        else{
             addItemToList(selectedItem);
             this.value = ''; // Limpa a seleção
         }
-    }
-});
+    });
 
 document.getElementById('bebidas').addEventListener('change', function() {
     const selectedItem = this.value;
@@ -107,36 +106,23 @@ document.getElementById('bebidas').addEventListener('change', function() {
     }
 });
 
-// Remove unidade do item
+// Remove Produto do item
 modalAddPedido.addEventListener("click", function(event){
-    if(event.target.classList.contains("removerUnidade")){
-        var produto = event.target.parentElement
-        var nome = produto.querySelectorAll('p')[0].textContent;
+    if(event.target.classList.contains("removerProduto")){
+        var produto = event.target.parentElement;
+        var nome = produto.querySelector('p').textContent;
 
         pedido.forEach((item) => {
             if(nome == item.name){
-                var index = pedido.indexOf(item)
-
-                if(pedido[index].quantity == 1){
-                    event.target.parentNode.remove()
-                    pedido.splice(index, 1)
-                }
-                else{
-                    pedido[index].quantity -= 1
-                    let itemLista = document.querySelectorAll(".item")
-
-                    itemLista.forEach((item) => {
-                        var info = item.querySelectorAll("p")
-                        if(nome == info[0].textContent){
-                            info[1].textContent = "x" + pedido[index].quantity
-                        }
-                    })
-                }
-                console.log(pedido);    
-            }
-        }) 
-    }
-})
+                var index = pedido.indexOf(item);
+                
+                event.target.parentNode.remove()
+                pedido.splice(index, 1)
+                console.log(pedido);
+            };
+        });
+    };
+});
 
 let ultimoItemClicado
 // Seleciona item
@@ -146,6 +132,7 @@ modalAddPedido.addEventListener("click", function(event){
         if(ultimoItemClicado && ultimoItemClicado.textContent != itemAtual.textContent){
             ultimoItemClicado.classList.remove("selecionado")   
         }
+        
         itemAtual.classList.add("selecionado")
         let nomes = document.querySelectorAll(".nome")
 

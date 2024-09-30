@@ -108,6 +108,7 @@
                                 <option value="todos">Todos</option>
                                 <option value="preparando">Preparando</option>
                                 <option value="pedido-pronto">Pedido pronto</option>
+                                <option value="finalizado">Finalizado</option>
                             </select>
 
                             <label class="">Buscar:</label>
@@ -125,8 +126,10 @@
                             <tr>
                                 <th>Andamento</th>
                                 <th>Número</th>
-                                <th>Pedido</th>
-                                <th>Resumo</th>
+                                <th>Itens</th>
+                                <th>Tipo</th>
+                                <th>Forma Pagamento</th>
+                                <th>Valor Total</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,6 +163,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!---->
 
                 <!--JANELA PARA REGISTRAR PEDIDO-->
 
@@ -205,7 +210,7 @@
 
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--vermelho botao-cancelar">Fechar</button>
                                 <button class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
@@ -230,8 +235,16 @@
                                 <input id="nomeCliente" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
+                                <label for="tipoPedido">Tipo do pedido:</label>
+                                <select class="col-2 select" name="tipoPedido" id="tipoPedido">
+                                    <option value=""></option>
+                                    <option value="entrega">entrega</option>
+                                    <option value="retirada">retirada</option>
+                                </select>
+                            </div>
+                            <div class="grupo-form">
                                 <label for="endereco">Endereço:</label>
-                                <input id="endereco" placeholder="" type="text">
+                                <input id="endereco" placeholder="" type="text" disabled>
                             </div>
                       
                         </form>

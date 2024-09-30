@@ -133,32 +133,47 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            
                             <tr class="linhaPedido">
                                 <td>preparando</td>
                                 <td>1</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
+                                <td><div class="itens">Itens</div></td>
+                                <td>entrega</td>
+                                <td>pix</td>
+                                <td>$00,00</td>
                             </tr>
                             <tr class="linhaPedido">
-                                <td>pedido-pronto</td>
+                                <td>preparando</td>
                                 <td>2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
+                                <td><div class="itens">Itens</div></td>
+                                <td>retirada</td>
+                                <td>pix</td>
+                                <td>$00,00</td>
                             </tr>
                             <tr class="linhaPedido">
                                 <td>preparando</td>
                                 <td>3</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
+                                <td><div class="itens">Itens</div></td>
+                                <td>entrega</td>
+                                <td>pix</td>
+                                <td>$00,00</td>
                             </tr>
                             <tr class="linhaPedido">
-                                <td>pedido-pronto</td>
+                                <td>preparando</td>
                                 <td>4</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
+                                <td><div class="itens">Itens</div></td>
+                                <td>entrega</td>
+                                <td>pix</td>
+                                <td>$00,00</td>
                             </tr>
-                            
+                            <tr class="linhaPedido">
+                                <td>preparando</td>
+                                <td>5</td>
+                                <td><div class="itens">Itens</div></td>
+                                <td>entrega</td>
+                                <td>pix</td>
+                                <td>$00,00</td>
+                            </tr>
                             
                         </tbody>
                     </table>
@@ -166,7 +181,90 @@
 
                 <!---->
 
-                <!--JANELA PARA REGISTRAR PEDIDO-->
+                <!--JANELA REGISTRO DE PEDIDO-->
+
+                <div id="infoPedido" class="modal">
+                    <div class="modalContainer">
+
+                        <header class="container-fluid">
+                            <span><i class="fa-solid fa-plus"></i></span>
+                            <h2>Adicionar Pedido</h2>
+                        </header>
+
+                        <form class="grid-form">
+                            <div class="grupo-form">
+                                <label for="nomeCliente">Nome do cliente:</label>
+                                <input id="nomeCliente" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="tipoPedido">Tipo do pedido:</label>
+                                <select class="col-2 select" name="tipoPedido" id="tipoPedido">
+                                    <option value=""></option>
+                                    <option value="entrega">entrega</option>
+                                    <option value="retirada">retirada</option>
+                                </select>
+                            </div>
+                            <div class="grupo-form">
+                                <label for="endereco">Endereço:</label>
+                                <input id="endereco" placeholder="" type="text" disabled>
+                            </div>
+                      
+                        </form>
+
+                        <footer class="container">
+                            <div class="row justify-content-evenly">
+                                <button id="cancelar"
+                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+                
+                <!---->
+
+                <!--JANELA ALTERAR PEDIDO-->
+
+                <div id="alterarInfoPedido" class="modal">
+                    <div class="modalContainer">
+
+                        <header class="container-fluid">
+                            <span><i class="fa-solid fa-plus"></i></span>
+                            <h2>Alterar Pedido</h2>
+                        </header>
+
+                        <form class="grid-form">
+                            <div class="grupo-form">
+                                <label for="nomeAlterar">Alterar nome do cliente:</label>
+                                <input id="nomeAlterar" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="tipoPedidoAlterar">Alterar tipo do pedido:</label>
+                                <select class="col-2 select" name="tipoPedidoAlterar" id="tipoPedidoAlterar">
+                                    <option value="entrega">entrega</option>
+                                    <option value="retirada">retirada</option>
+                                </select>
+                            </div>
+                            <div class="grupo-form">
+                                <label for="enderecoAlterar">Alterar endereço:</label>
+                                <input id="enderecoAlterar" placeholder="" type="text" disabled>
+                            </div>
+                      
+                        </form>
+
+                        <footer class="container">
+                            <div class="row justify-content-evenly">
+                                <button id="cancelar"
+                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+                
+                <!---->
+
+                <!--JANELA DE ADIÇÃO DE ITENS-->
 
                 <div id="janelaRegisPedido" class="modal">
                     <div class="modalContainer">
@@ -219,34 +317,21 @@
 
                 <!---->
 
-                <!--JANELA DE CRIAÇÃO DE PEDIDO-->
+                <!--JANELA FECHAR PEDIDO-->
 
-                <div id="infoPedido" class="modal">
+                <div id="fecharPedido" class="modal">
                     <div class="modalContainer">
 
                         <header class="container-fluid">
                             <span><i class="fa-solid fa-plus"></i></span>
-                            <h2>Adicionar Pedido</h2>
+                            <h2>Fechar Pedido</h2>
                         </header>
 
                         <form class="grid-form">
                             <div class="grupo-form">
-                                <label for="nomeCliente">Nome do cliente:</label>
-                                <input id="nomeCliente" placeholder="" type="text">
+                                <label for="formaPagamento">Forma de pagamento:</label>
+                                <input id="formaPagamento" placeholder="" type="text">
                             </div>
-                            <div class="grupo-form">
-                                <label for="tipoPedido">Tipo do pedido:</label>
-                                <select class="col-2 select" name="tipoPedido" id="tipoPedido">
-                                    <option value=""></option>
-                                    <option value="entrega">entrega</option>
-                                    <option value="retirada">retirada</option>
-                                </select>
-                            </div>
-                            <div class="grupo-form">
-                                <label for="endereco">Endereço:</label>
-                                <input id="endereco" placeholder="" type="text" disabled>
-                            </div>
-                      
                         </form>
 
                         <footer class="container">
@@ -258,7 +343,8 @@
                         </footer>
                     </div>
                 </div>
-                
+
+
                 <!---->
 
             </main>

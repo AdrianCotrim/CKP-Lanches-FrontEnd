@@ -229,6 +229,26 @@ ul a:hover {
     padding: 2vh;
 }
 
+.grid-form {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 5vh;
+    align-items: center;
+    font-weight: 500;
+}
+
+.grupo-form {
+    display: contents;
+}
+
+.grupo-form label {
+    text-align: left;
+}
+
+.grupo-form select {
+    width: 15vh;
+}
+
 .label-input label {
     font-weight: 500;
     color: var(--cinza-texto);

@@ -59,18 +59,24 @@ function addItemToList(item) {
 
     const itemList = document.getElementById('itemList');
     const itemElement = document.createElement('div');
-    const nome = document.createElement('p');
+    const containerRemoverProduto = document.createElement('div')
     const removerProduto = document.createElement('i');
+    const nome = document.createElement('p');
+    const obs = document.createElement('p');
 
     itemElement.classList.add('item');
+    containerRemoverProduto.classList.add('containerRemoverProduto');
+    containerRemoverProduto.appendChild(removerProduto);
     removerProduto.classList.add('fa-solid');
     removerProduto.classList.add('fa-x');
     removerProduto.classList.add('removerProduto');
     nome.textContent = item;
     nome.classList.add('nome')
+    obs.classList.add('obs')
 
-    itemElement.appendChild(removerProduto);
+    itemElement.appendChild(containerRemoverProduto);
     itemElement.appendChild(nome);
+    itemElement.appendChild(obs);
     itemList.appendChild(itemElement);
 
     pedido.push(produto)
@@ -110,15 +116,17 @@ document.getElementById('bebidas').addEventListener('change', function() {
 
 // Remove Produto do item
 modalAddPedido.addEventListener("click", function(event){
+    
     if(event.target.classList.contains("removerProduto")){
-        var produto = event.target.parentElement;
+        var produto = event.target.parentElement.parentElement;
         var nome = produto.querySelector('p').textContent;
-
+        console.log(nome);
+        
         pedido.forEach((item) => {
             if(nome == item.name){
                 var index = pedido.indexOf(item);
                 
-                event.target.parentNode.remove()
+                produto.remove()
                 pedido.splice(index, 1)
                 console.log(pedido);
             };
@@ -129,14 +137,18 @@ modalAddPedido.addEventListener("click", function(event){
 let ultimoItemClicado
 // Seleciona item
 modalAddPedido.addEventListener("click", function(event){
+    
+
     if(event.target.classList.contains("nome")){
-        let itemAtual = event.target
+        let itemAtual = event.target.parentElement.parentElement;
+        let obs = itemAtual.querySelector(".obs");
+        
+        
+        // Desmarca último item
         if(ultimoItemClicado && ultimoItemClicado.textContent != itemAtual.textContent){
             ultimoItemClicado.classList.remove("selecionado")   
         }
-        
         itemAtual.classList.add("selecionado")
-        let nomes = document.querySelectorAll(".nome")
 
         nomes.forEach((nome) => {
             if(nome.classList.contains("selecionado")){

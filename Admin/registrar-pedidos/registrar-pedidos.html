@@ -135,7 +135,7 @@
                         <tbody>
                             
                             <tr class="linhaPedido">
-                                <td>preparando</td>
+                                <td>finalizado</td>
                                 <td>1</td>
                                 <td><div class="itens">Itens</div></td>
                                 <td>entrega</td>
@@ -299,21 +299,10 @@
 
                             <div class="row container mt-4 justify-content-between conteinerProdutos">
                                 <div class="mb-3 esquerda col-6">
-                                    <select id="lanches" class="select select--modal">
-                                        <option value="" disabled selected>Lanches</option>
-                                        <option value="X-Tudo">X-Tudo</option>
-                                        <option value="X-Nada">X-Nada</option>
-                                        <option value="X-Quasetudo">X-Quasetudo</option>
-                                        <option value="X-Salada">X-Salada</option>
+                                    <select id="itens" class="select select--modal">
+                                        <option value="" disabled selected>Itens</option>
                                     </select>
                                     <br>
-                                    <select id="bebidas" class="select select--modal">
-                                        <option value="" disabled selected>Bebidas</option>
-                                        <option value="Coca-Cola">Coca-Cola</option>
-                                        <option value="Pepsi">Pepsi</option>
-                                        <option value="Fanta Uva">Fanta Uva</option>
-                                        <option value="Fanta Laranja">Fanta Laranja</option>
-                                    </select>
                                 </div>
 
                                 <div class="item-list direita col-6 text-end" id="itemList">
@@ -374,6 +363,7 @@
     </div>
 
     <script src="../script.js"></script>
+    <script src="conexao-tabela-pedidos.js"></script>
     <script src="adicionar-pedidos.js"></script>
     <script src="pesquisa-pedidos.js"></script>
     <script src="alterar-pedidos.js"></script>

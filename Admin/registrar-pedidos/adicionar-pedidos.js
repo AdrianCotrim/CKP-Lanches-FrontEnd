@@ -12,7 +12,6 @@ btnAdd.addEventListener("click", function() {
     modalInfoPedido.style.display = "flex"
 });
 
-
 // Habilita campos de "entrega"
 const entrega = document.getElementById('entrega');
 const tipoPedido = document.getElementById('tipoPedido');
@@ -23,7 +22,6 @@ tipoPedido.addEventListener('change', function() {
         entrega.style.display = "none"
     } 
 });
-
 
 modalInfoPedido.addEventListener("click", function(event) {
     var nomeCliente = document.getElementById("nomeCliente");
@@ -73,6 +71,48 @@ modalInfoPedido.addEventListener("click", function(event) {
 
 
 // ModalAddPedido
+function checaVisibilidadeModal() {
+    // Verifica se o modal está visível (exemplo usando 'display')
+    const isVisible = window.getComputedStyle(modalAddPedido).display !== 'none';
+    
+    if (isVisible) {
+      console.log('Modal está visível');
+      
+      // Dispara a requisição fetch
+      fetch("http://localhost:8080/produtos", {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
+        method: 'GET'
+        })
+        .then(response => response.json())
+        .then(dados => {
+            console.log(dados);
+            const itens = document.getElementById("itens");
+
+            dados.forEach(element => {
+                console.log(element.product_name);
+                const option = document.createElement("option");
+                const id = document.createElement("input")
+                option.value = element.product_name;
+                option.textContent = element.product_name;
+                id.value = element.product_id;
+
+                itens.appendChild(option)
+                itens.appendChild(id)
+            })
+        })
+        .catch(erro => console.log(erro))
+  
+      // Opcional: Para parar de monitorar após o modal ser exibido
+      clearInterval(modalChecker);
+    }
+}
+  
+// Verifica o modal a cada 500ms
+const modalChecker = setInterval(checaVisibilidadeModal, 500);
+
 modalAddPedido.addEventListener("click", function(event) {
     if(event.target.textContent == 'Voltar'){
         modalAddPedido.style.display = "none"
@@ -83,16 +123,19 @@ modalAddPedido.addEventListener("click", function(event) {
     }
 })
 
-
 // Adiciona o pedido
 let pedido = []
 
 function addItemToList(item) {
+    // Adiciona item ao array
     const produto = {
         name: item,    
         obs: ""
     }
+    
+    pedido.push(produto)
 
+    // Adiciona item a lista
     const itemList = document.getElementById('itemList');
     const itemElement = document.createElement('div');
     const containerRemoverProduto = document.createElement('div')
@@ -115,39 +158,14 @@ function addItemToList(item) {
     itemElement.appendChild(obs);
     itemList.appendChild(itemElement);
 
-    pedido.push(produto)
 }
 
-document.getElementById('lanches').addEventListener('change', function() {
+document.getElementById('itens').addEventListener('change', function() {
     const selectedItem = this.value;
     if (selectedItem) {
             addItemToList(selectedItem);
             this.value = ''; // Limpa a seleção
         }
-    });
-
-document.getElementById('bebidas').addEventListener('change', function() {
-    const selectedItem = this.value;
-    if (selectedItem) {
-        if(pedido.some(item => item.name === selectedItem)){
-            var itemIndex = pedido.findIndex(item => item.name === selectedItem)
-            pedido[itemIndex].quantity += 1
-
-            let itemLista = document.querySelectorAll(".item")
-            itemLista.forEach((item) => {
-                var info = item.querySelectorAll("p")
-                if(selectedItem == info[0].textContent){
-                    info[1].textContent = "x" + pedido[itemIndex].quantity
-                }
-            })
-
-            this.value = ''; // Limpa a seleção
-        }
-        else{
-            addItemToList(selectedItem);
-            this.value = ''; // Limpa a seleção
-        }
-    }
 });
 
 // Remove Produto do item

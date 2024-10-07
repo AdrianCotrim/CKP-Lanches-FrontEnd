@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="imagex/png" href="/ckp - lanches/imagens/ckp-logo.png">
+    <title>CKP - Administrar usuários</title>
+
+    <!--STYLESHEETS-->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="adm-usuarios.css">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
+    <!--SCRIPTS-->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <!--FONTES-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+
+<body class="container-fluid">
+    <script>
+        document.addEventListener('DOMContentLoaded', async function iniciar() {
+            try {
+                // Faz a solicitação de login
+                const response = await fetch("http://localhost:8080/user/name", {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    },
+                });
+
+                // Verifica se a resposta foi bem-sucedida
+                if (!response.ok) {
+                    window.location.href = "/Tela-de-login/index.html"
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                else {
+                    document.body.classList.add('visible');
+                }
+            }
+            catch (erro) {
+                console.error('Erro:', erro);
+            }
+        })
+    </script>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center topo">
+            <img src="/Imagens/ckp-logo.png" alt="CKP Logo">
+
+            <div class="dropdown pe-3">
+                <div id="dropdown-content" class="dropdown-content">
+                    <a class="dropdown-item" onclick="deleteToken()">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+                    </a>
+                </div>
+                <div class="dropdown-button p-2" onclick="toggleDropdown()">
+                    <i class="fa-solid fa-user ps-2"></i>
+                    <label class="ps-3">Usuário</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-0 col-sm-2 menu">
+            <nav>
+                <ul class="list-unstyled display-4">
+                    <li><a href="/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
+                            inicial</a></li>
+                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
+                            Registrar pedidos</a></li>
+                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
+                            Verificar estoque</a></li>
+                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-3"></i>
+                            Histórico de vendas</a></li>
+                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-3"></i>
+                            Gerenciar cardápio</a></li>
+                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-3"></i>
+                            Administrar usuários</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-12 col-sm-10 conteudo">
+            <header class="pt-5 ps-5 pe-5 cabecalho justify-content-between align-items-center">
+                <h1>Administrar usuários</h1>
+                <hr class="linha">
+            </header>
+
+            <main class="ps-5 pt-2 pe-5">
+                <div class="row pesquisa pb-4 align-items-center">
+                    <form class="label-input d-flex col-4" action="">
+
+                        <label class="me-2" for="search">Pesquisar:</label>
+                        <input placeholder="Nome" class="me-2" name="text" type="text">
+
+                        <label class="me-2" for="search">Ordenar:</label>
+                        <input placeholder="Número" class="me-2" name="text" type="text">
+
+                    </form>
+
+                    <div class="col-8 d-flex justify-content-end align-items-center">
+                        <div class="botoes d-flex align-items-center">
+                            <button id="addFunc" class="botao botao--vermelho"><i class="fas fa-plus"></i>
+                                Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--TABELA-->
+
+                <div class="tabela-responsiva">
+                    <table id="funcionarios" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Cód.</th>
+                                <th>Email</th>
+                                <th>Função</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <td>Pedro Henrique Silva Cantarin</td>
+                                <td>26</td>
+                                <td>pedro.lol@gmail.com</td>
+                                <td>Garçom</td>
+                            </tr>
+                            <tr>
+                                <td>Éder Moraes Lima Júnior</td>
+                                <td>21</td>
+                                <td>eder.xd@gmail.com</td>
+                                <td>Cozinheiro</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!--JANELA PARA ADICIONAR FUNCIONÁRIO-->
+
+                <div id="adicionarFunc" class="modal">
+                    <div class="modalContainer">
+
+                        <header class="container-fluid">
+                            <span><i class="fa-solid fa-plus"></i></span>
+                            <h2>Adicionar funcionário</h2>
+                        </header>
+
+                        <form class="grid-form">
+                            <div class="grupo-form">
+                                <label for="nome">Nome:</label>
+                                <input id="nome" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="descricao">Email:</label>
+                                <input id="descricao" placeholder="exemplo@gmail.com" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="qtdMinima">Senha:</label>
+                                <input id="qtdMinima" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="quantidade">Confirme a senha:</label>
+                                <input id="quantidade" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="dataValidade">Data de nascimento:</label>
+                                <input id="dataValidade" placeholder="Ex: dd/mm/aaaa" type="text">
+                            </div>
+                        </form>
+
+                        <footer class="container">
+                            <div class="row justify-content-evenly">
+                                <button id="cancelar"
+                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+                <!-- JANELA PARA EDITAR FUNCIONÁRIO -->
+
+                <div id="editarFunc" class="modal">
+                    <div class="modalContainer">
+
+                        <header class="container-fluid">
+                            <span><i class="fas fa-edit"></i></span>
+                            <h2>Editar funcionário</h2>
+                        </header>
+
+                        <form class="grid-form">
+                            <div class="grupo-form">
+                                <label for="nome">Alterar nome:</label>
+                                <input id="nomeAlterar" value="" placeholder="Ex: Tomate" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="descricao">Alterar email:</label>
+                                <input id="descricaoAlterar" placeholder="Ex: Para salada" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="QtdMinima">Alterar senha:</label>
+                                <input id="QtdMinimaAlterar" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="quantidade">Alterar quantidade:</label>
+                                <input id="quantidadeAlterar" placeholder="" type="text">
+                            </div>
+                        </form>
+
+                        <footer class="container">
+                            <div class="row justify-content-evenly">
+                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--verde">Concluir</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+
+                <!--JANELA PARA FILTRAR HISTORICO DE MOVIMENTAÇÃO-->
+
+                <div id="filtrarMovimentacao" class="modal">
+                    <div class="modalContainer">
+
+                        <header class="container-fluid">
+                            <span><i class="fa-solid fa-file-alt"></i></span>
+                            <h2>Gerar relatório de movimentação</h2>
+                        </header>
+
+                        <form class="gerar-relatorio">
+                            <div>
+                                <p>Produto:</p>
+                                <div class="input-radio-group">
+                                    <input class="radio" type="radio" name="produto">
+                                    <label for="Todos">Todos</label>
+                                </div>
+                                <div class="input-radio-group">
+                                    <input type="radio" name="produto">
+                                    <input type="text" placeholder="Ex: Tomate">
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="pt-4">Data:</p>
+                                <div class="input-radio-group">
+                                    <input class="radio" type="radio" name="produto">
+                                    <label for="Todos">Todos</label>
+                                </div>
+                                <div class="input-radio-group">
+                                    <input type="radio" name="produto">
+                                    <input type="date">
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="pt-4">Usuário:</p>
+                                <div class="input-radio-group">
+                                    <input class="radio" type="radio" name="produto">
+                                    <label for="Todos">Todos</label>
+                                </div>
+                                <div class="input-radio-group">
+                                    <input type="radio" name="produto">
+                                    <input type="text" placeholder="Usuário">
+                                </div>
+                            </div>
+                        </form>
+
+                        <footer class="container">
+                            <div class="row justify-content-evenly">
+                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--verde">Concluir</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!--LISTA DE COMPRAS-->
+
+    <table id="lista-de-compras">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Qtde. Mín.</th>
+                <th>Qtde.</th>
+                <th>Desc.</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script src="adm-usuarios.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

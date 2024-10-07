@@ -1,44 +1,80 @@
 // Modal
-var modalAddPedido = document.getElementById("janelaRegisPedido")
-var modalInfoPedido = document.getElementById("infoPedido")
-var modalFecharPedido = document.getElementById("fecharPedido")
-var btnAdd = document.getElementById("registrarPedido")
-const obs = document.getElementById('obs')
+var modalInfoPedido = document.getElementById("infoPedido");
+var modalAddPedido = document.getElementById("janelaRegisPedido");
+var modalFecharPedido = document.getElementById("fecharPedido");
+var btnAdd = document.getElementById("registrarPedido");
+const obs = document.getElementById('obs');
 
 
+// ModalInfoPedido
 // Exibe modal na tela
 btnAdd.addEventListener("click", function() {
     modalInfoPedido.style.display = "flex"
-})
+});
 
 
-// Habilita e desabilita o campo "endereço"
-const endereco = document.getElementById('endereco');
+// Habilita campos de "entrega"
+const entrega = document.getElementById('entrega');
 const tipoPedido = document.getElementById('tipoPedido');
 tipoPedido.addEventListener('change', function() {
-    console.log(this.value);
     if (this.value === 'entrega') {
-        endereco.disabled = false;
+        entrega.style.display = ""
     } else {
-        endereco.disabled = true;
-        endereco.value = "";
+        entrega.style.display = "none"
     } 
 });
 
 
 modalInfoPedido.addEventListener("click", function(event) {
+    var nomeCliente = document.getElementById("nomeCliente");
+    var tipoPedido = document.getElementById("tipoPedido");
+    var endereco = document.getElementById("endereco");
+    var motoboy = document.getElementById("motoboy");
+    var troco = document.getElementById("troco");
+    var complemento = document.getElementById("complemento");
+    var taxa = document.getElementById("taxa");
+
+    const pedido = {
+        nome_cliente: nomeCliente.value,
+        tipoPedido: tipoPedido.value,
+        endereco: endereco.value,
+        motoboy: motoboy.value,
+        troco: troco.value,
+        complemento: complemento.value,
+        taxa: taxa.value
+    }
+    console.log(pedido);
+
+
     if(event.target.textContent == 'Concluir' && tipoPedido.value != ""){
-        modalInfoPedido.style.display = "none"
-        modalAddPedido.style.display = "flex"
+        nomeCliente.value = "";
+        tipoPedido.value = "";
+        endereco.value = "";
+        motoboy.value = "";
+        troco.value = "";
+        complemento.value = "";
+        taxa.value = "";
+
+        modalInfoPedido.style.display = "none";
+        modalAddPedido.style.display = "flex";
     }
     if(event.target.textContent == 'Cancelar'){
-        modalInfoPedido.style.display = "none"
+        nomeCliente.value = "";
+        tipoPedido.value = "";
+        endereco.value = "";
+        motoboy.value = "";
+        troco.value = "";
+        complemento.value = "";
+        taxa.value = "";
+
+        modalInfoPedido.style.display = "none";     
     }
 })
 
 
+// ModalAddPedido
 modalAddPedido.addEventListener("click", function(event) {
-    if(event.target.textContent == 'Fechar'){
+    if(event.target.textContent == 'Voltar'){
         modalAddPedido.style.display = "none"
     }
     if(event.target.textContent == 'Fechar'){

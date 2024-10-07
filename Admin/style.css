@@ -235,6 +235,8 @@ ul a:hover {
     gap: 5vh;
     align-items: center;
     font-weight: 500;
+    max-height: 50vh;
+    overflow-y: auto;
 }
 
 .grupo-form {

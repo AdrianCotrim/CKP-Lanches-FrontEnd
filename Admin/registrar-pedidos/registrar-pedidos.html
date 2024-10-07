@@ -191,10 +191,10 @@
                             <h2>Adicionar Pedido</h2>
                         </header>
 
-                        <form class="grid-form">
+                        <form class="grid-form mt-4">
                             <div class="grupo-form">
                                 <label for="nomeCliente">Nome do cliente:</label>
-                                <input id="nomeCliente" placeholder="" type="text">
+                                <input id="nomeCliente" placeholder="" type="text" required>
                             </div>
                             <div class="grupo-form">
                                 <label for="tipoPedido">Tipo do pedido:</label>
@@ -204,11 +204,33 @@
                                     <option value="retirada">retirada</option>
                                 </select>
                             </div>
-                            <div class="grupo-form">
-                                <label for="endereco">Endereço:</label>
-                                <input id="endereco" placeholder="" type="text" disabled>
+
+                            <div style="display: none;" id="entrega" class="grupo-form">
+                                <div class="grupo-form">
+                                    <label for="endereco">Endereço:</label>
+                                    <input id="endereco" placeholder="" type="text">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="motoboy">Motoboy:</label>
+                                    <input id="motoboy" placeholder="" type="text">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="troco">Troco:</label>
+                                    <select class="col-2 select" name="troco" id="troco">
+                                        <option value="sim">Sim</option>
+                                        <option value="nao">Não</option>
+                                    </select>
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="complemento">Complemento:</label>
+                                    <input id="complemento" placeholder="" type="text">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="taxa">Taxa:</label>
+                                    <input id="taxa" placeholder="" type="text">
+                                </div>
                             </div>
-                      
+
                         </form>
 
                         <footer class="container">

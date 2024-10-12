@@ -1,7 +1,7 @@
 const token = localStorage.getItem('authToken');
 
 // Traz pedidos do banco
-fetch("http://localhost:8080/pedido", {
+fetch("http://localhost:8080/produtos", {
     headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
@@ -20,8 +20,7 @@ fetch("http://localhost:8080/pedido", {
         <td>${element.description}</td>
         <td>${element.minQuantity}</td>
         <td>${element.maxQuantity}</td>
-        <td>${element.quantity}</td>
-        <td>${element.experation_date}</td>`
+        <td>${element.quantity}</td>`
         tr.classList.add("linha");
         tbody.appendChild(tr)
     });  

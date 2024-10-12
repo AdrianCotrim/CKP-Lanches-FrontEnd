@@ -1,9 +1,9 @@
 // Modal
 var modalInfoPedido = document.getElementById("infoPedido");
-var modalAddPedido = document.getElementById("janelaRegisPedido");
+var modalAddItens = document.getElementById("janelaRegisPedido");
 var modalFecharPedido = document.getElementById("fecharPedido");
 var btnAdd = document.getElementById("registrarPedido");
-const obs = document.getElementById('obs');
+const obs = document.getElementById('observacao');
 
 
 // ModalInfoPedido
@@ -54,7 +54,7 @@ modalInfoPedido.addEventListener("click", function(event) {
         taxa.value = "";
 
         modalInfoPedido.style.display = "none";
-        modalAddPedido.style.display = "flex";
+        modalAddItens.style.display = "flex";
     }
     if(event.target.textContent == 'Cancelar'){
         nomeCliente.value = "";
@@ -70,10 +70,13 @@ modalInfoPedido.addEventListener("click", function(event) {
 })
 
 
-// ModalAddPedido
+// modalAddItens
+let pedido = []
+
+// Puxa os produtos para os selects
 function checaVisibilidadeModal() {
     // Verifica se o modal está visível (exemplo usando 'display')
-    const isVisible = window.getComputedStyle(modalAddPedido).display !== 'none';
+    const isVisible = window.getComputedStyle(modalAddItens).display !== 'none';
     
     if (isVisible) {
       console.log('Modal está visível');
@@ -88,19 +91,15 @@ function checaVisibilidadeModal() {
         })
         .then(response => response.json())
         .then(dados => {
-            console.log(dados);
             const itens = document.getElementById("itens");
 
             dados.forEach(element => {
-                console.log(element.product_name);
                 const option = document.createElement("option");
-                const id = document.createElement("input")
                 option.value = element.product_name;
                 option.textContent = element.product_name;
-                id.value = element.product_id;
+
 
                 itens.appendChild(option)
-                itens.appendChild(id)
             })
         })
         .catch(erro => console.log(erro))
@@ -113,30 +112,57 @@ function checaVisibilidadeModal() {
 // Verifica o modal a cada 500ms
 const modalChecker = setInterval(checaVisibilidadeModal, 500);
 
-modalAddPedido.addEventListener("click", function(event) {
+function listaId(pedido) {
+    fetch("http://localhost:8080/produtos", {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
+        method: 'GET'
+        })
+        .then(response => response.json())
+        .then(dados => {
+            let produtosIds = [];
+
+            dados.forEach(element => {
+                pedido.forEach(item => {
+                    if(item.name == element.product_name){
+                        produtosIds.push(element.product_id);
+                    }
+                })
+            })
+            console.log(produtosIds);  
+        })
+        .catch(erro => console.log(erro))
+}
+
+modalAddItens.addEventListener("click", function(event) {
     if(event.target.textContent == 'Voltar'){
-        modalAddPedido.style.display = "none"
+        modalAddItens.style.display = "none"
+        listaId(pedido);
     }
     if(event.target.textContent == 'Fechar'){
-        modalAddPedido.style.display = "none"
+        modalAddItens.style.display = "none"
         modalFecharPedido.style.display = "flex"
+        listaId(pedido);
     }
 })
 
 // Adiciona o pedido
-let pedido = []
-
-function addItemToList(item) {
-    // Adiciona item ao array
+function adicionaItem(item) {
+    
     const produto = {
-        name: item,    
+        name: item,
         obs: ""
     }
-    
+
     pedido.push(produto)
+    console.log(pedido);
+    
 
     // Adiciona item a lista
     const itemList = document.getElementById('itemList');
+
     const itemElement = document.createElement('div');
     const containerRemoverProduto = document.createElement('div')
     const removerProduto = document.createElement('i');
@@ -163,23 +189,22 @@ function addItemToList(item) {
 document.getElementById('itens').addEventListener('change', function() {
     const selectedItem = this.value;
     if (selectedItem) {
-            addItemToList(selectedItem);
+            adicionaItem(selectedItem);
             this.value = ''; // Limpa a seleção
         }
 });
 
 // Remove Produto do item
-modalAddPedido.addEventListener("click", function(event){
+modalAddItens.addEventListener("click", function(event){
     
     if(event.target.classList.contains("removerProduto")){
-        var produto = event.target.parentElement.parentElement;
-        var nome = produto.querySelector('p').textContent;
-        console.log(nome);
+        
+        const produto = event.target.parentElement.parentElement;
+        const nome = produto.querySelector('.nome').textContent;
         
         pedido.forEach((item) => {
             if(nome == item.name){
-                var index = pedido.indexOf(item);
-                
+                const index = pedido.indexOf(item);
                 produto.remove()
                 pedido.splice(index, 1)
                 console.log(pedido);
@@ -188,41 +213,32 @@ modalAddPedido.addEventListener("click", function(event){
     };
 });
 
-let ultimoItemClicado
+let ultimoItemSelecionado
+let itemSelecionado
 // Seleciona item
-modalAddPedido.addEventListener("click", function(event){
-    
-
+modalAddItens.addEventListener("click", function(event){
     if(event.target.classList.contains("nome")){
-        let itemAtual = event.target.parentElement.parentElement;
-        let obs = itemAtual.querySelector(".obs");
-        
-        
-        // Desmarca último item
-        if(ultimoItemClicado && ultimoItemClicado.textContent != itemAtual.textContent){
-            ultimoItemClicado.classList.remove("selecionado")   
+        // Desmarca último item clicado
+        if(ultimoItemSelecionado){
+            ultimoItemSelecionado.classList.remove("selecionado");
         }
-        itemAtual.classList.add("selecionado")
+        itemSelecionado = event.target.parentElement;
+        ultimoItemSelecionado = itemSelecionado;
+        itemSelecionado.classList.add("selecionado");
 
-        nomes.forEach((nome) => {
-            if(nome.classList.contains("selecionado")){
-                itemIndex = pedido.findIndex(item => item.name === nome.textContent)
-                obs.value = pedido[itemIndex].obs
-            }
-        })
-        ultimoItemClicado = itemAtual   
+        const nomeProduto = itemSelecionado.querySelector(".nome").textContent;
+        const item = pedido.find(item => item.name == nomeProduto);
+        obs.value = item.obs;
+        
     }
 })
 
 // Observação
 obs.addEventListener('input', function() {
     const valor = obs.value; 
-    let nomes = document.querySelectorAll(".nome")
+    const nomeProduto = itemSelecionado.querySelector(".nome").textContent;
+    const item = pedido.find(item => item.name == nomeProduto);
+    
 
-    nomes.forEach((nome) => {
-        if(nome.classList.contains("selecionado")){
-            itemIndex = pedido.findIndex(item => item.name === nome.textContent)
-            pedido[itemIndex].obs = valor
-        }
-    })
+    item.obs = valor;
 })

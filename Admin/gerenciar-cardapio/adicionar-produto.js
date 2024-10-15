@@ -15,6 +15,48 @@ btnFecharAddProduto.addEventListener("click", function(){
     addProdutoModal.style.display = "none";
 })
 
+// Traz os insumos para o select
+if(addProdutoModal.style.display = "flex"){
+    fetch("http://localhost:8080/insumos", {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
+    })
+    .then(response => response.json())
+    .then(dados => {
+        console.log(dados)
+        var insumos = document.getElementById("insumos")
+    
+        dados.forEach(element => {
+            var option = document.createElement("option");
+            option.value = element.name;
+            option.textContent = element.name;
+            insumos.appendChild(option)
+        });  
+    })
+    .catch(erro => console.log(erro))
+}
+
+// Adiciona a lista de insumos incluidos no produto
+const selectInsumos = document.getElementById("insumos");
+const listaInsumos = document.getElementById("listaInsumos");
+let insumos = [];
+
+selectInsumos.addEventListener("change", function(){
+    let novoInsumo = document.createElement("li");
+    let removerInsumo = document.createElement("i");
+    removerInsumo.classList.add("fa");
+    removerInsumo.classList.add("fa-times");
+
+    novoInsumo.textContent = this.value;
+    novoInsumo.appendChild(removerInsumo);
+    listaInsumos.appendChild(novoInsumo);
+
+    insumos.push(this.value)
+})
+
+
 
 // btnAddProduto.addEventListener("click", function(){
 //     console.log("Fui clicado")
@@ -31,10 +73,33 @@ btnFecharAddProduto.addEventListener("click", function(){
 //     cardapio.appendChild(produto)
 // })  
 
+// function listaInsumoIds = function(){}
 
 btnAddProduto.addEventListener('click', function(event) {
     event.preventDefault();  // Prevenir o comportamento padrão do formulário, se houver
-    
+
+    // Cria lista de ids dos insumos
+    fetch("http://localhost:8080/insumos", {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
+        method: 'GET'
+        })
+        .then(response => response.json())
+        .then(dados => {
+            let insumosIds = [];
+
+            dados.forEach(element => {
+                insumos.forEach(insumo => {
+                    if(insumo == element.name){
+                        insumosIds.push(element.id)
+                    }
+                })
+            }) 
+        })
+        .catch(erro => console.log(erro))
+
     // Pegando os valores do formulário
     const produtoDTO = {
         productName: document.getElementById('nome').value,
@@ -62,4 +127,6 @@ btnAddProduto.addEventListener('click', function(event) {
         // Atualizar o grid de produtos, ou realizar alguma ação adicional
     })
     .catch(error => console.error('Erro ao cadastrar produto:', error));
+
+    //location.reload();
 });

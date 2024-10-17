@@ -7,72 +7,6 @@ const obs = document.getElementById('observacao');
 
 
 // ModalInfoPedido
-// Exibe modal na tela
-btnAdd.addEventListener("click", function() {
-    modalInfoPedido.style.display = "flex"
-});
-
-// Habilita campos de "entrega"
-const entrega = document.getElementById('entrega');
-const tipoPedido = document.getElementById('tipoPedido');
-tipoPedido.addEventListener('change', function() {
-    if (this.value === 'entrega') {
-        entrega.style.display = ""
-    } else {
-        entrega.style.display = "none"
-    } 
-});
-
-modalInfoPedido.addEventListener("click", function(event) {
-    var nomeCliente = document.getElementById("nomeCliente");
-    var tipoPedido = document.getElementById("tipoPedido");
-    var endereco = document.getElementById("endereco");
-    var motoboy = document.getElementById("motoboy");
-    var troco = document.getElementById("troco");
-    var complemento = document.getElementById("complemento");
-    var taxa = document.getElementById("taxa");
-
-    const pedido = {
-        nome_cliente: nomeCliente.value,
-        tipoPedido: tipoPedido.value,
-        endereco: endereco.value,
-        motoboy: motoboy.value,
-        troco: troco.value,
-        complemento: complemento.value,
-        taxa: taxa.value
-    }
-    console.log(pedido);
-
-
-    if(event.target.textContent == 'Concluir' && tipoPedido.value != ""){
-        nomeCliente.value = "";
-        tipoPedido.value = "";
-        endereco.value = "";
-        motoboy.value = "";
-        troco.value = "";
-        complemento.value = "";
-        taxa.value = "";
-
-        modalInfoPedido.style.display = "none";
-        modalAddItens.style.display = "flex";
-    }
-    if(event.target.textContent == 'Cancelar'){
-        nomeCliente.value = "";
-        tipoPedido.value = "";
-        endereco.value = "";
-        motoboy.value = "";
-        troco.value = "";
-        complemento.value = "";
-        taxa.value = "";
-
-        modalInfoPedido.style.display = "none";     
-    }
-})
-
-
-// modalAddItens
-let pedido = []
-
 // Puxa os produtos para os selects
 function checaVisibilidadeModal() {
     // Verifica se o modal está visível (exemplo usando 'display')
@@ -108,11 +42,8 @@ function checaVisibilidadeModal() {
       clearInterval(modalChecker);
     }
 }
-  
-// Verifica o modal a cada 500ms
-const modalChecker = setInterval(checaVisibilidadeModal, 500);
 
-function listaId(pedido) {
+function adicionaItensAoPedido(pedidoItens, pedido) {
     fetch("http://localhost:8080/produtos", {
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -122,33 +53,31 @@ function listaId(pedido) {
         })
         .then(response => response.json())
         .then(dados => {
-            let produtosIds = [];
+            let produtos = [];
 
             dados.forEach(element => {
-                pedido.forEach(item => {
+                pedidoItens, pedidoItens.forEach(item => {
                     if(item.name == element.product_name){
-                        produtosIds.push(element.product_id);
+                        let nome = element.product_name;
+                        let count = pedidoItens.filter(item => item.name === element.product_name).length;
+                        let obs = item.obs;
+                        
+                        let produto = {
+                            productName: nome,
+                            quantity: count,
+                            observacao: obs
+                        }
+                        produtos.push(produto);
+                        console.log(produto);
                     }
                 })
             })
-            console.log(produtosIds);  
+            pedido["orderProductsDTOs"] = produtos;
+            console.log(pedido);
         })
         .catch(erro => console.log(erro))
 }
 
-modalAddItens.addEventListener("click", function(event) {
-    if(event.target.textContent == 'Voltar'){
-        modalAddItens.style.display = "none"
-        listaId(pedido);
-    }
-    if(event.target.textContent == 'Fechar'){
-        modalAddItens.style.display = "none"
-        modalFecharPedido.style.display = "flex"
-        listaId(pedido);
-    }
-})
-
-// Adiciona o pedido
 function adicionaItem(item) {
     
     const produto = {
@@ -156,8 +85,8 @@ function adicionaItem(item) {
         obs: ""
     }
 
-    pedido.push(produto)
-    console.log(pedido);
+    pedidoItens.push(produto)
+    console.log(pedidoItens);
     
 
     // Adiciona item a lista
@@ -186,6 +115,81 @@ function adicionaItem(item) {
 
 }
 
+// Exibe modal na tela
+btnAdd.addEventListener("click", function() {
+    modalInfoPedido.style.display = "flex"
+});
+
+// Habilita campos de "entrega"
+const entrega = document.getElementById('entrega');
+const tipoPedido = document.getElementById('tipoPedido');
+tipoPedido.addEventListener('change', function() {
+    if (this.value === 'entrega') {
+        entrega.style.display = ""
+    } else {
+        entrega.style.display = "none"
+    } 
+});
+
+var pedido = {
+    orderStatus: "",
+    customerName: "",
+    exitMethod: "",
+    paymentMethod: "Null",
+    endDateTime: "2024-10-14T11:00",
+    exitDateTime: "2024-10-14T11:00",
+    orderProductsDTOs: []
+}
+
+modalInfoPedido.addEventListener("click", function(event) {
+    var nomeCliente = document.getElementById("nomeCliente");
+    var tipoPedido = document.getElementById("tipoPedido");
+    var endereco = document.getElementById("endereco");
+    var motoboy = document.getElementById("motoboy");
+    var troco = document.getElementById("troco");
+    var complemento = document.getElementById("complemento");
+    var taxa = document.getElementById("taxa");
+
+    if(event.target.textContent == 'Concluir' && tipoPedido.value != ""){
+        pedido["customerName"] = nomeCliente.value;
+        pedido['exitMethod'] = tipoPedido.value;
+
+        console.log(pedido);
+        modalInfoPedido.style.display = "none";
+        modalAddItens.style.display = "flex";
+    }
+    if(event.target.textContent == 'Cancelar'){
+        nomeCliente.value = "";
+        tipoPedido.value = "";
+        endereco.value = "";
+        motoboy.value = "";
+        troco.value = "";
+        complemento.value = "";
+        taxa.value = "";
+
+        modalInfoPedido.style.display = "none";     
+    }
+})
+
+// modalAddItens
+let pedidoItens = []
+
+// Verifica o modal a cada 500ms
+const modalChecker = setInterval(checaVisibilidadeModal, 500);
+
+modalAddItens.addEventListener("click", function(event) {
+    if(event.target.textContent == 'Voltar'){
+        modalAddItens.style.display = "none"
+        adicionaItensAoPedido(pedidoItens, pedido);
+    }
+    if(event.target.textContent == 'Fechar'){
+        modalAddItens.style.display = "none"
+        modalFecharPedido.style.display = "flex"
+        adicionaItensAoPedido(pedidoItens, pedido);
+    }
+})
+
+// Adiciona o pedido
 document.getElementById('itens').addEventListener('change', function() {
     const selectedItem = this.value;
     if (selectedItem) {
@@ -202,11 +206,11 @@ modalAddItens.addEventListener("click", function(event){
         const produto = event.target.parentElement.parentElement;
         const nome = produto.querySelector('.nome').textContent;
         
-        pedido.forEach((item) => {
+        pedidoItens.forEach((item) => {
             if(nome == item.name){
                 const index = pedido.indexOf(item);
                 produto.remove()
-                pedido.splice(index, 1)
+                pedidoItens.splice(index, 1)
                 console.log(pedido);
             };
         });
@@ -237,7 +241,7 @@ modalAddItens.addEventListener("click", function(event){
 obs.addEventListener('input', function() {
     const valor = obs.value; 
     const nomeProduto = itemSelecionado.querySelector(".nome").textContent;
-    const item = pedido.find(item => item.name == nomeProduto);
+    const item = pedidoItens.find(item => item.name == nomeProduto);
     
 
     item.obs = valor;

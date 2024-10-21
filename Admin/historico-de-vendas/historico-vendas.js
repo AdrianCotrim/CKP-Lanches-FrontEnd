@@ -13,9 +13,12 @@ fetch("http://localhost:8080/pedidos/finalizados", {
     var tbody = vendas.querySelector("tbody")
 
     dados.forEach(element => {
-        var tr = document.createElement("tr")
+        var tr = document.createElement("tr");
+        const date = new Date();
+        let dataHora = date.toLocaleString('pt-BR')
+
         tr.innerHTML = `<td>${element.orderId}</td>
-        <td>${element.endDateTime}</td>
+        <td>${dataHora}</td>
         <td>${element.exitMethod}</td>
         <td>${element.paymentMethod}</td>
         <td>${element.totalValue == null ? "$00,00": element.totalValue}</td>`

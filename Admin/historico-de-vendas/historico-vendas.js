@@ -10,12 +10,12 @@ fetch("http://localhost:8080/pedidos/finalizados", {
 .then(dados => {
     console.log(dados)
     var vendas = document.getElementById("vendas")
-    var tbody = pedidos.querySelector("tbody")
+    var tbody = vendas.querySelector("tbody")
 
     dados.forEach(element => {
         var tr = document.createElement("tr")
         tr.innerHTML = `<td>${element.orderId}</td>
-        <td>21/10/2024</td>
+        <td>${element.endDateTime}</td>
         <td>${element.exitMethod}</td>
         <td>${element.paymentMethod}</td>
         <td>${element.totalValue == null ? "$00,00": element.totalValue}</td>`

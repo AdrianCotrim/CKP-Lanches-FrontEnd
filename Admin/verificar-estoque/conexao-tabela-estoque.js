@@ -20,8 +20,7 @@ fetch("http://localhost:8080/insumos", {
         <td>${element.description}</td>
         <td>${element.minQuantity}</td>
         <td>${element.maxQuantity}</td>
-        <td>${element.quantity}</td>
-        <td>${element.experation_date}</td>`
+        <td>${element.quantity}</td>`
         tr.classList.add("linha");
         tbody.appendChild(tr)
     });  

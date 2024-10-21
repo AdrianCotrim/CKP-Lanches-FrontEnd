@@ -1,3 +1,8 @@
+.cardapio{
+    overflow-y: auto;
+    height: 60vh;
+}
+
 .produto{
     background-color: var(--cinza-claro);
     height: 45vh;
@@ -19,4 +24,32 @@
     height: 10vh;
     overflow-y: auto;
     color: var(--cinza-texto);
+}
+
+.grid-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5vh;
+    align-items: center;
+    font-weight: 500;
+}
+
+.listaInsumosContainer {
+    padding-top: 0;
+}
+
+#listaInsumos li{
+    display: inline-flex;
+    background-color: #F1363A;
+    color: white;
+    padding: 2px 8px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 25px;
+    margin: 0.2em;
+}
+
+#listaInsumos i{
+    margin-left: 5px;
+    font-size: 3vh;
 }

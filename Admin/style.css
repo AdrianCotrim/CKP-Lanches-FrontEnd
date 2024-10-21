@@ -232,7 +232,7 @@ ul a:hover {
 .grid-form {
     display: grid;
     grid-template-columns: auto auto;
-    gap: 5vh;
+    gap: 3vh;
     align-items: center;
     font-weight: 500;
     max-height: 50vh;

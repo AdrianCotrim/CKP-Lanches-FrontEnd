@@ -26,17 +26,6 @@
     color: var(--cinza-texto);
 }
 
-.grid-form {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 5vh;
-    align-items: center;
-    font-weight: 500;
-}
-
-.listaInsumosContainer {
-    padding-top: 0;
-}
 
 #listaInsumos li{
     display: inline-flex;
@@ -51,5 +40,23 @@
 
 #listaInsumos i{
     margin-left: 5px;
-    font-size: 3vh;
+    font-size: 1.4vh;
+}
+
+.esquerda {
+    height: 18vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.direita {
+    border-left: 0.15rem solid var(--cinza-bg);
+    height: 18vh;
+    overflow-y: auto;
+    font-weight: 500;
+    color: var(--cinza-texto);
+    padding-top: 0;
+    max-height: 10vh;
+    max-width: 30vh;
+    overflow-x: hidden;
 }

@@ -11,7 +11,7 @@ function imprimirTabela() {
     janelaImpressao.document.write('<html><head><link rel="stylesheet" type="text/css" href="../style.css"><link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><title>Imprimir Tabela</title>');
     janelaImpressao.document.write('<style>body{font-family: "Fredoka", sans-serif;} table { width: 100%; border: none} th, td {padding: 8px; text-align: left; } th { background-color: var(--cinza-bg); } img{width: 100%}</style>');
     janelaImpressao.document.write('</head><body >');
-    janelaImpressao.document.write('<img src="/ckp - lanches/Imagens/cabecalho-lista-de-compras.png">')
+    janelaImpressao.document.write('<img src="/Imagens/cabecalho-lista-de-compras.png">')
     janelaImpressao.document.write(conteudoTabela);
     janelaImpressao.document.write('</body></html>');
 

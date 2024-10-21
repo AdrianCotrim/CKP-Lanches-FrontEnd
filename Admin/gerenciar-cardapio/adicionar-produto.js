@@ -26,14 +26,14 @@ if(addProdutoModal.style.display = "flex"){
     .then(response => response.json())
     .then(dados => {
         console.log(dados)
-        var insumos = document.getElementById("insumos")
+        let insumos = document.getElementById("insumos")
     
         dados.forEach(element => {
-            var option = document.createElement("option");
+            let option = document.createElement("option");
             option.value = element.name;
             option.textContent = element.name;
             insumos.appendChild(option)
-        });  
+        });
     })
     .catch(erro => console.log(erro))
 }

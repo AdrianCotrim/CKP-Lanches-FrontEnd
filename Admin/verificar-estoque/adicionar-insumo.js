@@ -1,10 +1,10 @@
 // Modal
-var modalAddInsumo = document.getElementById("adicionarInsumo")
-var btnAdd = document.getElementById("addInsumo")
+let modalAddInsumo = document.getElementById("adicionarInsumo")
+let btnAdd = document.getElementById("addInsumo")
 
 // Exibe modal na tela
 btnAdd.addEventListener("click", function() {
-    modalAddInsumo.style.display = "flex"
+    modalAddInsumo.style.display = "flex";
 })
 
 modalAddInsumo.addEventListener('click', (event) => {
@@ -19,7 +19,7 @@ modalAddInsumo.addEventListener('click', (event) => {
             maxQuantity: parseInt(document.getElementById("qtdMaxima").value),
             minQuantity: parseInt(document.getElementById("qtdMinima").value),
             name: document.getElementById("nome").value,    
-            quantity: parseInt(document.getElementById("quantidade").value),
+            quantity: parseInt(document.getElementById("quantidade").value)
         }
         console.log(insumo)
         

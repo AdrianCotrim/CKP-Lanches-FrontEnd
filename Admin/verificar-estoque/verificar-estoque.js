@@ -7,6 +7,7 @@ function imprimirTabela() {
     // Obtém o conteúdo da tabela
     const tabela = document.getElementById('estoque');
     const insumos = tabela.querySelectorAll('.linha');
+
     
     
     // Adiciona o HTML básico para a nova janela
@@ -18,7 +19,9 @@ function imprimirTabela() {
     insumos.forEach(insumo => {
         let quantidade = insumo.querySelector("td:nth-child(6)").textContent;
         let quantidadeMinima = insumo.querySelector("td:nth-child(4)").textContent;
-        console.log();
+        if(quantidade <= quantidadeMinima){
+            janelaImpressao.document.write(insumo.outerHTML);
+        }
     })
     janelaImpressao.document.write('</table></body></html>');
 

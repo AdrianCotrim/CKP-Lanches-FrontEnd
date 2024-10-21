@@ -14,22 +14,6 @@
     color: var(--cinza-hover);
 }
 
-.grid-form {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 5vh;
-    align-items: center;
-    font-weight: 500;
-}
-
-.grupo-form {
-    display: contents;
-}
-
-.grupo-form label {
-    text-align: left;
-}
-
 #lista-de-compras {
     display: none;
 }

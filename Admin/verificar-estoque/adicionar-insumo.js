@@ -15,11 +15,10 @@ modalAddInsumo.addEventListener('click', (event) => {
 
         const insumo = {
             description: document.getElementById("descricao").value,
-            lot: parseInt(document.getElementById("lote").value),
-            maxQuantity: parseInt(document.getElementById("qtdMaxima").value),
-            minQuantity: parseInt(document.getElementById("qtdMinima").value),
-            name: document.getElementById("nome").value,    
-            quantity: parseInt(document.getElementById("quantidade").value),
+            maxQuantity: parseInt(document.getElementById("qtdMaxima").value) > 0 ? parseInt(document.getElementById("qtdMaxima").value) : 0,
+            minQuantity: parseInt(document.getElementById("qtdMinima").value) > 0 ? parseInt(document.getElementById("qtdMinima").value) : 0,
+            quantity: parseInt(document.getElementById("quantidade").value) > 0 ? parseInt(document.getElementById("quantidade").value) : 0,
+            name: document.getElementById("nome").value,
         }
         console.log(insumo)
         

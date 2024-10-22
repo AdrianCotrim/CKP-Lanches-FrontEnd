@@ -29,9 +29,13 @@ if(addProdutoModal.style.display = "flex"){
         let insumos = document.getElementById("insumos")
     
         dados.forEach(element => {
-            let option = document.createElement("option");
+            let option = document.createElement("p");
+            let addInsumo = document.createElement('i')
+            addInsumo.classList.add('fas');
+            addInsumo.classList.add('fa-plus');
             option.value = element.name;
             option.textContent = element.name;
+            option.appendChild(addInsumo)
             insumos.appendChild(option)
         });
     })

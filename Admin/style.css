@@ -104,10 +104,6 @@
     }
 }
 
-/* Animação de efeito de luz piscando no texto */
-
-
-
 /*MENU DE NAVEGAÇÃO LATERAL*/
 
 .menu {
@@ -191,13 +187,14 @@ ul a:hover {
 
 .modalContainer {
     background-color: #E9E9E9;
-    margin: 11% auto;
+    margin: 7% auto;
     width: 60vh;
     border-radius: 2vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: fit-content;
+    overflow: hidden;
 }
 
 .modalContainer header {
@@ -237,6 +234,7 @@ ul a:hover {
     font-weight: 500;
     max-height: 50vh;
     overflow-y: auto;
+    overflow: hidden;
 }
 
 .grupo-form {

@@ -33,6 +33,7 @@ if(addProdutoModal.style.display = "flex"){
             let addInsumo = document.createElement('i')
             addInsumo.classList.add('fas');
             addInsumo.classList.add('fa-plus');
+            addInsumo.classList.add('novoInsumo');
             option.value = element.name;
             option.textContent = element.name;
             option.appendChild(addInsumo)
@@ -59,6 +60,23 @@ selectInsumos.addEventListener("change", function(){
 
     insumos.push(this.value)
 })
+
+const adicionarInsumo = document.querySelectorAll('.novoInsumo');
+const listaAdicionados = document.getElementById('listaInsumos');
+
+        addButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const produto = button.parentElement.querySelector('span').textContent;
+                
+                // Cria um novo elemento para a lista de adicionados
+                const novoProduto = document.createElement('div');
+                novoProduto.textContent = produto;
+                novoProduto.classList.add('adicionado');
+                
+                // Adiciona o novo produto à lista de adicionados
+                listaAdicionados.appendChild(novoProduto);
+            });
+        });
 
 
 

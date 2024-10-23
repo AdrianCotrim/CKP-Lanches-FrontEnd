@@ -58,7 +58,7 @@
 
     <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center topo">
-            <img src="/Imagens/ckp-logo.png" alt="CKP Logo">
+            <img src="/ckp - lanches/imagens/ckp-logo.png" alt="CKP Logo">
 
             <div class="dropdown pe-3">
                 <div id="dropdown-content" class="dropdown-content">
@@ -76,17 +76,22 @@
         <div class="col-0 col-sm-2 menu">
             <nav>
                 <ul class="list-unstyled display-4">
-                    <li><a href="/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
+                    <li><a href="/ckp - lanches/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
                             inicial</a></li>
-                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/registrar-pedidos/registrar-pedidos.html"><i
+                                class="fas fa-plus pe-3"></i>
                             Registrar pedidos</a></li>
-                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/verificar-estoque/verificar-estoque.html"><i
+                                class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
-                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/historico-de-vendas/historico-vendas.html"><i
+                                class="fas fa-history pe-3"></i>
                             Histórico de vendas</a></li>
-                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i
+                                class="fas fa-utensils pe-3"></i>
                             Gerenciar cardápio</a></li>
-                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-3"></i>
+                    <li><a href="/ckp - lanches/Admin/administrar-usuarios/adm-usuarios.html"><i
+                                class="fas fa-users pe-3"></i>
                             Administrar usuários</a></li>
                 </ul>
             </nav>
@@ -103,17 +108,22 @@
                     <form class="label-input d-flex col-4" action="">
 
                         <label class="me-2" for="search">Pesquisar:</label>
-                        <input placeholder="Nome" class="me-2" name="text" type="text">
+                        <input id="pesquisa-nome" placeholder="Nome" class="me-2" name="text" type="text">
 
                         <label class="me-2" for="search">Ordenar:</label>
-                        <input placeholder="Número" class="me-2" name="text" type="text">
+                        <select id="pesquisa_ordenar" class="col-2 select" name="andamento" id="andamento">
+                            <option value="todos">Todos</option>
+                            <option value="nome">Nome</option>
+                            <option value="codigo">Código</option>
+                            <option value="email">Email</option>
+                            <option value="funcao">Função</option>
+                        </select>
 
                     </form>
 
                     <div class="col-8 d-flex justify-content-end align-items-center">
                         <div class="botoes d-flex align-items-center">
-                            <button id="addFunc" class="botao botao--vermelho"><i class="fas fa-plus"></i>
-                                Adicionar</button>
+                            <button id="addFunc" class="botao botao--vermelho"><i class="fas fa-plus"></i>Adicionar</button>
                         </div>
                     </div>
                 </div>
@@ -128,23 +138,10 @@
                                 <th>Cód.</th>
                                 <th>Email</th>
                                 <th>Função</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            <tr>
-                                <td>Pedro Henrique Silva Cantarin</td>
-                                <td>26</td>
-                                <td>pedro.lol@gmail.com</td>
-                                <td>Garçom</td>
-                            </tr>
-                            <tr>
-                                <td>Éder Moraes Lima Júnior</td>
-                                <td>21</td>
-                                <td>eder.xd@gmail.com</td>
-                                <td>Cozinheiro</td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -155,8 +152,8 @@
                     <div class="modalContainer">
 
                         <header class="container-fluid">
-                            <span><i class="fa-solid fa-plus"></i></span>
-                            <h2>Adicionar funcionário</h2>
+                            <span><i class="fa fa-user-plus"></i></span>
+                            <h2 class="ps-3">Adicionar funcionário</h2>
                         </header>
 
                         <form class="grid-form">
@@ -165,27 +162,29 @@
                                 <input id="nome" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="descricao">Email:</label>
-                                <input id="descricao" placeholder="exemplo@gmail.com" type="text">
+                                <label for="email">Email:</label>
+                                <input id="email" placeholder="exemplo@gmail.com" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="qtdMinima">Senha:</label>
-                                <input id="qtdMinima" placeholder="" type="text">
+                                <label for="senha">Senha:</label>
+                                <input id="senha" placeholder="" type="password">
                             </div>
                             <div class="grupo-form">
-                                <label for="quantidade">Confirme a senha:</label>
-                                <input id="quantidade" placeholder="" type="text">
+                                <label for="senhaConfirma">Confirme a senha:</label>
+                                <input id="senhaConfirma" placeholder="" type="password">
                             </div>
                             <div class="grupo-form">
-                                <label for="dataValidade">Data de nascimento:</label>
-                                <input id="dataValidade" placeholder="Ex: dd/mm/aaaa" type="text">
+                                <label for="nivelAcesso">Nível de acesso:</label>
+                                <select class="col-2 select" name="nivelAcesso" id="nivelAcesso">
+                                    <option value="USER">Usuário</option>
+                                    <option value="ADMIN">Admin</option>
+                                </select>
                             </div>
                         </form>
 
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button id="cancelar"
-                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="cancelar"class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
                                 <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
@@ -198,26 +197,37 @@
                     <div class="modalContainer">
 
                         <header class="container-fluid">
-                            <span><i class="fas fa-edit"></i></span>
-                            <h2>Editar funcionário</h2>
+                            <span><i class="fa fa-user-edit"></i></span>
+                            <h2 class="ps-3">Editar funcionário</h2>
                         </header>
 
                         <form class="grid-form">
+                            <input id="id" value="" type="hidden">
                             <div class="grupo-form">
-                                <label for="nome">Alterar nome:</label>
+                                <label for="nomeAlterar">Alterar nome:</label>
                                 <input id="nomeAlterar" value="" placeholder="Ex: Tomate" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="descricao">Alterar email:</label>
-                                <input id="descricaoAlterar" placeholder="Ex: Para salada" type="text">
+                                <label for="emailAlterar">Alterar email:</label>
+                                <input id="emailAlterar" placeholder="Ex: Para salada" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="QtdMinima">Alterar senha:</label>
-                                <input id="QtdMinimaAlterar" placeholder="" type="text">
+                                <label for="senhaAlterar">Alterar senha:</label>
+                                <input id="senhaAlterar" placeholder="" type="password">
                             </div>
                             <div class="grupo-form">
-                                <label for="quantidade">Alterar quantidade:</label>
-                                <input id="quantidadeAlterar" placeholder="" type="text">
+                                <label for="nivelAcesso">Nível de acesso:</label>
+                                <select class="col-2 select" name="nivelAcesso" id="nivelAcessoAlterar">
+                                    <option value="USER">Usuário</option>
+                                    <option value="ADMIN">Admin</option>
+                                </select>
+                            </div>
+                            <div class="grupo-form">
+                                <label for="status">Status:</label>
+                                <select class="col-2 select" name="status" id="statusAlterar">
+                                    <option value="ATIVO">Ativo</option>
+                                    <option value="INATIVO">Inativo</option>
+                                </select>
                             </div>
                         </form>
 
@@ -291,22 +301,10 @@
         </div>
     </div>
 
-    <!--LISTA DE COMPRAS-->
-
-    <table id="lista-de-compras">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Qtde. Mín.</th>
-                <th>Qtde.</th>
-                <th>Desc.</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <script src="adm-usuarios.js"></script>
+    <script src="conexao-tabela-usuarios.js"></script>
+    <script src="adicionar-usuario.js"></script>
+    <script src="alterar-usuario.js"></script>
+    <script src="pesquisar-usuario.js"></script>
     <script src="../script.js"></script>
 </body>
 

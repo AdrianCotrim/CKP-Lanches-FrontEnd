@@ -1,0 +1,33 @@
+.botoes span {
+    font-size: 4vh;
+    color: var(--cinza-texto);
+
+    transition: 200ms;
+}
+
+.botoes {
+    gap: 3vh;
+}
+
+.botoes span:hover {
+    transform: scale(1.2);
+    color: var(--cinza-hover);
+}
+
+#lista-de-compras {
+    display: none;
+}
+
+.gerar-relatorio {
+    width: 100%;
+    justify-content: center;
+}
+
+.radio {
+    display: inline-block;
+    width: fit-content;
+}
+
+label {
+    display: inline-block;
+}

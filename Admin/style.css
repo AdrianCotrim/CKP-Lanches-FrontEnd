@@ -47,6 +47,7 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    /* Faz com que a tela de loading fique sobre os outros conteúdos */
 }
 
 .loader {
@@ -155,6 +156,7 @@ ul a:hover {
     background-color: var(--cinza-bg);
     color: var(--cinza-texto);
     height: 4vh;
+    width: 22vh;
 }
 
 .select--modal {
@@ -227,28 +229,6 @@ ul a:hover {
 
 .label-input {
     padding: 2vh;
-}
-
-.grid-form {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: 5vh;
-    align-items: center;
-    font-weight: 500;
-    max-height: 50vh;
-    overflow-y: auto;
-}
-
-.grupo-form {
-    display: contents;
-}
-
-.grupo-form label {
-    text-align: left;
-}
-
-.grupo-form select {
-    width: 15vh;
 }
 
 .label-input label {
@@ -475,3 +455,8 @@ select {
 .fa-user {
     color: var(--vermelho-secundario);
 }
+
+/*RADIO-BUTTON*/
+
+input[type="radio"]{
+    height: 2vh;

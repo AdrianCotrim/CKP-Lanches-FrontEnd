@@ -310,6 +310,11 @@ input {
     cursor: pointer;
 }
 
+.table select{
+    height: 4vh;
+    padding: 1vh;
+}
+
 .table td {
     color: var(--cinza-texto);
     font-weight: 500;

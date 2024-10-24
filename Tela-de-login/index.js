@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 mensagemLabel.textContent = message;
             }
         } catch (error) {
-                let message = "Erro no servidor";
+                let message = "Usuário ou Senha incorretos";
                 const mensagemLabel = document.getElementById("mensagem-erro");
                 mensagemLabel.textContent = message;
         }
@@ -75,10 +75,19 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    button.addEventListener('click', function(event) {
-        logar();
+    document.getElementById('username').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            document.getElementById('botao').click();
+        }
     });
-    button.addEventListener('enter', function(event) {
+
+    document.getElementById('userPassword').addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            document.getElementById('botao').click();
+        }
+    });
+
+    button.addEventListener('click', function() {
         logar();
     });
 });

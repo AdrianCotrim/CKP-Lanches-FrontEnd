@@ -1,5 +1,3 @@
-// script.js
-
 // Obtém o modal
 var modal = document.getElementById("janelaRegisPedido");
 
@@ -18,7 +16,6 @@ btn.onclick = function() {
 span.onclick = function() {
     modal.style.display = "none";
 }
-
 
 document.getElementById('lanches').addEventListener('change', function() {
     const selectedItem = this.value;

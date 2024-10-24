@@ -13,10 +13,14 @@ funcionarios.addEventListener('click', (event) => {
         var nome = celulas[0].textContent;
         var id = celulas[1].textContent;
         var email = celulas[2].textContent;
+        var funcao = celulas[3].textContent;
+        var status = celulas[4].textContent;
         
         document.getElementById('nomeAlterar').value = nome;
         document.getElementById('emailAlterar').value = email;
         document.getElementById('id').value = id;
+        document.getElementById('nivelAcessoAlterar').value = funcao;
+        document.getElementById('statusAlterar').value = status;
     }   
 })
 

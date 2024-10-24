@@ -35,21 +35,22 @@
         document.addEventListener('DOMContentLoaded', async function iniciar() {
             try {
                 // Faz a solicitação de login
-                const response = await fetch("http://localhost:8080/user/name", {
+                const response = await fetch("http://localhost:8080/user/role", {
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem("authToken")}`
                     },
                 });
 
-
+                const data = response.json();
 
                 // Verifica se a resposta foi bem-sucedida
-                if (!response.ok) {
+                if (!response.ok || data.role != 'ADMIN') {
                     window.location.href = "/Tela-de-login/index.html"
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 else {
+                    console.log('Admin')
                     document.body.classList.add('visible');
                 }
             }

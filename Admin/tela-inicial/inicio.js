@@ -107,6 +107,8 @@ async function iniciar() {
 
     // Atualiza o conteúdo do elemento com o ID "welcome"
     const welcome = document.getElementById("welcome");
+    const usuarioLabel = document.getElementById('usuario');
+    usuarioLabel.textContent = username;
     welcome.textContent = message;
   }
   catch (erro) {

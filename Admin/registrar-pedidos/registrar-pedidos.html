@@ -39,7 +39,7 @@
                     },
                 });
 
-                const data = response.json();
+                const data = await response.json();
 
                 // Verifica se a resposta foi bem-sucedida
                 if (!response.ok || data.role != 'ADMIN') {
@@ -69,7 +69,7 @@
                 </div>
                 <div class="dropdown-button p-2" onclick="toggleDropdown()">
                     <i class="fa-solid fa-user ps-2"></i>
-                    <label class="ps-3">Usuário</label>
+                    <label id="usuario" class="ps-3">Usuário</label>
                 </div>
             </div>
         </div>

@@ -41,7 +41,7 @@
                     },
                 });
 
-                const data = response.json();
+                const data = await response.json();
 
                 // Verifica se a resposta foi bem-sucedida
                 if (!response.ok || data.role != 'ADMIN') {
@@ -61,7 +61,7 @@
 
     <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center topo">
-            <img src="/ckp - lanches/imagens/ckp-logo.png" alt="CKP Logo">
+            <img src="/imagens/ckp-logo.png" alt="CKP Logo">
 
             <div class="dropdown pe-3">
                 <div id="dropdown-content" class="dropdown-content">
@@ -71,7 +71,7 @@
                 </div>
                 <div class="dropdown-button p-2" onclick="toggleDropdown()">
                     <i class="fa-solid fa-user ps-2"></i>
-                    <label class="ps-3">Usuário</label>
+                    <label id="usuario" class="ps-3">Usuário</label>
                 </div>
             </div>
         </div>

@@ -160,8 +160,8 @@
                                 <label for="tipoPedido">Tipo do pedido:</label>
                                 <select class="col-2 select" name="tipoPedido" id="tipoPedido">
                                     <option value=""></option>
-                                    <option value="entrega">entrega</option>
-                                    <option value="retirada">retirada</option>
+                                    <option value="ENTREGA">entrega</option>
+                                    <option value="RETIRADA">retirada</option>
                                 </select>
                             </div>
 
@@ -177,8 +177,8 @@
                                 <div class="grupo-form">
                                     <label for="troco">Troco:</label>
                                     <select class="col-2 select" name="troco" id="troco">
-                                        <option value="sim">Sim</option>
-                                        <option value="nao">Não</option>
+                                        <option value="SIM">Sim</option>
+                                        <option value="NAO">Não</option>
                                     </select>
                                 </div>
                                 <div class="grupo-form">
@@ -248,7 +248,7 @@
 
                 <!--JANELA DE ADIÇÃO DE ITENS-->
 
-                <div id="janelaRegisPedido" class="modal">
+                <div id="addProdutos" class="modal">
                     <div class="modalContainer">
                         <header class="container-fluid">
                             <span><i class="fa-solid fa-list-check"></i></span>
@@ -325,6 +325,7 @@
     <script src="../script.js"></script>
     <script src="conexao-tabela-pedidos.js"></script>
     <script src="adicionar-pedidos.js"></script>
+    <script src="adicionar-itens.js"></script>
     <script src="pesquisa-pedidos.js"></script>
     <script src="alterar-pedidos.js"></script>
     <script src="fechar-pedidos.js"></script>

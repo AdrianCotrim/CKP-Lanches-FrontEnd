@@ -42,13 +42,19 @@
                     },
                 });
 
-                const data = await response.json();
-
                 // Verifica se a resposta foi bem-sucedida
-                if (!response.ok || data.role !== 'ADMIN') {
+                if (!response.ok) {
                     window.location.href = "/Tela-de-login/index.html"
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
+
+                const data = await response.json();
+
+                if(data.role != 'ADMIN'){
+                    window.location.href = "/Tela-de-login/index.html"
+                    throw new Error(`Você não tem permissão!`);
+                }
+
                 else {
                     console.log('Admin')
                     document.body.classList.add('visible');

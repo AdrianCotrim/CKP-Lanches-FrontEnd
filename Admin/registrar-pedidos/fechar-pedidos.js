@@ -1,29 +1,39 @@
 // Modal
-import  './adicionar-pedidos.js'
-
 var modalFecharPedido = document.getElementById("fecharPedido");
-let formaPagamento = document.getElementById("formaPagamento").value;
 
-function fecharPedido() {
+console.log();
+function fecharPedido(pedido) {
+    let formaPagamento = document.getElementById("formaPagamento").value;
+    const agora = new Date();
+    const endDateTime = `${agora.getFullYear()}-${agora.getMonth()+1}-${agora.getDate()}T${agora.getHours()}:${agora.getMinutes()}`;
+    const exitDateTime = `${agora.getFullYear()}-${agora.getMonth()+1}-${agora.getDate()}T${agora.getHours()}:${agora.getMinutes()}`;
+    
+    pedido.orderDTO.paymentMethod = formaPagamento;
+    pedido.orderDTO.endDateTime = endDateTime;
+    pedido.orderDTO.exitDateTime = exitDateTime;
     console.log(pedido);
-    /* etch("http://localhost:8080/pedidos", {
-        method: 'PUT',
+
+    fetch("http://localhost:8080/pedidos", {
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Accept': 'application/json'
-        }
+            'Accept': 'application/json',
+            'Content-Type':'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(pedido)
     })
-    .then(response => response.json())
-    .then(dados => {
-        
+    .then(response =>{
+        console.log(response)
+        window.location.reload()
     })
-    .catch(erro => console.log(erro));  */
+    .catch(erro => console.log(erro))
+
 }
 
 
 modalFecharPedido.addEventListener("click", function(event) {
     if(event.target.textContent == 'Concluir'){
-        fecharPedido();
+        fecharPedido(pedido);
         modalFecharPedido.style.display = "none"
     }
     if(event.target.textContent == 'Cancelar'){

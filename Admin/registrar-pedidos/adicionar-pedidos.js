@@ -9,16 +9,10 @@ const pedido = {
       orderStatus: "PREPARANDO",
       customerName: "",
       exitMethod: "",
-      paymentMethod: "DINHEIRO",
-      endDateTime: "2024-10-14T11:00",
-      exitDateTime: "2024-10-14T11:00",
-      orderProductDTOs: [
-        {
-            productName: "X-Tudo",
-            quantity: 2,
-            observacao: "vem tudo"
-        }
-      ]
+      paymentMethod: "",
+      endDateTime: "",
+      exitDateTime: "",
+      orderProductDTOs: []
     },
     deliveryDTO: {
       motoboy: "",

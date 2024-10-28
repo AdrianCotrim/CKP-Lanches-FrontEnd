@@ -3,60 +3,6 @@ var modalAddItens = document.getElementById("addProdutos");
 const obs = document.getElementById('observacao');
 let pedidoItens = []
 
-// Puxa os produtos para os selects
-function checaVisibilidadeModal() {
-    // Verifica se o modal está visível (exemplo usando 'display')
-    const isVisible = window.getComputedStyle(modalAddItens).display !== 'none';
-    
-    if (isVisible) {
-        console.log('Modal está visível');
-        
-        // Dispara a requisição fetch
-        fetch("http://localhost:8080/produtos", {
-            headers: {
-                'Authorization': `Bearer ${token}`,
-            'Accept': 'application/json'
-        },
-        method: 'GET'
-        })
-        .then(response => response.json())
-        .then(dados => {
-            const produtos = document.querySelector(".esquerda");
-            const itens = document.getElementById("itens");
-            let categorias = [];
-
-            dados.forEach(element => {
-                const option = document.createElement("option");
-                option.value = element.product_name;
-                option.textContent = element.product_name;
-                itens.appendChild(option);
-
-                const select = document.createElement("select");
-                const nomeSelect = document.createElement("option");
-                select.classList.add("select");
-                select.classList.add("select--modal");
-
-                if(!categorias.includes(element.category)){
-                    categorias.push(element.category);
-                
-                    nomeSelect.disabled = true;
-                    nomeSelect.selected = true;
-                    nomeSelect.textContent = element.category;
-                    select.appendChild(nomeSelect);
-                    produtos.appendChild(select);
-                }
-                select.appendChild(option)
-            })
-        })
-        .catch(erro => console.log(erro))
-  
-      // Opcional: Para parar de monitorar após o modal ser exibido
-      clearInterval(modalChecker);
-    }
-}
-// Verifica o modal a cada 500ms
-const modalChecker = setInterval(checaVisibilidadeModal, 500);
-
 modalAddItens.addEventListener("click", function(event) {
     if(event.target.textContent == 'Voltar'){
         modalAddItens.style.display = "none"
@@ -133,14 +79,73 @@ function adicionaItem(item) {
     
 }
 
-// Adiciona o produto
-document.getElementById('itens').addEventListener('change', function() {
-    const selectedItem = this.value;
-    if (selectedItem) {
-            adicionaItem(selectedItem);
-            this.value = ''; // Limpa a seleção
-        }
-});
+// Puxa os produtos para os selects
+function checaVisibilidadeModal() {
+    // Verifica se o modal está visível (exemplo usando 'display')
+    const isVisible = window.getComputedStyle(modalAddItens).display !== 'none';
+    
+    if (isVisible) {
+        console.log('Modal está visível');
+        
+        // Dispara a requisição fetch
+        fetch("http://localhost:8080/produtos", {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        },
+        method: 'GET'
+        })
+        .then(response => response.json())
+        .then(dados => {
+            const produtos = document.querySelector(".esquerda");
+            const itens = document.getElementById("itens");
+            const categorias = [];
+            const listaProdutos = [];
+
+            dados.forEach(element => {
+                const option = document.createElement("option");
+                option.value = element.product_name;
+                option.textContent = element.product_name;
+
+                if(!categorias.includes(element.category)){
+                    categorias.push(element.category);
+
+                    const select = document.createElement("select");
+                    select.classList.add("select");
+                    select.classList.add("select--modal");
+                    select.id = element.category;
+                    select.onchange = function(){
+                        adicionaItem(this.value);
+                        this.value = ""; 
+                    }
+                    const nomeSelect = document.createElement("option");
+                    nomeSelect.disabled = true;
+                    nomeSelect.selected = true;
+                    nomeSelect.textContent = element.category;
+
+                    select.appendChild(nomeSelect);
+                    listaProdutos.push(select)
+                    produtos.appendChild(select);
+                }
+
+                listaProdutos.forEach(lista => {
+                    if(element.category == lista.id){
+                        const index = listaProdutos.indexOf(lista);
+                        listaProdutos[index].appendChild(option)
+                    }
+                })
+                //itens.appendChild(option);
+                
+            })
+        })
+        .catch(erro => console.log(erro))
+  
+      // Opcional: Para parar de monitorar após o modal ser exibido
+      clearInterval(modalChecker);
+    }
+}
+// Verifica o modal a cada 500ms
+const modalChecker = setInterval(checaVisibilidadeModal, 500);
 
 // Remove Produto do item
 modalAddItens.addEventListener("click", function(event){

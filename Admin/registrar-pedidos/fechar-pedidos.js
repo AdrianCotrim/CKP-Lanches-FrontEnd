@@ -5,8 +5,10 @@ console.log();
 function fecharPedido(pedido) {
     let formaPagamento = document.getElementById("formaPagamento").value;
     const agora = new Date();
-    const endDateTime = `${agora.getFullYear()}-${agora.getMonth()+1}-${agora.getDate()}T${agora.getHours()}:${agora.getMinutes()}`;
-    const exitDateTime = `${agora.getFullYear()}-${agora.getMonth()+1}-${agora.getDate()}T${agora.getHours()}:${agora.getMinutes()}`;
+    let hours = agora.getHours();
+    if(hours<10) hours = String(hours).padStart(2, '0');
+    const endDateTime = `${agora.getFullYear()}-${agora.getMonth()+1}-${agora.getDate()}T${hours}:${agora.getMinutes()}`;
+    const exitDateTime = `${agora.getFullYear()}-${agora.getMonth()+1}-${agora.getDate()}T${hours}:${agora.getMinutes()}`;
     
     pedido.orderDTO.paymentMethod = formaPagamento;
     pedido.orderDTO.endDateTime = endDateTime;

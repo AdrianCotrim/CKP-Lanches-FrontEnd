@@ -37,17 +37,27 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
     produtos.forEach((produto) => {
         pedido.orderDTO.orderProductDTOs.push(produto);
     })
-    console.log(pedido); 
+    console.log(pedido);
+    pedidoItens = []; 
     
 }
 
 // Adiciona produtos a comanda
-function adicionaItem(item) {
-    
+function adicionaItem(item, alterar) {
     const produto = {
         name: item,
         obs: ""
     }
+
+    if(alterar == 0){
+        produto.name = item;
+        produto.obs = "";
+    }
+    if(alterar == 1){
+        produto.name = item.productTableDTO.product_name;
+        produto.obs = item.observacao;
+    }
+    
 
     pedidoItens.push(produto)
     console.log(pedidoItens);
@@ -87,7 +97,11 @@ function checaVisibilidadeModal() {
     if (isVisible) {
         console.log('Modal está visível');
         
-        // Dispara a requisição fetch
+        if(pedidoAlterar){
+            pedidoAlterar.orderProductTableDTOs.forEach(produto => adicionaItem(produto, 1))
+            
+        }
+
         fetch("http://localhost:8080/produtos", {
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -115,7 +129,7 @@ function checaVisibilidadeModal() {
                     select.classList.add("select--modal");
                     select.id = element.category;
                     select.onchange = function(){
-                        adicionaItem(this.value);
+                        adicionaItem(this.value, 0);
                         this.value = ""; 
                     }
                     const nomeSelect = document.createElement("option");
@@ -139,7 +153,8 @@ function checaVisibilidadeModal() {
             })
         })
         .catch(erro => console.log(erro))
-  
+        
+
       // Opcional: Para parar de monitorar após o modal ser exibido
       clearInterval(modalChecker);
     }

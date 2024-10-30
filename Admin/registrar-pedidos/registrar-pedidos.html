@@ -221,16 +221,47 @@
                                 <input id="nomeAlterar" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="tipoPedidoAlterar">Alterar tipo do pedido:</label>
-                                <select class="col-2 select" name="tipoPedidoAlterar" id="tipoPedidoAlterar">
-                                    <option value="entrega">entrega</option>
-                                    <option value="retirada">retirada</option>
-                                </select>
+                                <label for="andamentoAlterar">Alterar Andamento:</label>
+                                <input id="andamentoAlterar" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="enderecoAlterar">Alterar endereço:</label>
-                                <input id="enderecoAlterar" placeholder="" type="text" disabled>
+                                <label for="formaPagamentoAlterar">Alterar forma de pagamento:</label>
+                                <input id="formaPagamentoAlterar" placeholder="" type="text">
                             </div>
+                            <div class="grupo-form">
+                                <label for="tipoPedidoAlterar">Alterar tipo do pedido:</label>
+                                <select class="col-2 select" name="tipoPedidoAlterar" id="tipoPedidoAlterar">
+                                    <option value="ENTREGA">entrega</option>
+                                    <option value="RETIRADA">retirada</option>
+                                </select>
+                            </div>
+
+                            <div style="display: none;" id="entregaAlterar" class="grupo-form">
+                                <div class="grupo-form">
+                                    <label for="enderecoAlterar">Endereço:</label>
+                                    <input id="enderecoAlterar" placeholder="" type="text">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="motoboyAlterar">motoboyAlterar:</label>
+                                    <input id="motoboyAlterar" placeholder="" type="text">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="trocoAlterar">trocoAlterar:</label>
+                                    <select class="col-2 select" name="trocoAlterar" id="trocoAlterar">
+                                        <option value="SIM">Sim</option>
+                                        <option value="NAO">Não</option>
+                                    </select>
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="complementoAlterar">complementoAlterar:</label>
+                                    <input id="complementoAlterar" placeholder="" type="text">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="taxaAlterar">taxaAlterar:</label>
+                                    <input id="taxaAlterar" placeholder="" type="text">
+                                </div>
+                            </div>
+
                             <div class="grupo-form">
                                 <button id="deletar" class="col-4 botao botao--vermelho botao-cancelar">Deletar</button>
                             </div>

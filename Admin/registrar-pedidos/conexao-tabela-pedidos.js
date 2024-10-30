@@ -1,4 +1,5 @@
 const token = localStorage.getItem('authToken');
+const pedidosArray = [];
 
 // Traz pedidos do banco
 fetch("http://localhost:8080/pedidos", {
@@ -14,6 +15,8 @@ fetch("http://localhost:8080/pedidos", {
     var tbody = pedidos.querySelector("tbody")
 
     dados.forEach(element => {
+        pedidosArray.push(element);
+
         var tr = document.createElement("tr")
         tr.innerHTML = `<td>${element.orderStatus}</td>
         <td>${element.orderId}</td>
@@ -24,7 +27,8 @@ fetch("http://localhost:8080/pedidos", {
         <td>${element.totalValue == null ? "$00,00": "$" + element.totalValue}</td>`
         tr.classList.add("linha");
         tbody.appendChild(tr)
-    });  
+    });
+      
 })
 .catch(erro => console.log(erro))
 

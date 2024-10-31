@@ -11,7 +11,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="gerenciar-cardapio.css">
+    <link rel="stylesheet" type="text/css" href="verificar-estoque.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
@@ -34,7 +34,7 @@
         document.addEventListener('DOMContentLoaded', async function iniciar() {
             try {
                 // Faz a solicitação de login
-                const response = await fetch("http://localhost:8080/user/role", {
+                const response = await fetch("http://localhost:8080/user/name", {
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem("authToken")}`
@@ -46,16 +46,7 @@
                     window.location.href = "/Tela-de-login/index.html"
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-
-                const data = await response.json();
-
-                if(data.role != 'ADMIN'){
-                    window.location.href = "/Tela-de-login/index.html"
-                    throw new Error(`Você não tem permissão!`);
-                }
-
                 else {
-                    console.log('Admin')
                     document.body.classList.add('visible');
                 }
             }
@@ -85,25 +76,19 @@
         <div class="col-0 col-sm-2 menu">
             <nav>
                 <ul class="list-unstyled display-4">
-                    <li><a href="/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
+                    <li><a href="/Usuario/tela inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
                             inicial</a></li>
-                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
+                    <li><a href="/Usuario/registrar pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
                             Registrar pedidos</a></li>
-                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
+                    <li><a href="/Usuario/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
-                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-3"></i>
-                            Histórico de vendas</a></li>
-                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-3"></i>
-                            Gerenciar cardápio</a></li>
-                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-3"></i>
-                            Administrar usuários</a></li>
                 </ul>
             </nav>
         </div>
 
         <div class="col-12 col-sm-10 conteudo">
             <header class="pt-5 ps-5 pe-5 cabecalho justify-content-between align-items-center">
-                <h1>Gerenciar cardápio</h1>
+                <h1>Verificar estoque</h1>
                 <hr class="linha">
             </header>
 
@@ -113,67 +98,63 @@
 
                         <label class="me-2" for="search">Pesquisar:</label>
                         <input placeholder="Nome" class="me-2" name="text" id="pesquisa-nome" type="text">
+                        <!-- 
+                        <label class="me-2" for="search">Buscar:</label>
+                        <input placeholder="Número" class="me-2" name="text" id="pesquisa-numero" type="number"> -->
 
                     </form>
-
-                    <div class="col-8 d-flex justify-content-end align-items-center">
-                        <div class="botoes d-flex align-items-center">
-                            <button id="addInsumo" class="botao botao--vermelho"><i class="fas fa-plus"></i>Adicionar</button>
-                        </div>
-                    </div>
                 </div>
 
-                <!--PRODUTOS-->
+                <!--TABELA-->
 
-                <section class="row cardapio" id="cardapio">
-                </section>
+                <div class="tabela-responsiva">
+                    <table id="estoque" class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>ID</th>
+                                <th>Descrição</th>
+                                <th>Qtd Mínima</th>
+                                <th>Qtd Máxima</th>
+                                <th>Quantidade</th>
+                                <th>Data Validade</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
 
-                <!--JANELA PARA ADICIONAR PRODUTO-->
+                <!--JANELA PARA ADICIONAR ITEM-->
 
                 <div id="adicionarInsumo" class="modal">
                     <div class="modalContainer">
 
                         <header class="container-fluid">
-                            <span><i class="fas fa-utensils"></i></span>
-                            <h2>Adicionar produto</h2>
+                            <span><i class="fa-solid fa-plus"></i></span>
+                            <h2>Adicionar Insumo</h2>
                         </header>
 
-                        <form class="grid-form" id="adicionar-produto">
+                        <form class="grid-form">
                             <div class="grupo-form">
-                                <label for="nome">Nome do produto:</label>
-                                <input id="nome" placeholder="Ex: X-Tudo" type="text">
+                                <label for="nome">Nome do insumo:</label>
+                                <input id="nome" placeholder="Ex: Tomate" type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="descricao">Descrição:</label>
-                                <input id="descricao" placeholder="Pão, queijo, hambúrguer" type="text">
+                                <input id="descricao" placeholder="Ex: Para salada" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="valor">Valor:</label>
-                                <input id="valor" placeholder="" type="number">
+                                <label for="qtdMinima">Quantidade mínima:</label>
+                                <input id="qtdMinima" placeholder="" type="number">
                             </div>
-                            <div class="">
-                                <label for="imagem">Anexar imagem:</label>
-                                <input id="imagem" placeholder="" type="file" accept="image/jpeg, image/png">
+                            <div class="grupo-form">
+                                <label for="qtdMaxima">Quantidade máxima:</label>
+                                <input id="qtdMaxima" placeholder="" type="number">
                             </div>
-                            <div class="">
-                                <select id="categoria" class="select select--modal">
-                                    <option value="LANCHES"  selected>LANCHES</option>
-                                    <option value="BEBIDAS">BEBIDAS</option>
-                                </select>
+                            <div class="grupo-form">
+                                <label for="quantidade">Quantidade inicial:</label>
+                                <input id="quantidade" placeholder="" type="number">
                             </div>
-                            <div class="">
-                                <select id="insumos" class="select select--modal">
-                                    <option value="" selected>Insumos</option>
-                                </select>
-                            </div>
-                            <div class="">
-                                Insumos incluidos:
-                                <div class="listaInsumosContainer">
-                                    <ul id="listaInsumos">
-                                    </ul>
-                                </div>
-                            </div>
-                            
 
                         </form>
 
@@ -181,60 +162,12 @@
                             <div class="row justify-content-evenly">
                                 <button id="cancelar"
                                     class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button id="confirmarAddProduto" class="col-4 botao botao--verde">Concluir</button>
+                                <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
                     </div>
                 </div>
-
-                <!-- JANELA PARA ALTERAR ITEM -->
-
-                <div id="alterarInsumo" class="modal">
-                    <div class="modalContainer">
-
-                        <header class="container-fluid">
-                            <span><i class="fas fa-edit"></i></span>
-                            <h2>Alterar Insumo</h2>
-                        </header>
-
-                        <form class="grid-form">
-                            <input id="id" value="" type="hidden">
-                            <div class="grupo-form">
-                                <label for="nomeAlterar">Alterar nome:</label>
-                                <input id="nomeAlterar" value="" placeholder="Ex: Tomate" type="text">
-                            </div>
-                            <div class="grupo-form">
-                                <label for="descricaoAlterar">Alterar descrição:</label>
-                                <input id="descricaoAlterar" placeholder="Ex: Para salada" type="text">
-                            </div>
-                            <div class="grupo-form">
-                                <label for="qtdMinimaAlterar">Alterar quantidade mínima:</label>
-                                <input id="qtdMinimaAlterar" placeholder="" type="text">
-                            </div>
-                            <div class="grupo-form">
-                                <label for="qtdMaximaAlterar">Alterar quantidade máxima:</label>
-                                <input id="qtdMaximaAlterar" placeholder="" type="text">
-                            </div>
-                            <div class="grupo-form">
-                                <label for="quantidadeAlterar">Alterar quantidade:</label>
-                                <input id="quantidadeAlterar" placeholder="" type="text">
-                            </div>
-                            <div class="grupo-form">
-                                <label for="loteAlterar">Alterar lote:</label>
-                                <input id="loteAlterar" placeholder="" type="text">
-                            </div>
-                        </form>
-
-                        <footer class="container">
-                            <div class="row justify-content-evenly">
-                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Concluir</button>
-                            </div>
-                        </footer>
-                    </div>
-                </div>
-
-
+                
                 <!--JANELA PARA FILTRAR HISTORICO DE MOVIMENTAÇÃO-->
 
                 <div id="filtrarMovimentacao" class="modal">
@@ -299,9 +232,27 @@
         </div>
     </div>
 
+    <!--LISTA DE COMPRAS-->
+
+    <table id="lista-de-compras">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Qtde. Mín.</th>
+                <th>Qtde.</th>
+                <th>Desc.</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script src="verificar-estoque.js"></script>
     <script src="../script.js"></script>
-    <script src="conexao-cardapio.js"></script>
-    <script src="adicionar-produto.js"></script>
+    <script src="conexao-tabela-estoque.js"></script>
+    <script src="alterar-estoque.js"></script>
+    <script src="adicionar-insumo.js"></script>
+    <script src="pesquisa-estoque.js"></script>
 </body>
 
 </html>

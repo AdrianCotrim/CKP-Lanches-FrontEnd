@@ -8,19 +8,41 @@ btnAdd.addEventListener("click", function() {
 })
 
 modalAddInsumo.addEventListener('click', (event) => {
+
+    const form = document.querySelector('#adicionarInsumo form')
+    const description = document.getElementById("descricao")
+    const maxQuantity = document.getElementById("qtdMaxima")
+    const minQuantity = document.getElementById("qtdMinima")
+    const quantity = document.getElementById("quantidade")
+    const name = document.getElementById("nome")
     
     // Adiciona o insumo ao banco
     if(event.target.textContent == 'Concluir'){
-        modalAddInsumo.style.display = 'none'
 
         const insumo = {
-            description: document.getElementById("descricao").value,
-            maxQuantity: parseInt(document.getElementById("qtdMaxima").value) > 0 ? parseInt(document.getElementById("qtdMaxima").value) : 0,
-            minQuantity: parseInt(document.getElementById("qtdMinima").value) > 0 ? parseInt(document.getElementById("qtdMinima").value) : 0,
-            quantity: parseInt(document.getElementById("quantidade").value) > 0 ? parseInt(document.getElementById("quantidade").value) : 0,
-            name: document.getElementById("nome").value,
+            description: description.value,
+            maxQuantity: parseInt(maxQuantity.value) > 0 ? parseInt(maxQuantity.value) : 0,
+            minQuantity: parseInt(minQuantity.value) > 0 ? parseInt(minQuantity.value) : 0,
+            quantity: parseInt(quantity.value) > 0 ? parseInt(quantity.value) : 0,
+            name: name.value,
         }
         console.log(insumo)
+
+        if(insumo.minQuantity >= insumo.maxQuantity){
+            //Mensagem de erro
+            const span = document.createElement('span');
+            span.textContent = "Quantidade Mínima ou Máxima inválida!"
+            span.style.color = 'red';
+            form.appendChild(span);
+
+            //Limpar campos
+            maxQuantity.value = null;
+            minQuantity.value = null;
+
+            throw new Error("Quantidade Mínima ou Máxima inválida!");
+        }
+
+        modalAddInsumo.style.display = 'none';
         
         fetch("http://localhost:8080/insumos", {
             headers: {
@@ -42,5 +64,4 @@ modalAddInsumo.addEventListener('click', (event) => {
     if(event.target.textContent == 'Cancelar'){
         modalAddInsumo.style.display = 'none'
     }
-
 })

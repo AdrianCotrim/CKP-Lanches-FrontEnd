@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-fetch("http://localhost:8080/pedidos/finalizados", {
+// Traz pedidos do banco
+fetch("http://localhost:8080/pedidos", {
     headers: {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json'
@@ -39,16 +40,15 @@ fetch("http://localhost:8080/pedidos/finalizados", {
 .then(response => response.json())
 .then(dados => {
     console.log(dados)
-    var vendas = document.getElementById("vendas")
-    var tbody = vendas.querySelector("tbody")
+    var pedidos = document.getElementById("pedidos")
+    var tbody = pedidos.querySelector("tbody")
 
     dados.forEach(element => {
-        var tr = document.createElement("tr");
-        const date = new Date();
-        let dataHora = date.toLocaleString('pt-BR')
-
-        tr.innerHTML = `<td>${element.orderId}</td>
-        <td>${dataHora}</td>
+        var tr = document.createElement("tr")
+        tr.innerHTML = `<td>${element.orderStatus}</td>
+        <td>${element.orderId}</td>
+        <td>${element.customerName}</td>
+        <td><div class="itens">Itens</div></td>
         <td>${element.exitMethod}</td>
         <td>${element.paymentMethod}</td>
         <td>${element.totalValue == null ? "$00,00": element.totalValue}</td>`

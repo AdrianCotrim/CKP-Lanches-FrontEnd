@@ -34,7 +34,7 @@
         document.addEventListener('DOMContentLoaded', async function iniciar() {
             try {
                 // Faz a solicitação de login
-                const response = await fetch("http://localhost:8080/user/name", {
+                const response = await fetch("http://localhost:8080/user/role", {
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem("authToken")}`
@@ -46,7 +46,16 @@
                     window.location.href = "/Tela-de-login/index.html"
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
+
+                const data = await response.json();
+
+                if(data.role != 'ADMIN'){
+                    window.location.href = "/Tela-de-login/index.html"
+                    throw new Error(`Você não tem permissão!`);
+                }
+
                 else {
+                    console.log('Admin')
                     document.body.classList.add('visible');
                 }
             }
@@ -58,7 +67,7 @@
 
     <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center topo">
-            <img src="/Imagens/ckp-logo.png" alt="CKP Logo">
+            <img src="/imagens/ckp-logo.png" alt="CKP Logo">
 
             <div class="dropdown pe-3">
                 <div id="dropdown-content" class="dropdown-content">
@@ -68,7 +77,7 @@
                 </div>
                 <div class="dropdown-button p-2" onclick="toggleDropdown()">
                     <i class="fa-solid fa-user ps-2"></i>
-                    <label class="ps-3">Usuário</label>
+                    <label id="usuario" class="ps-3">Usuário</label>
                 </div>
             </div>
         </div>
@@ -99,23 +108,28 @@
             </header>
 
             <main class="ps-5 pt-2 pe-5">
-                <div class="row pesquisa pb-4 align-items-center">
-                    <form class="label-input d-flex col-4" action="">
+                <div class="row pesquisa pb-4">
+                    <div class="col-10">
+                        <form class=" label-input" action="">
+                            <label for="pesquisa-nome" class="">Buscar:</label>
+                            <input id="pesquisa-nome" placeholder="Nome" class="col-2 input" name="text" type="text">
 
-                        <label class="me-2" for="search">Pesquisar:</label>
-                        <input placeholder="Nome" class="me-2" name="text" type="text">
+                            <label class="" for="funcao">Função:</label>
+                            <select class="col-2 select" name="funcao" id="funcao">
+                                <option value="todos">Todos</option>
+                                <option value="ADMIN">Admin</option>
+                                <option value="USER">User</option>
+                            </select>
 
-                        <label class="me-2" for="search">Ordenar:</label>
-                        <input placeholder="Número" class="me-2" name="text" type="text">
-
-                    </form>
-
-                    <div class="col-8 d-flex justify-content-end align-items-center">
-                        <div class="botoes d-flex align-items-center">
-                            <button id="addFunc" class="botao botao--vermelho"><i class="fas fa-plus"></i>
-                                Adicionar</button>
-                        </div>
+                            <label class="" for="status">Status:</label>
+                            <select class="col-2 select" name="status" id="status">
+                                <option value="todos">Todos</option>
+                                <option value="ATIVO">Ativo</option>
+                                <option value="INATIVO">Inativo</option>
+                            </select>
+                        </form>
                     </div>
+                    <button id="addFunc" class="botao botao--vermelho"><i class="fas fa-plus"></i>Adicionar</button>
                 </div>
 
                 <!--TABELA-->
@@ -128,23 +142,10 @@
                                 <th>Cód.</th>
                                 <th>Email</th>
                                 <th>Função</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            <tr>
-                                <td>Pedro Henrique Silva Cantarin</td>
-                                <td>26</td>
-                                <td>pedro.lol@gmail.com</td>
-                                <td>Garçom</td>
-                            </tr>
-                            <tr>
-                                <td>Éder Moraes Lima Júnior</td>
-                                <td>21</td>
-                                <td>eder.xd@gmail.com</td>
-                                <td>Cozinheiro</td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -155,8 +156,8 @@
                     <div class="modalContainer">
 
                         <header class="container-fluid">
-                            <span><i class="fa-solid fa-plus"></i></span>
-                            <h2>Adicionar funcionário</h2>
+                            <span><i class="fa fa-user-plus"></i></span>
+                            <h2 class="ps-3">Adicionar funcionário</h2>
                         </header>
 
                         <form class="grid-form">
@@ -165,27 +166,29 @@
                                 <input id="nome" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="descricao">Email:</label>
-                                <input id="descricao" placeholder="exemplo@gmail.com" type="text">
+                                <label for="email">Email:</label>
+                                <input id="email" placeholder="exemplo@gmail.com" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="qtdMinima">Senha:</label>
-                                <input id="qtdMinima" placeholder="" type="text">
+                                <label for="senha">Senha:</label>
+                                <input id="senha" placeholder="" type="password">
                             </div>
                             <div class="grupo-form">
-                                <label for="quantidade">Confirme a senha:</label>
-                                <input id="quantidade" placeholder="" type="text">
+                                <label for="senhaConfirma">Confirme a senha:</label>
+                                <input id="senhaConfirma" placeholder="" type="password">
                             </div>
                             <div class="grupo-form">
-                                <label for="dataValidade">Data de nascimento:</label>
-                                <input id="dataValidade" placeholder="Ex: dd/mm/aaaa" type="text">
+                                <label for="nivelAcesso">Nível de acesso:</label>
+                                <select class="col-2 select" name="nivelAcesso" id="nivelAcesso">
+                                    <option value="USER">Usuário</option>
+                                    <option value="ADMIN">Admin</option>
+                                </select>
                             </div>
                         </form>
 
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button id="cancelar"
-                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="cancelar"class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
                                 <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
@@ -198,26 +201,37 @@
                     <div class="modalContainer">
 
                         <header class="container-fluid">
-                            <span><i class="fas fa-edit"></i></span>
-                            <h2>Editar funcionário</h2>
+                            <span><i class="fa fa-user-edit"></i></span>
+                            <h2 class="ps-3">Editar funcionário</h2>
                         </header>
 
                         <form class="grid-form">
+                            <input id="id" value="" type="hidden">
                             <div class="grupo-form">
-                                <label for="nome">Alterar nome:</label>
+                                <label for="nomeAlterar">Alterar nome:</label>
                                 <input id="nomeAlterar" value="" placeholder="Ex: Tomate" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="descricao">Alterar email:</label>
-                                <input id="descricaoAlterar" placeholder="Ex: Para salada" type="text">
+                                <label for="emailAlterar">Alterar email:</label>
+                                <input id="emailAlterar" placeholder="Ex: Para salada" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="QtdMinima">Alterar senha:</label>
-                                <input id="QtdMinimaAlterar" placeholder="" type="text">
+                                <label for="senhaAlterar">Alterar senha:</label>
+                                <input id="senhaAlterar" placeholder="" type="password">
                             </div>
                             <div class="grupo-form">
-                                <label for="quantidade">Alterar quantidade:</label>
-                                <input id="quantidadeAlterar" placeholder="" type="text">
+                                <label for="nivelAcesso">Nível de acesso:</label>
+                                <select class="col-2 select" name="nivelAcesso" id="nivelAcessoAlterar">
+                                    <option value="USER">Usuário</option>
+                                    <option value="ADMIN">Admin</option>
+                                </select>
+                            </div>
+                            <div class="grupo-form">
+                                <label for="status">Status:</label>
+                                <select class="col-2 select" name="status" id="statusAlterar">
+                                    <option value="ATIVO">Ativo</option>
+                                    <option value="INATIVO">Inativo</option>
+                                </select>
                             </div>
                         </form>
 
@@ -291,22 +305,10 @@
         </div>
     </div>
 
-    <!--LISTA DE COMPRAS-->
-
-    <table id="lista-de-compras">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Qtde. Mín.</th>
-                <th>Qtde.</th>
-                <th>Desc.</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <script src="adm-usuarios.js"></script>
+    <script src="conexao-tabela-usuarios.js"></script>
+    <script src="adicionar-usuario.js"></script>
+    <script src="alterar-usuario.js"></script>
+    <script src="pesquisar-usuario.js"></script>
     <script src="../script.js"></script>
 </body>
 

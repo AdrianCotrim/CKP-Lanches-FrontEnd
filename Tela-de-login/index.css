@@ -31,6 +31,7 @@ header h2{
   height: 5vh;
   border-radius: 5vh;
   font-size: larger;
+  padding-left: 3vh;
 }
 
 main{

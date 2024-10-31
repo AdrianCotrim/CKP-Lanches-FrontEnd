@@ -30,17 +30,29 @@
 <body class="container-fluid">
 
     <div class="row">
-        <div class="col-12 topo">
-            <img src="/Imagens/ckp-logo.png">
+        <div class="col-12 d-flex justify-content-between align-items-center topo">
+            <img src="/Imagens/ckp-logo.png" alt="CKP Logo">
+
+            <div class="dropdown pe-3">
+                <div id="dropdown-content" class="dropdown-content">
+                    <a class="dropdown-item" onclick="deleteToken()">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+                    </a>
+                </div>
+                <div class="dropdown-button p-2" onclick="toggleDropdown()">
+                    <i class="fa-solid fa-user ps-2"></i>
+                    <label id="usuario" class="ps-3">Usuário</label>
+                </div>
+            </div>
         </div>
 
-        <div class="col-0 col-sm-2 menu">
+        <div class="col-2 menu">
             <nav>
                 <ul class="list-unstyled display-4">
                     <li><a href="/Usuario/Tela inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página inicial</a></li>
                     <li><a href="/Usuario/Registrar pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
                             Registrar pedidos</a></li>
-                    <li><a href="/Usuario/Verificar estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
+                    <li><a href="/Usuario/Verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
                 </ul>
             </nav>
@@ -171,6 +183,7 @@
         </div>
     </div>
 
+    <script src="../script.js"></script>
     <script src="registrar-pedidos.js"></script>
 </body>
 

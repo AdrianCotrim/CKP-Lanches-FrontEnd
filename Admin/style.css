@@ -47,6 +47,7 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    /* Faz com que a tela de loading fique sobre os outros conteúdos */
 }
 
 .loader {
@@ -151,6 +152,7 @@ ul a:hover {
     background-color: var(--cinza-bg);
     color: var(--cinza-texto);
     height: 4vh;
+    width: 22vh;
 }
 
 .select--modal {
@@ -225,6 +227,7 @@ ul a:hover {
 .label-input {
     padding: 2vh;
 }
+
 
 .grid-form {
     display: grid;
@@ -306,6 +309,11 @@ input {
 
 .table-hover {
     cursor: pointer;
+}
+
+.table select{
+    height: 4vh;
+    padding: 1vh;
 }
 
 .table td {
@@ -468,3 +476,8 @@ select {
 .fa-user {
     color: var(--vermelho-secundario);
 }
+
+/*RADIO-BUTTON*/
+
+input[type="radio"]{
+    height: 2vh;

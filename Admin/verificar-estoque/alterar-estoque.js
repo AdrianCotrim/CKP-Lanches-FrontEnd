@@ -23,7 +23,6 @@ estoque.addEventListener('click', (event) => {
         document.getElementById('descricaoAlterar').value = descricao;
         document.getElementById('qtdMinimaAlterar').value = qtdMinima;
         document.getElementById('qtdMaximaAlterar').value = qtdMaxima;
-        document.getElementById('quantidadeAlterar').value = quantidade;
     }   
 })
 
@@ -33,12 +32,10 @@ modalAltInsumo.addEventListener('click', (event) => {
     if(event.target.textContent == 'Concluir'){
         modalAltInsumo.style.display = 'none'
         const insumo = {
+            name: document.getElementById("nomeAlterar").value,  
             description: document.getElementById("descricaoAlterar").value,
-            lot: parseInt(document.getElementById("loteAlterar").value) || 0,
             maxQuantity: parseInt(document.getElementById("qtdMaximaAlterar").value),
-            minQuantity: parseInt(document.getElementById("qtdMinimaAlterar").value),
-            name: document.getElementById("nomeAlterar").value,    
-            quantity: parseInt(document.getElementById("quantidadeAlterar").value),
+            minQuantity: parseInt(document.getElementById("qtdMinimaAlterar").value),  
         }
         const id = parseInt(document.getElementById('id').value);
 

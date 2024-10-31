@@ -46,19 +46,31 @@ if(addProdutoModal.style.display = "flex"){
 // Adiciona a lista de insumos incluidos no produto
 const selectInsumos = document.getElementById("insumos");
 const listaInsumos = document.getElementById("listaInsumos");
-let insumos = [];
+var insumos = [];
 
 selectInsumos.addEventListener("change", function(){
-    let novoInsumo = document.createElement("li");
-    let removerInsumo = document.createElement("i");
-    removerInsumo.classList.add("fa");
-    removerInsumo.classList.add("fa-times");
+    if(this.value !== "Insumos"){
+        let novoInsumo = document.createElement("li");
+        let removerInsumo = document.createElement("i");
+        removerInsumo.classList.add("fa");
+        removerInsumo.classList.add("fa-times");
+        removerInsumo.id = `excluir-${this.value}`
 
-    novoInsumo.textContent = this.value;
-    novoInsumo.appendChild(removerInsumo);
-    listaInsumos.appendChild(novoInsumo);
 
-    insumos.push(this.value)
+        if(!insumos.some((insumo) => {return insumo === this.value})){
+            novoInsumo.textContent = this.value;
+            novoInsumo.appendChild(removerInsumo);
+            listaInsumos.appendChild(novoInsumo);
+            insumos.push(this.value)
+        }
+
+        selectInsumos.value = "";
+
+        removerInsumo.addEventListener('click', () => {
+            listaInsumos.removeChild(novoInsumo);
+            insumos =  insumos.filter(insumo => insumo !== novoInsumo.textContent)
+        });
+    }
 })
 
 const adicionarInsumo = document.querySelectorAll('.novoInsumo');
@@ -100,34 +112,37 @@ const listaAdicionados = document.getElementById('listaInsumos');
 btnAddProduto.addEventListener('click', function(event) {
     event.preventDefault();  // Prevenir o comportamento padrão do formulário, se houver
 
-    // Cria lista de ids dos insumos
-    fetch("http://localhost:8080/insumos", {
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/json'
-        },
-        method: 'GET'
-        })
-        .then(response => response.json())
-        .then(dados => {
-            let insumosIds = [];
+    // fetch("http://localhost:8080/insumos", {
+    //     headers: {
+    //         'Authorization': `Bearer ${token}`,
+    //         'Accept': 'application/json'
+    //     },
+    //     method: 'GET'
+    //     })
+    //     .then(response => response.json())
+    //     .then(dados => {
+    //         let insumosIds = [];
 
-            dados.forEach(element => {
-                insumos.forEach(insumo => {
-                    if(insumo == element.name){
-                        insumosIds.push(element.id)
-                    }
-                })
-            }) 
-        })
-        .catch(erro => console.log(erro))
+    //         dados.forEach(element => {
+    //             insumos.forEach(insumo => {
+    //                 if(insumo == element.name){
+    //                     c
+    //                     insumosIds.push(element.id)
+    //                 }
+    //             })
+    //         }) 
+    //     })
+    //     .catch(erro => console.log(erro))
 
     // Pegando os valores do formulário
+    console.log(insumos);
+    
     const produtoDTO = {
         productName: document.getElementById('nome').value,
         productValue: parseFloat(document.getElementById('valor').value),
         description: document.getElementById('descricao').value,
-        supplies: []  // Ajuste de acordo com sua necessidade
+        supplieNames: insumos,
+        category: document.getElementById('categoria').value
     };
 
     // Criando o FormData

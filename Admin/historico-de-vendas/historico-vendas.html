@@ -33,28 +33,35 @@
         document.addEventListener('DOMContentLoaded', async function iniciar() {
             try {
                 // Faz a solicitação de login
-                const response = await fetch("http://localhost:8080/user/name", {
+                const response = await fetch("http://localhost:8080/user/role", {
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem("authToken")}`
                     },
                 });
 
-            
-
                 // Verifica se a resposta foi bem-sucedida
                 if (!response.ok) {
-                window.location.href = "/Tela-de-login/index.html"
-                throw new Error(`HTTP error! status: ${response.status}`);
+                    window.location.href = "/Tela-de-login/index.html"
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                else{
+
+                const data = await response.json();
+
+                if(data.role != 'ADMIN'){
+                    window.location.href = "/Tela-de-login/index.html"
+                    throw new Error(`Você não tem permissão!`);
+                }
+
+                else {
+                    console.log('Admin')
                     document.body.classList.add('visible');
                 }
-                }
-                catch(erro){
-                    console.error('Erro:', erro);
-                }
-            })
+            }
+            catch (erro) {
+                console.error('Erro:', erro);
+            }
+        })
     </script>
 
     <div class="row">
@@ -69,7 +76,7 @@
                 </div>
                 <div class="dropdown-button p-2" onclick="toggleDropdown()">
                     <i class="fa-solid fa-user ps-2"></i>
-                    <label class="ps-3">Usuário</label>
+                    <label id="usuario" class="ps-3">Usuário</label>
                 </div>
             </div>
         </div>
@@ -104,87 +111,25 @@
                 <div class="pesquisa pb-4">
 
                     <form class="row label-input" action="">
-
-                        <label class="col-1" for="andamento">Filtrar:</label>
-                        <select class="col-2" name="andamento" id="andamento">
-                            <option value="todos">Todos</option>
-                            <option value="preparando">Preparando</option>
-                            <option value="pedido-pronto">Pedido pronto</option>
-                        </select>
-
                         <label class="col-1">Buscar:</label>
-                        <input placeholder="Número" class="col-2 input--red" name="text" type="text">
+                        <input id="pesquisa-numero" placeholder="Número" class="col-2 input--red" name="text" type="text">
 
                     </form>
 
                 </div>
 
                 <div class="tabela-responsiva">
-                    <table class="table table-hover">
+                    <table id="vendas" class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Andamento</th>
                                 <th>Número</th>
-                                <th>Pedido</th>
-                                <th>Resumo</th>
+                                <th>Data/Hora</th>
+                                <th>Forma Saída</th>
+                                <th>Forma Pagamento</th>
+                                <th>Valor Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-                            <tr>
-                                <td>Exemplo 1</td>
-                                <td>Exemplo 2</td>
-                                <td>Exemplo 3</td>
-                                <td>Exemplo 4</td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>
@@ -193,6 +138,7 @@
     </div>
 
     <script src="historico-vendas.js"></script>
+    <script src="pesquisa-vendas.js"></script>
     <script src="../script.js"></script>
 </body>
 

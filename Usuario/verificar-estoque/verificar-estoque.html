@@ -34,22 +34,19 @@
         document.addEventListener('DOMContentLoaded', async function iniciar() {
             try {
                 // Faz a solicitação de login
-                const response = await fetch("http://localhost:8080/user/role", {
+                const response = await fetch("http://localhost:8080/user/name", {
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem("authToken")}`
                     },
                 });
 
-                const data = await response.json();
-
                 // Verifica se a resposta foi bem-sucedida
-                if (!response.ok || data.role != 'ADMIN') {
+                if (!response.ok) {
                     window.location.href = "/Tela-de-login/index.html"
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 else {
-                    console.log('Admin')
                     document.body.classList.add('visible');
                 }
             }
@@ -79,18 +76,12 @@
         <div class="col-0 col-sm-2 menu">
             <nav>
                 <ul class="list-unstyled display-4">
-                    <li><a href="/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
+                    <li><a href="/Usuario/tela inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
                             inicial</a></li>
-                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
+                    <li><a href="/Usuario/registrar pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
                             Registrar pedidos</a></li>
-                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
+                    <li><a href="/Usuario/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
-                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-3"></i>
-                            Histórico de vendas</a></li>
-                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-3"></i>
-                            Gerenciar cardápio</a></li>
-                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-3"></i>
-                            Administrar usuários</a></li>
                 </ul>
             </nav>
         </div>
@@ -107,20 +98,11 @@
 
                         <label class="me-2" for="search">Pesquisar:</label>
                         <input placeholder="Nome" class="me-2" name="text" id="pesquisa-nome" type="text">
-<!-- 
+                        <!-- 
                         <label class="me-2" for="search">Buscar:</label>
                         <input placeholder="Número" class="me-2" name="text" id="pesquisa-numero" type="number"> -->
 
                     </form>
-
-                    <div class="col-8 d-flex justify-content-end align-items-center">
-                        <div class="botoes d-flex align-items-center">
-                            <span class="me-2" id="listaCompras" onclick="imprimirTabela()"><i
-                                    class="fa-solid fa-cart-plus"></i></span>
-                            <span class="me-2"><i class="fa-solid fa-file-lines"></i></span>
-                            <button id="addInsumo" class="botao botao--vermelho"><i class="fas fa-plus"></i> Adicionar</button>
-                        </div>
-                    </div>
                 </div>
 
                 <!--TABELA-->
@@ -173,7 +155,7 @@
                                 <label for="quantidade">Quantidade inicial:</label>
                                 <input id="quantidade" placeholder="" type="number">
                             </div>
-                      
+
                         </form>
 
                         <footer class="container">
@@ -185,47 +167,7 @@
                         </footer>
                     </div>
                 </div>
-
-                <!-- JANELA PARA ALTERAR ITEM -->
-
-                <div id="alterarInsumo" class="modal">
-                    <div class="modalContainer">
-
-                        <header class="container-fluid">
-                            <span><i class="fas fa-edit"></i></span>
-                            <h2>Alterar Insumo</h2>
-                        </header>
-
-                        <form class="grid-form">
-                            <input id="id" value="" type="hidden">
-                            <div class="grupo-form">
-                                <label for="nomeAlterar">Alterar nome:</label>
-                                <input id="nomeAlterar" placeholder="Ex: Tomate" type="text">
-                            </div>
-                            <div class="grupo-form">
-                                <label for="descricaoAlterar">Alterar descrição:</label>
-                                <input id="descricaoAlterar" placeholder="Ex: Para salada" type="text">
-                            </div>
-                            <div class="grupo-form">
-                                <label for="qtdMinimaAlterar">Alterar quantidade mínima:</label>
-                                <input id="qtdMinimaAlterar" placeholder="" type="number">
-                            </div>
-                            <div class="grupo-form">
-                                <label for="qtdMaximaAlterar">Alterar quantidade máxima:</label>
-                                <input id="qtdMaximaAlterar" placeholder="" type="number">
-                            </div>
-                        </form>
-
-                        <footer class="container">
-                            <div class="row justify-content-evenly">
-                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Concluir</button>
-                            </div>
-                        </footer>
-                    </div>
-                </div>
-
-
+                
                 <!--JANELA PARA FILTRAR HISTORICO DE MOVIMENTAÇÃO-->
 
                 <div id="filtrarMovimentacao" class="modal">
@@ -305,11 +247,11 @@
         </tbody>
     </table>
 
-    <script src="adicionar-insumo.js"></script>
     <script src="verificar-estoque.js"></script>
     <script src="../script.js"></script>
     <script src="conexao-tabela-estoque.js"></script>
     <script src="alterar-estoque.js"></script>
+    <script src="adicionar-insumo.js"></script>
     <script src="pesquisa-estoque.js"></script>
 </body>
 

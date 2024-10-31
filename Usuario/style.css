@@ -5,17 +5,19 @@
 :root {
     --azul: #2971DE;
     --branco: #E9E9E9;
-    --branco-hover: #ffffff;
+    --branco-hover: #FFFFFF;
     --cinza-bg: #D9D9D9;
+    --cinza-claro: #F3F3F3;
     --cinza-texto: #474747;
-    --cinza-scroll: #7d7d7d;
+    --cinza-scroll: #7D7D7D;
     --verde: #30B035;
-    --verde-escuro: #00a505;
+    --verde-escuro: #00A505;
     --vermelho-principal: #CE2323;
     --vermelho-secundario: #F1363A;
+    --vermelho-escuro: #B12626;
     --amarelo: #F2CF53;
     --amarelo-escuro: #D2B342;
-    --laranja: #ffa946;
+    --laranja: #FFA946;
 }
 
 .topo {
@@ -174,8 +176,10 @@ input{
     top: 0;
 }
 
-.table-hover {
+.table select{
     cursor: pointer;
+    height: 4vh;
+    padding: 1vh;
 }
 
 .table td {
@@ -287,4 +291,54 @@ select {
 ::-webkit-scrollbar-thumb {
     background-color: var(--cinza-scroll);
     border-radius: 1vh;
+}
+
+/*DROPDOWN PARA LOGOUT*/
+
+/* Estilizando o botão do dropdown */
+.dropdown {
+    display: inline-block;
+}
+
+.dropdown-button {
+    background-color: var(--vermelho-escuro);
+    color: var(--branco);
+    font-size: 1.7vh;
+    border: none;
+    width: 15vh;
+    border-radius: 3vh;
+    transition: 200ms;
+    scale: 1;
+}
+
+.dropdown-button:hover {
+    transform: scale(1.1);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--cinza-bg);
+    min-width: 15vh;
+    margin-top: 2.3vh;
+    border-bottom-left-radius: 2vh;
+    border-bottom-right-radius: 2vh;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 1vh;
+    text-decoration: none;
+    display: block;
+    padding-top: 3vh;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--branco);
+    border-bottom-left-radius: 2vh;
+    border-bottom-right-radius: 2vh;
+}
+
+.fa-user {
+    color: var(--vermelho-secundario);
 }

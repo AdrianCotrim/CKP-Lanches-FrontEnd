@@ -35,21 +35,28 @@
         document.addEventListener('DOMContentLoaded', async function iniciar() {
             try {
                 // Faz a solicitação de login
-                const response = await fetch("http://localhost:8080/user/name", {
+                const response = await fetch("http://localhost:8080/user/role", {
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem("authToken")}`
                     },
                 });
 
-
-
                 // Verifica se a resposta foi bem-sucedida
                 if (!response.ok) {
                     window.location.href = "/Tela-de-login/index.html"
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
+
+                const data = await response.json();
+
+                if(data.role != 'ADMIN'){
+                    window.location.href = "/Tela-de-login/index.html"
+                    throw new Error(`Você não tem permissão!`);
+                }
+
                 else {
+                    console.log('Admin')
                     document.body.classList.add('visible');
                 }
             }
@@ -80,7 +87,7 @@
                     </div>
                     <div class="dropdown-button p-2" onclick="toggleDropdown()">
                         <i class="fa-solid fa-user ps-2"></i>
-                        <label class="ps-3">Usuário</label>
+                        <label class="ps-3" id="usuario">Usuário</label>
                     </div>
                 </div>
             </div>

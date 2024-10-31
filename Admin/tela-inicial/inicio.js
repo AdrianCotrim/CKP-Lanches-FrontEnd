@@ -43,8 +43,8 @@ async function valores() {
     // GRÁFICO
 
     const valoresX = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
-    const valorGastoY = [spents[0] || 0, spents[1] || 0, spents[2] || 0, spents[3] || 0, spents[4] || 0, spents[5] || 0, spents[6] || 0];
-    const valorRecebidoY = [earned[0] || 0, earned[1] || 0, earned[2] || 0, earned[3] || 0, earned[4] || 0, earned[5] || 0, earned[6] || 0];
+    const valorGastoY = [spents[0].toFixed(2) || 0, spents[1].toFixed(2) || 0, spents[2].toFixed(2) || 0, spents[3].toFixed(2) || 0, spents[4].toFixed(2) || 0, spents[5].toFixed(2) || 0, spents[6].toFixed(2) || 0];
+    const valorRecebidoY = [earned[0].toFixed(2) || 0, earned[1].toFixed(2) || 0, earned[2].toFixed(2) || 0, earned[3].toFixed(2) || 0, earned[4].toFixed(2) || 0, earned[5].toFixed(2) || 0, earned[6].toFixed(2) || 0];
 
     new Chart("myChart", {
       type: "bar",
@@ -107,6 +107,8 @@ async function iniciar() {
 
     // Atualiza o conteúdo do elemento com o ID "welcome"
     const welcome = document.getElementById("welcome");
+    const usuarioLabel = document.getElementById('usuario');
+    usuarioLabel.textContent = username;
     welcome.textContent = message;
   }
   catch (erro) {

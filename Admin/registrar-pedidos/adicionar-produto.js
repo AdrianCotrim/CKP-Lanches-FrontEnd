@@ -5,13 +5,24 @@ let pedidoItens = []
 
 modalAddItens.addEventListener("click", function(event) {
     if(event.target.textContent == 'Voltar'){
-        modalAddItens.style.display = "none"
-        adicionaItensAoPedido(pedidoItens, pedido);
+        if(pedidoItens.length > 0){
+            modalAddItens.style.display = "none"
+            adicionaItensAoPedido(pedidoItens, pedido);
+        }
+        else {
+            document.getElementById("mensagemErro").style.display = "block"
+        }
     }
     if(event.target.textContent == 'Fechar'){
-        modalAddItens.style.display = "none"
-        modalFecharPedido.style.display = "flex"
-        adicionaItensAoPedido(pedidoItens, pedido);
+        if(pedidoItens.length > 0){
+            modalAddItens.style.display = "none"
+            modalFecharPedido.style.display = "flex"
+            adicionaItensAoPedido(pedidoItens, pedido);
+        }
+        else {
+            document.getElementById("mensagemErro").style.display = "block"
+        }
+        
     }
 })
 
@@ -37,8 +48,24 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
     produtos.forEach((produto) => {
         pedido.orderDTO.orderProductDTOs.push(produto);
     })
-    console.log(pedido);
-    pedidoItens = []; 
+    pedido.orderDTO.endDateTime = "2024-10-14T11:00";
+    pedido.orderDTO.exitDateTime = "2024-10-14T11:00";
+    pedido.orderDTO.paymentMethod = "a pagar";
+    pedidoItens = [];
+
+    fetch("http://localhost:8080/pedidos", {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+            'Content-Type':'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify(pedido)
+    })
+    .then(response =>{
+        console.log(response)
+    })
+    .catch(erro => console.log(erro))
     
 }
 

@@ -26,14 +26,19 @@ if(addProdutoModal.style.display = "flex"){
     .then(response => response.json())
     .then(dados => {
         console.log(dados)
-        var insumos = document.getElementById("insumos")
+        let insumos = document.getElementById("insumos")
     
         dados.forEach(element => {
-            var option = document.createElement("option");
+            let option = document.createElement("p");
+            let addInsumo = document.createElement('i')
+            addInsumo.classList.add('fas');
+            addInsumo.classList.add('fa-plus');
+            addInsumo.classList.add('novoInsumo');
             option.value = element.name;
             option.textContent = element.name;
+            option.appendChild(addInsumo)
             insumos.appendChild(option)
-        });  
+        });
     })
     .catch(erro => console.log(erro))
 }
@@ -67,6 +72,23 @@ selectInsumos.addEventListener("change", function(){
         });
     }
 })
+
+const adicionarInsumo = document.querySelectorAll('.novoInsumo');
+const listaAdicionados = document.getElementById('listaInsumos');
+
+        addButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const produto = button.parentElement.querySelector('span').textContent;
+                
+                // Cria um novo elemento para a lista de adicionados
+                const novoProduto = document.createElement('div');
+                novoProduto.textContent = produto;
+                novoProduto.classList.add('adicionado');
+                
+                // Adiciona o novo produto à lista de adicionados
+                listaAdicionados.appendChild(novoProduto);
+            });
+        });
 
 
 

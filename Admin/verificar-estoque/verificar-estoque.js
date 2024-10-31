@@ -28,9 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-
-
-
 // Gerar PDF - Lista de compras
 function imprimirTabela() {
     // Cria uma nova janela para impressão

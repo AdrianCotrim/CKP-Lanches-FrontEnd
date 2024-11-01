@@ -1,0 +1,85 @@
+.pedidos {
+    background-color: var(--branco);
+    height: 65vh;
+    max-height: 65vh;
+    border-radius: 1vh;
+    overflow-y: auto;
+}
+
+.pedido {
+    background-color: var(--branco-hover);
+    border-radius: 0.5vh;
+    max-height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.valor {
+    color: var(--verde);
+}
+
+.info {
+    border-radius: 1vh;
+    height: 20vh;
+    max-height: 20vh;
+    display: inline-flex;
+}
+
+.info h5{
+    color: var(--cinza-texto);
+}
+
+.info p{
+    color: var(--cinza-scroll);
+}
+
+.item-pedido {
+    border: 0.3vh solid var(--cinza-bg);
+    border-radius: 1vh;
+    height: 20vh;
+    max-height: 20vh;
+    font-weight: 600;
+    font-size: 2vh;
+    overflow-y: auto;
+}
+
+.situacao-pedido{
+    background-color: var(--vermelho-principal);
+    border-top-right-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+    width: 1.5vh;
+    height: 10vh;
+}
+
+.info-pedido{
+    padding: 2vh;
+}
+
+.pedido label{
+    font-weight: 600;
+}
+
+.desc-valor{
+    font-size: 2vh;
+    font-weight: 500;
+    color: var(--cinza-texto);
+}
+
+.label-valor{
+    font-weight: 500;
+    color: var(--cinza-scroll);
+}
+
+.label-valor-final{
+    font-weight: 600;
+    color: var(--verde);
+    font-size: 2vh;
+}
+
+.desc-valor-final{
+    padding-top: 1vh;
+    font-weight: 600;
+    color: var(--cinza-texto);
+    font-size: 2vh;
+}

@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="imagex/png" href="/ckp - lanches/Imagens/ckp-logo.png">
-    <title>CKP - Histórico de vendas</title>
+    <title>CKP - Entrega</title>
 
     <!--STYLESHEETS-->
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="adm-usuario.css">
+    <link rel="stylesheet" type="text/css" href="entrega.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@
 
                 const data = await response.json();
 
-                if(data.role != 'ADMIN'){
+                if (data.role != 'ADMIN') {
                     window.location.href = "/Tela-de-login/index.html"
                     throw new Error(`Você não tem permissão!`);
                 }
@@ -104,42 +104,65 @@
 
         <div class="col-12 col-sm-10 conteudo">
             <header class="pt-5 ps-5 pe-5 cabecalho">
-                <h1>Histórico de vendas</h1>
+                <h1>Entrega</h1>
                 <hr class="linha">
             </header>
 
-            <main class="ps-5 pt-4 pe-5">
+            <main class="ps-5 pt-4 pe-5 row">
+                <section class="pedidos col-3">
+                    <div class="pedido mt-3 me-2 ms-2 mb-1">
+                        <div class="info-pedido">
+                            <p>Éder Júnior</p>
+                            <label class="pe-5">Nº 26</label>
+                            <label class="valor">R$70,00</label>
+                        </div>
+                        <div class="situacao-pedido"></div>
+                    </div>
+                </section>
+                
+                <section class="col-9">
+                    <div class="info ps-2">
+                        <div>
+                            <h5>Cliente</h5>
+                            <p>Éder Júnior</p>
+                            <h5>Endereço</h5>
+                            <p>R. José Estanislau Ambiel, 927, Jd. Morada do Sol</p>
+                        </div>
 
-                <div class="pesquisa pb-4">
+                        <div class="ms-5">
+                            <h5>Complemento</h5>
+                            <p>Casa 4</p>
+                            <h5>Telefone</h5>
+                            <p>(19) 91234-5678</p>
+                        </div>
+                    </div>
 
-                    <form class="row label-input" action="">
-                        <label class="col-1">Buscar:</label>
-                        <input id="pesquisa-numero" placeholder="Número" class="col-2 input--red" name="text" type="text">
+                    <div class="item-pedido p-3">
+                        
+                    </div>
 
-                    </form>
+                    <div class="info ps-2 mt-3">
+                        <div class="me-5">
+                            <h5>Forma de pagamento</h5>
+                            <p class="label-valor">Pix</p>
+                        </div>
 
-                </div>
+                        <div class="ms-5">
+                            <label class="desc-valor pe-3">Sub-Total:</label>
+                            <label class="label-valor">R$63,00</label><br>
+                            <label class="desc-valor pe-3">Taxa de Entrega:</label>
+                            <label class="label-valor">R$7,00</label><br>
+                            <label class="desc-valor-final pe-3">Total:</label>
+                            <label class="label-valor-final">R$7,00</label>
+                        </div>
+                    </div>
+                </section>
 
-                <div class="tabela-responsiva">
-                    <table id="vendas" class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Número</th>
-                                <th>Data/Hora</th>
-                                <th>Forma Saída</th>
-                                <th>Forma Pagamento</th>
-                                <th>Valor Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
             </main>
         </div>
     </div>
 
-    <script src="historico-vendas.js"></script>
+    <script src="entrega.js"></script>
     <script src="pesquisa-vendas.js"></script>
     <script src="../script.js"></script>
 </body>

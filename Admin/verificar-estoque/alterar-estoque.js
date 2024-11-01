@@ -1,5 +1,4 @@
 // Modal
-var modalAddInsumo = document.getElementById("adicionarInsumo");
 var estoque = document.getElementById('estoque')
 var modalAltInsumo = document.getElementById('alterarInsumo')
 

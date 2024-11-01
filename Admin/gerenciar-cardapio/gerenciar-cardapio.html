@@ -157,15 +157,12 @@
                                 <label for="imagem">Anexar imagem:</label>
                                 <input id="imagem" placeholder="" type="file" accept="image/jpeg, image/png">
                             </div>
-                            <div>
+                            <div class="grupo-form">
                                 <label for="imagem">Tipo de produto:</label>
                                 <select id="categoria" class="select select--modal">
-                                    <option value="LANCHES"  selected>LANCHES</option>
-                                    <option value="BEBIDAS">BEBIDAS</option>
+                                    <option value="LANCHES"  selected>Lanches</option>
+                                    <option value="BEBIDAS">Bebidas</option>
                                 </select>
-                            </div>
-
-                            <div class="">
                             </div>
                             
                             <div class="grupo-form">
@@ -192,28 +189,10 @@
                                         <li>teste<i class="fa fa-times"></i></li>
                                         <li>teste<i class="fa fa-times"></i></li>
                                         <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
-                                        <li>teste<i class="fa fa-times"></i></li>
                                     </ul>
                                 </div>
                             </div>
                         </form>
-
                         <footer class="container">
                             <div class="row justify-content-evenly">
                                 <button id="cancelar"
@@ -258,68 +237,6 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="loteAlterar">Alterar lote:</label>
-                                <input id="loteAlterar" placeholder="" type="text">
-                            </div>
-                        </form>
-
-                        <footer class="container">
-                            <div class="row justify-content-evenly">
-                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Concluir</button>
-                            </div>
-                        </footer>
-                    </div>
-                </div>
-
-
-                <!--JANELA PARA FILTRAR HISTORICO DE MOVIMENTAÇÃO-->
-
-                <div id="filtrarMovimentacao" class="modal">
-                    <div class="modalContainer">
-
-                        <header class="container-fluid">
-                            <span><i class="fa-solid fa-file-alt"></i></span>
-                            <h2>Gerar relatório de movimentação</h2>
-                        </header>
-
-                        <form class="gerar-relatorio">
-                            <div>
-                                <p>Produto:</p>
-                                <div class="input-radio-group">
-                                    <input class="radio" type="radio" name="produto">
-                                    <label for="Todos">Todos</label>
-                                </div>
-                                <div class="input-radio-group">
-                                    <input type="radio" name="produto">
-                                    <input type="text" placeholder="Ex: Tomate">
-                                </div>
-                            </div>
-
-                            <div>
-                                <p class="pt-4">Data:</p>
-                                <div class="input-radio-group">
-                                    <input class="radio" type="radio" name="produto">
-                                    <label for="Todos">Todos</label>
-                                </div>
-                                <div class="input-radio-group">
-                                    <input type="radio" name="produto">
-                                    <input type="date">
-                                </div>
-                            </div>
-
-                            <div>
-                                <p class="pt-4">Usuário:</p>
-                                <div class="input-radio-group">
-                                    <input class="radio" type="radio" name="produto">
-                                    <label for="Todos">Todos</label>
-                                </div>
-                                <div class="input-radio-group">
-                                    <input type="radio" name="produto">
-                                    <input type="text" placeholder="Usuário">
-                                </div>
-                            </div>
-                            <div class="grupo-form">
-                                <label for="lote">Alterar lote:</label>
                                 <input id="loteAlterar" placeholder="" type="text">
                             </div>
                         </form>

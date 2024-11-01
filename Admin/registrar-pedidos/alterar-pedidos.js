@@ -1,6 +1,7 @@
 // Modal
-var modalAddProdutos = document.getElementById("addProdutos")
-const modalAlterarInfoPedido = document.getElementById("alterarInfoPedido")
+const modalAlterarInfoPedido = document.getElementById("alterarInfoPedido");
+var modalAddProdutos = document.getElementById("addProdutos");
+var modalFecharPedido = document.getElementById("fecharPedido");
 var pedidoAlterar = null;
 
 // Exibe modal na tela
@@ -64,7 +65,7 @@ pedidos.addEventListener('click', (event) => {
 })
 
 modalAlterarInfoPedido.addEventListener("click", function(event) {
-  if(event.target.textContent == 'Concluir'){
+  if(event.target.textContent == 'Alterar'){
     pedidoAlterar.customerName = nomeAlterar.value;
     pedidoAlterar.orderStatus = andamentoAlterar.value;
     pedidoAlterar.totalValue = formaPagamentoAlterar.value;
@@ -130,8 +131,13 @@ modalAlterarInfoPedido.addEventListener("click", function(event) {
     .catch(erro => console.log(erro))
   }
 
+  if(event.target.textContent == 'Fechar'){
+    modalAlterarInfoPedido.style.display = "none";
+    modalFecharPedido.style.display = "flex";
+  }
+
   if(event.target.textContent == 'Cancelar'){
     pedidoAlterar = null;
-    modalAlterarInfoPedido.style.display = "none"
+    modalAlterarInfoPedido.style.display = "none";
   }
 })

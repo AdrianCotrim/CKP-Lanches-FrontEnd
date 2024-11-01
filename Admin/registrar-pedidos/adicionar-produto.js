@@ -53,7 +53,7 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
     pedido.orderDTO.paymentMethod = "a pagar";
     pedidoItens = [];
 
-    fetch("http://localhost:8080/pedidos", {
+    /* fetch("http://localhost:8080/pedidos", {
         headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',
@@ -65,7 +65,8 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
     .then(response =>{
         console.log(response)
     })
-    .catch(erro => console.log(erro))
+    .catch(erro => console.log(erro)) */
+    console.log(pedido);
     
 }
 

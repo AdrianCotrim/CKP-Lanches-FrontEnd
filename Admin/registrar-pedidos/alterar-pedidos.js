@@ -1,6 +1,7 @@
 // Modal
 const modalAlterarInfoPedido = document.getElementById("alterarInfoPedido");
 var modalAddProdutos = document.getElementById("addProdutos");
+var tipoPedidoSelect = document.getElementById("tipoPedidoAlterar");
 var modalFecharPedido = document.getElementById("fecharPedido");
 var pedidoAlterar = null
 let novoPedidoAlterar = {
@@ -83,7 +84,7 @@ pedidos.addEventListener('click', (event) => {
           complementoAlterar.value = pedido.deliveryDTO.complement;
           taxaAlterar.value = pedido.deliveryDTO.fee;
         }
-        else {
+        if (tipoPedidoAlterar.value == 'RETIRADA') {
           document.getElementById('entregaAlterar').style.display = "none";
         }
 
@@ -107,6 +108,15 @@ pedidos.addEventListener('click', (event) => {
 
 })
 
+tipoPedidoSelect.addEventListener('change', (event) => {
+  if(tipoPedidoSelect.value == "ENTREGA"){
+    document.getElementById("entregaAlterar").style.display = "block";
+  }
+  if(tipoPedidoSelect.value == "RETIRADA"){
+    document.getElementById("entregaAlterar").style.display = "none";
+  }
+})
+
 modalAlterarInfoPedido.addEventListener("click", function (event) {
   if (event.target.textContent == 'Alterar') {
     novoPedidoAlterar.customerName = nomeAlterar.value;
@@ -114,13 +124,18 @@ modalAlterarInfoPedido.addEventListener("click", function (event) {
     novoPedidoAlterar.paymentMethod = formaPagamentoAlterar.value;
     novoPedidoAlterar.exitMethod = tipoPedidoAlterar.value;
 
-    if (novoPedidoAlterar.exitMethod == 'ENTREGA') {
+    if (tipoPedidoSelect.value == 'ENTREGA') {
+      novoPedidoAlterar.exitMethod = 'ENTREGA';
+      novoPedidoAlterar.deliveryDTO = {};
       novoPedidoAlterar.deliveryDTO.address = enderecoAlterar.value;
       novoPedidoAlterar.deliveryDTO.motoboy = motoboyAlterar.value;
       novoPedidoAlterar.deliveryDTO.change = trocoAlterar.value;
       novoPedidoAlterar.deliveryDTO.complement = complementoAlterar.value;
       novoPedidoAlterar.deliveryDTO.fee = taxaAlterar.value;
-
+    }
+    if (tipoPedidoSelect.value == 'RETIRADA') {
+      novoPedidoAlterar.exitMethod = 'RETIRADA';
+      novoPedidoAlterar.deliveryDTO = null;
     }
 
     console.log(novoPedidoAlterar);
@@ -151,7 +166,6 @@ modalAlterarInfoPedido.addEventListener("click", function (event) {
           console.error("Erro 403: Acesso negado. Verifique suas permissões.");
         }
       });
-
 
     modalAlterarInfoPedido.style.display = "none";
   }

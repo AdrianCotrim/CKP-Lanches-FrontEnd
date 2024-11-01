@@ -133,7 +133,7 @@
                 <!--JANELA PARA ADICIONAR PRODUTO-->
 
                 <div id="adicionarInsumo" class="modal" style="display: flex;">
-                    <div class="modalContainer">
+                    <div class="modalContainer modal--larger">
 
                         <header class="container-fluid">
                             <span><i class="fas fa-utensils"></i></span>
@@ -157,20 +157,20 @@
                                 <label for="imagem">Anexar imagem:</label>
                                 <input id="imagem" placeholder="" type="file" accept="image/jpeg, image/png">
                             </div>
-
-                            <div class="">
+                            <div>
+                                <label for="imagem">Tipo de produto:</label>
                                 <select id="categoria" class="select select--modal">
                                     <option value="LANCHES"  selected>LANCHES</option>
                                     <option value="BEBIDAS">BEBIDAS</option>
                                 </select>
                             </div>
-                            <div class="">
-                                <select id="insumos" class="select select--modal">
-                                    <option value="" selected>Insumos</option>
-                                </select>
 
+                            <div class="">
                             </div>
+                            
                             <div class="grupo-form">
+                                <div id="insumos" class="insumos">
+                                </div>
                                 <div class="listaInsumosContainer direita">
                                     <ul id="listaInsumos">
                                         <li>teste<i class="fa fa-times"></i></li>

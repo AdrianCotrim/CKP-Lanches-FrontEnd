@@ -11,7 +11,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="entrega.css">
+    <link rel="stylesheet" type="text/css" href="fornecedor.css">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
     <!--FONTES-->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
 <body class="container-fluid">
@@ -98,67 +98,94 @@
                             Gerenciar cardápio</a></li>
                     <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-3"></i>
                             Administrar usuários</a></li>
+                    <li><a href="/Admin/gerenciar-fornecedor/fornecedor.html"><i class="fas fa-truck pe-3"></i>
+                            Administrar fornecedores</a></li>
                 </ul>
             </nav>
         </div>
 
         <div class="col-12 col-sm-10 conteudo">
             <header class="pt-5 ps-5 pe-5 cabecalho">
-                <h1>Entrega</h1>
+                <h1><i class="fas fa-truck"></i> Fornecedor</h1>
                 <hr class="linha">
             </header>
 
             <main class="ps-5 pt-4 pe-5 row">
-                <section class="pedidos col-3">
-                    <div class="pedido mt-3 me-2 ms-2 mb-1">
-                        <div class="info-pedido">
-                            <p>Éder Júnior</p>
-                            <label class="pe-5">Nº 26</label>
-                            <label class="valor">R$70,00</label>
+                <section class="fornecedores col-3">
+                    <div class="campo">
+                        <div class="fornecedor mt-3 me-2 ms-2 mb-1">
+                            <div class="info-fornecedor">
+                                <p>Empresa de Exemplo Lol</p>
+                                <label class="pe-5">(19) 91234-4321</label>
+                                <label class="valor">ID: 06</label>
+                            </div>
                         </div>
-                        <div class="situacao-pedido" id="statusPedido"></div>
+                    </div>
+                    <div class="cadastrar d-flex justify-content-evenly">
+                        <button class="cadastrar botao botao--vermelho" id="abrirCadastrarFornecedor">Cadastrar</button>
                     </div>
                 </section>
-                
-                <section class="col-9">
-                    <div class="info ps-2">
+
+                <section class="col-9 d-flex justify-content-between">
+                    <div class="info ps-2" id="infoFornecedor">
                         <div>
-                            <h5>Cliente</h5>
-                            <p>Éder Júnior</p>
+                            <h5>Fornecedor (Nome Fantasia)</h5>
+                            <p>Empresa de Exemplo Lol</p>
+                            <h5>CNPJ</h5>
+                            <p>12.345.678/0001-90</p>
+                            <h5>Razão Social</h5>
+                            <p>Comércio de Produtos Tecnológicos Ltda.</p>
                             <h5>Endereço</h5>
                             <p>R. José Estanislau Ambiel, 927, Jd. Morada do Sol</p>
-                        </div>
-
-                        <div class="ms-5">
                             <h5>Complemento</h5>
-                            <p>Casa 4</p>
+                            <p>-</p>
+                            <h5>Email</h5>
+                            <p>empresa.exemplo@gmail.com</p>
                             <h5>Telefone</h5>
-                            <p>(19) 91234-5678</p>
+                            <p>(19) 91234-4321</p>
                         </div>
                     </div>
 
-                    <div class="item-pedido p-3">
+                    <!--LAYOUT PARA ALTERAR FORNECEDOR-->
+
+                    <div class="cadastro" style="display: none;">
+                        <div>
+                            <h5>Nome Fantasia:</h5>
+                            <input type="text" class="input">
+                            <h5>CNPJ:</h5>
+                            <input type="text" class="input" placeholder="00.000.000/0000-00">
+                            <h5>Razão Social:</h5>
+                            <input type="text" class="input">
+                            <h5>Endereço:</h5>
+                            <input type="text" class="input">
+                            <h5>Complemento:</h5>
+                            <input type="text" class="input">
+                            <h5>Email:</h5>
+                            <input type="text" class="input" placeholder="exemplo@mail.com">
+                            <h5>Telefone:</h5>
+                            <input type="text" class="input" placeholder="(00) 00000-0000">
+                        </div>
                     </div>
 
-                    <div class="info ps-2 mt-3">
-                        <div class="me-5">
-                            <h5>Forma de pagamento</h5>
-                            <p class="label-valor">Pix</p>
-                        </div>
+                    <!--LAYOUT PARA CADASTRAR FORNECEDOR-->
 
-                        <div class="ms-5">
-                            <label class="desc-valor pe-3">Sub-Total:</label>
-                            <label class="label-valor" id="valorPedido">R$63,00</label><br>
-                            <label class="desc-valor pe-3">Taxa de Entrega:</label>
-                            <label class="label-valor" id="valorTaxa">R$7,00</label><br>
-                            <label class="desc-valor-final pe-3">Total:</label>
-                            <label class="label-valor-final" id="valorTotal">R$70,00</label>
+                    <div class="cadastro" id="cadastrarFornecedor" style="display: none;">
+                        <div>
+                            <h5>Nome Fantasia:</h5>
+                            <input type="text" class="input">
+                            <h5>CNPJ:</h5>
+                            <input type="text" class="input" placeholder="00.000.000/0000-00">
+                            <h5>Razão Social:</h5>
+                            <input type="text" class="input">
+                            <h5>Endereço:</h5>
+                            <input type="text" class="input">
+                            <h5>Complemento:</h5>
+                            <input type="text" class="input">
+                            <h5>Email:</h5>
+                            <input type="text" class="input" placeholder="exemplo@mail.com">
+                            <h5>Telefone:</h5>
+                            <input type="text" class="input" placeholder="(00) 00000-0000">
                         </div>
-                    </div>
-                    <div class="ps-2 d-flex justify-content-between">
-                            <button class="botao botao--vermelho" id="abrirConfirmarCancel">Cancelar</button>
-                            <button class="botao botao--azul">Concluir</button>
-                            <button class="botao botao--verde">Finalizar</button>
                     </div>
                 </section>
 
@@ -167,11 +194,11 @@
 
                 <div id="confirmarCancel" class="modal">
                     <div class="modalContainer">
-            
+
                         <div class="mensagem-confirmar text-center">
-                           <h4>Ao clicar em confirmar, o pedido será totalmente excluído. Deseja prosseguir?</h4>
+                            <h4>Ao clicar em confirmar, o pedido será totalmente excluído. Deseja prosseguir?</h4>
                         </div>
-            
+
                         <footer class="container pt-5 rodape">
                             <div class="row justify-content-evenly">
                                 <button class="col-4 botao botao--vermelho" id="cancelar">Cancelar</button>
@@ -184,7 +211,7 @@
         </div>
     </div>
 
-    <script src="entrega.js"></script>
+    <script src="fornecedor.js"></script>
     <script src="../script.js"></script>
 </body>
 

@@ -106,3 +106,34 @@
     width: 30vh !important;
     margin-bottom: 1vh;
 }
+
+.footer .botao{
+    width: 20vh !important;
+}
+
+.footer{
+    margin-top: 5vh;
+    height: fit-content !important;
+}
+
+.form-group {
+    width: 50vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1vh;
+}
+
+h5 {
+    margin: 0;
+    width: fit-content;
+}
+
+.input {
+    width: 65%;
+}
+
+.row {
+    display: flex;
+    justify-content: space-evenly;
+}

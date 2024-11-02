@@ -106,7 +106,7 @@
 
         <div class="col-12 col-sm-10 conteudo">
             <header class="pt-5 ps-5 pe-5 cabecalho">
-                <h1><i class="fas fa-truck"></i> Fornecedor</h1>
+                <h1><i class="fas fa-truck">&nbsp;</i>Fornecedor</h1>
                 <hr class="linha">
             </header>
 
@@ -129,7 +129,7 @@
                 <section class="col-9 d-flex justify-content-between">
                     <div class="info ps-2" id="infoFornecedor">
                         <div>
-                            <h5>Fornecedor (Nome Fantasia)</h5>
+                            <h5>Nome Fantasia</h5>
                             <p>Empresa de Exemplo Lol</p>
                             <h5>CNPJ</h5>
                             <p>12.345.678/0001-90</p>
@@ -143,69 +143,88 @@
                             <p>empresa.exemplo@gmail.com</p>
                             <h5>Telefone</h5>
                             <p>(19) 91234-4321</p>
+                            <button id="abrirAlterarFornecedor" class="col-4 botao botao--verde">Alterar</button>
                         </div>
                     </div>
 
                     <!--LAYOUT PARA ALTERAR FORNECEDOR-->
 
-                    <div class="cadastro" style="display: none;">
-                        <div>
-                            <h5>Nome Fantasia:</h5>
-                            <input type="text" class="input">
-                            <h5>CNPJ:</h5>
-                            <input type="text" class="input" placeholder="00.000.000/0000-00">
-                            <h5>Razão Social:</h5>
-                            <input type="text" class="input">
-                            <h5>Endereço:</h5>
-                            <input type="text" class="input">
-                            <h5>Complemento:</h5>
-                            <input type="text" class="input">
-                            <h5>Email:</h5>
-                            <input type="text" class="input" placeholder="exemplo@mail.com">
-                            <h5>Telefone:</h5>
-                            <input type="text" class="input" placeholder="(00) 00000-0000">
+                    <div class="cadastro" id="alterarFornecedor" style="display: none;">
+                        <div class="container">
+                            <div class="form-group">
+                                <h5>Nome Fantasia:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>CNPJ:</h5>
+                                <input type="text" class="input" placeholder="00.000.000/0000-00">
+                            </div>
+                            <div class="form-group">
+                                <h5>Razão Social:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Endereço:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Complemento:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Email:</h5>
+                                <input type="text" class="input" placeholder="exemplo@mail.com">
+                            </div>
+                            <div class="form-group">
+                                <h5>Telefone:</h5>
+                                <input type="text" class="input" placeholder="(00) 00000-0000">
+                            </div>
+                            <div class="row justify-content-evenly footer">
+                                <button id="cancelarAlteracao" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--verde">Alterar</button>
+                            </div>
                         </div>
                     </div>
 
                     <!--LAYOUT PARA CADASTRAR FORNECEDOR-->
 
                     <div class="cadastro" id="cadastrarFornecedor" style="display: none;">
-                        <div>
-                            <h5>Nome Fantasia:</h5>
-                            <input type="text" class="input">
-                            <h5>CNPJ:</h5>
-                            <input type="text" class="input" placeholder="00.000.000/0000-00">
-                            <h5>Razão Social:</h5>
-                            <input type="text" class="input">
-                            <h5>Endereço:</h5>
-                            <input type="text" class="input">
-                            <h5>Complemento:</h5>
-                            <input type="text" class="input">
-                            <h5>Email:</h5>
-                            <input type="text" class="input" placeholder="exemplo@mail.com">
-                            <h5>Telefone:</h5>
-                            <input type="text" class="input" placeholder="(00) 00000-0000">
+                        <div class="container">
+                            <div class="form-group">
+                                <h5>Nome Fantasia:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>CNPJ:</h5>
+                                <input type="text" class="input" placeholder="00.000.000/0000-00">
+                            </div>
+                            <div class="form-group">
+                                <h5>Razão Social:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Endereço:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Complemento:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Email:</h5>
+                                <input type="text" class="input" placeholder="exemplo@mail.com">
+                            </div>
+                            <div class="form-group">
+                                <h5>Telefone:</h5>
+                                <input type="text" class="input" placeholder="(00) 00000-0000">
+                            </div>
+                            <div class="row justify-content-evenly footer">
+                                <button id="cancelarCadastro" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--verde">Cadastrar</button>
+                            </div>
                         </div>
                     </div>
                 </section>
-
-
-                <!--Modal Confirmação-->
-
-                <div id="confirmarCancel" class="modal">
-                    <div class="modalContainer">
-
-                        <div class="mensagem-confirmar text-center">
-                            <h4>Ao clicar em confirmar, o pedido será totalmente excluído. Deseja prosseguir?</h4>
-                        </div>
-
-                        <footer class="container pt-5 rodape">
-                            <div class="row justify-content-evenly">
-                                <button class="col-4 botao botao--vermelho" id="cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Confirmar</button>
-                            </div>
-                        </footer>
-                    </div>
 
             </main>
         </div>

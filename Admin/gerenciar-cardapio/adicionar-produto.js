@@ -45,13 +45,14 @@ if(addProdutoModal.style.display = "flex"){
             insumoslista.appendChild(option)
             addInsumo.addEventListener('click', (event) => {
                 let novoInsumo = document.createElement("li");
+                novoInsumo.classList.add("ms-1");
                 let removerInsumo = document.createElement("i");
                 let p =  event.target.parentNode;
                 removerInsumo.classList.add("fa");
                 removerInsumo.classList.add("fa-times");
                 removerInsumo.id = `excluir-${p.value}`
 
-
+                
                 if(!insumos.some((insumo) => {return insumo === p.value})){
                     novoInsumo.textContent = p.value;
                     novoInsumo.appendChild(removerInsumo);

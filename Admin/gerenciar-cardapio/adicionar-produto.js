@@ -15,6 +15,11 @@ btnFecharAddProduto.addEventListener("click", function(){
     addProdutoModal.style.display = "none";
 })
 
+// Adiciona a lista de insumos incluidos no produto
+var selectInsumos = document.getElementById("insumos");
+var listaInsumos = document.getElementById("listaInsumos");
+var insumos = [];
+
 // Traz os insumos para o select
 if(addProdutoModal.style.display = "flex"){
     fetch("http://localhost:8080/insumos", {
@@ -26,7 +31,7 @@ if(addProdutoModal.style.display = "flex"){
     .then(response => response.json())
     .then(dados => {
         console.log(dados)
-        let insumos = document.getElementById("insumos")
+        let insumoslista = document.getElementById("insumos")
     
         dados.forEach(element => {
             let option = document.createElement("p");
@@ -37,39 +42,38 @@ if(addProdutoModal.style.display = "flex"){
             option.value = element.name;
             option.textContent = element.name;
             option.appendChild(addInsumo)
-            insumos.appendChild(option)
+            insumoslista.appendChild(option)
+            addInsumo.addEventListener('click', (event) => {
+                let novoInsumo = document.createElement("li");
+                let removerInsumo = document.createElement("i");
+                let p =  event.target.parentNode;
+                removerInsumo.classList.add("fa");
+                removerInsumo.classList.add("fa-times");
+                removerInsumo.id = `excluir-${p.value}`
+
+
+                if(!insumos.some((insumo) => {return insumo === p.value})){
+                    novoInsumo.textContent = p.value;
+                    novoInsumo.appendChild(removerInsumo);
+                    listaInsumos.appendChild(novoInsumo);
+                    insumos.push(p.value)
+                }
+
+
+                removerInsumo.addEventListener('click', () => {
+                    listaInsumos.removeChild(novoInsumo);
+                    insumos =  insumos.filter(insumo => insumo !== novoInsumo.textContent)
+                });
+                console.log(insumos);
+            });
         });
     })
     .catch(erro => console.log(erro))
-}
-
-// Adiciona a lista de insumos incluidos no produto
-const selectInsumos = document.getElementById("insumos");
-const listaInsumos = document.getElementById("listaInsumos");
-var insumos = [];
+};
 
 selectInsumos.addEventListener("change", function(){
     if(this.value !== "Insumos"){
-        let novoInsumo = document.createElement("li");
-        let removerInsumo = document.createElement("i");
-        removerInsumo.classList.add("fa");
-        removerInsumo.classList.add("fa-times");
-        removerInsumo.id = `excluir-${this.value}`
-
-
-        if(!insumos.some((insumo) => {return insumo === this.value})){
-            novoInsumo.textContent = this.value;
-            novoInsumo.appendChild(removerInsumo);
-            listaInsumos.appendChild(novoInsumo);
-            insumos.push(this.value)
-        }
-
-        selectInsumos.value = "";
-
-        removerInsumo.addEventListener('click', () => {
-            listaInsumos.removeChild(novoInsumo);
-            insumos =  insumos.filter(insumo => insumo !== novoInsumo.textContent)
-        });
+        
     }
 })
 

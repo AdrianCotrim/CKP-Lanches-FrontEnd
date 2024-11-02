@@ -85,27 +85,29 @@
                 <ul class="list-unstyled display-4">
                     <li><a href="/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
                             inicial</a></li>
-                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
+                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-2"></i>
                             Registrar pedidos</a></li>
-                    <li><a href="/Admin/gerenciar-entrega/entrega.html"><i class="fas fa-motorcycle pe-3"></i>
+                    <li><a href="/Admin/gerenciar-entrega/entrega.html"><i class="fas fa-motorcycle pe-2"></i>
                             Entrega</a></li>
-                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
+                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-2"></i>
                             Verificar estoque</a></li>
-                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-3"></i>
+                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-2"></i>
                             Histórico de vendas</a></li>
-                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-3"></i>
+                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-2"></i>
                             Gerenciar cardápio</a></li>
-                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-3"></i>
+                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-2"></i>
                             Administrar usuários</a></li>
-                    <li><a href="/Admin/gerenciar-fornecedor/fornecedor.html"><i class="fas fa-truck pe-3"></i>
+                    <li><a href="/Admin/gerenciar-fornecedor/fornecedor.html"><i class="fas fa-truck pe-2"></i>
                             Administrar fornecedores</a></li>
+                    <li><a href="/Admin/registrar-lote/lote.html"><i class="fas fa-box pe-2"></i>
+                            Registrar lote</a></li>
                 </ul>
             </nav>
         </div>
 
         <div class="col-12 col-sm-10 conteudo">
             <header class="pt-5 ps-5 pe-5 cabecalho">
-                <h1>Registrar pedidos</h1>
+                <h1><i class="fas fa-plus me-3"></i>Registrar pedidos</h1>
                 <hr class="linha">
             </header>
 
@@ -123,7 +125,7 @@
                             </select>
 
                             <label class="">Buscar:</label>
-                            <input id="pesquisa-numero" placeholder="Número" class="col-2 input" name="text" type="text">
+                            <input id="pesquisa-numero" placeholder="Número" oninput="this.value = this.value.replace(/[^0-9]/g, '');" class="col-2 input" name="text" type="text">
                         </form>
                     </div>
                     <button id="registrarPedido" class="botao botao--vermelho"><i class="fas fa-plus"></i>Adicionar</button>
@@ -150,8 +152,6 @@
                     </table>
                 </div>
 
-                <!---->
-
                 <!--JANELA REGISTRO DE PEDIDO-->
 
                 <div id="infoPedido" class="modal">
@@ -171,8 +171,8 @@
                                 <label for="tipoPedido">Tipo do pedido:</label>
                                 <select class="col-2 select" name="tipoPedido" id="tipoPedido">
                                     <option value=""></option>
-                                    <option value="entrega">entrega</option>
-                                    <option value="retirada">retirada</option>
+                                    <option value="ENTREGA">entrega</option>
+                                    <option value="RETIRADA">retirada</option>
                                 </select>
                             </div>
 
@@ -188,8 +188,8 @@
                                 <div class="grupo-form">
                                     <label for="troco">Troco:</label>
                                     <select class="col-2 select" name="troco" id="troco">
-                                        <option value="sim">Sim</option>
-                                        <option value="nao">Não</option>
+                                        <option value="SIM">Sim</option>
+                                        <option value="NAO">Não</option>
                                     </select>
                                 </div>
                                 <div class="grupo-form">
@@ -198,7 +198,7 @@
                                 </div>
                                 <div class="grupo-form">
                                     <label for="taxa">Taxa:</label>
-                                    <input id="taxa" placeholder="" type="text">
+                                    <input id="taxa" placeholder="R$0,00" type="text">
                                 </div>
                             </div>
 
@@ -232,24 +232,58 @@
                                 <input id="nomeAlterar" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="tipoPedidoAlterar">Alterar tipo do pedido:</label>
-                                <select class="col-2 select" name="tipoPedidoAlterar" id="tipoPedidoAlterar">
-                                    <option value="entrega">entrega</option>
-                                    <option value="retirada">retirada</option>
-                                </select>
+                                <label for="andamentoAlterar">Alterar Andamento:</label>
+                                <input id="andamentoAlterar" placeholder="" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="enderecoAlterar">Alterar endereço:</label>
-                                <input id="enderecoAlterar" placeholder="" type="text" disabled>
+                                <label for="formaPagamentoAlterar">Alterar forma de pagamento:</label>
+                                <input id="formaPagamentoAlterar" placeholder="" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="tipoPedidoAlterar">Alterar tipo do pedido:</label>
+                                <select class="col-2 select" name="tipoPedidoAlterar" id="tipoPedidoAlterar">
+                                    <option value="ENTREGA">entrega</option>
+                                    <option value="RETIRADA">retirada</option>
+                                </select>
+                            </div>
+
+                            <div style="display: none;" id="entregaAlterar" class="grupo-form">
+                                <div class="grupo-form">
+                                    <label for="enderecoAlterar">Endereço:</label>
+                                    <input id="enderecoAlterar" placeholder="" type="text">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="motoboyAlterar">motoboyAlterar:</label>
+                                    <input id="motoboyAlterar" placeholder="" type="text">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="trocoAlterar">trocoAlterar:</label>
+                                    <select class="col-2 select" name="trocoAlterar" id="trocoAlterar">
+                                        <option value="SIM">Sim</option>
+                                        <option value="NAO">Não</option>
+                                    </select>
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="complementoAlterar">complementoAlterar:</label>
+                                    <input id="complementoAlterar" placeholder="" type="text">
+                                </div>
+                                <div class="grupo-form">
+                                    <label for="taxaAlterar">taxaAlterar:</label>
+                                    <input id="taxaAlterar" placeholder="" type="text">
+                                </div>
+                            </div>
+
+                            <div class="grupo-form">
+                                <button id="deletar" class="col-4 botao botao--vermelho botao-cancelar">Deletar</button>
                             </div>
                       
                         </form>
 
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button id="cancelar"
-                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
+                                <button id="cancelar" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="confirmar" class="col-4 botao botao--verde">Alterar</button>
+                                <button id="confirmar" class="col-4 botao" style="background-color: #2971DE;">Fechar</button>
                             </div>
                         </footer>
                     </div>
@@ -259,7 +293,7 @@
 
                 <!--JANELA DE ADIÇÃO DE ITENS-->
 
-                <div id="janelaRegisPedido" class="modal">
+                <div id="addProdutos" class="modal">
                     <div class="modalContainer">
                         <header class="container-fluid">
                             <span><i class="fa-solid fa-list-check"></i></span>
@@ -269,11 +303,10 @@
                         <form class="container">
 
                             <div class="row container mt-4 justify-content-between conteinerProdutos">
-                                <div class="mb-3 esquerda col-6">
+                                <div id="listaProdutos" class="mb-3 esquerda col-6">
                                     <select id="itens" class="select select--modal">
                                         <option value="" disabled selected>Itens</option>
                                     </select>
-                                    <br>
                                 </div>
 
                                 <div class="item-list direita col-6 text-end" id="itemList">
@@ -288,6 +321,7 @@
 
                         </form>
 
+                        <span id="mensagemErro" style="color: red; display: none;">Para criar o pedido é necessário pelo menos 1 dentro do pedido</span>
                         <footer class="container">
                             <div class="row justify-content-evenly">
                                 <button class="col-4 botao botao--vermelho botao-cancelar">Voltar</button>
@@ -325,10 +359,6 @@
                         </footer>
                     </div>
                 </div>
-
-
-                <!---->
-
             </main>
         </div>
     </div>
@@ -336,6 +366,7 @@
     <script src="../script.js"></script>
     <script src="conexao-tabela-pedidos.js"></script>
     <script src="adicionar-pedidos.js"></script>
+    <script src="adicionar-produto.js"></script>
     <script src="pesquisa-pedidos.js"></script>
     <script src="alterar-pedidos.js"></script>
     <script src="fechar-pedidos.js"></script>

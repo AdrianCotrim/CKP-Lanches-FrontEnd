@@ -1,3 +1,24 @@
+//formatação monetária
+
+const input = document.getElementById('valor');
+
+input.addEventListener('input', function () {
+    // Remove tudo que não é dígito
+    let value = this.value.replace(/\D/g, '');
+
+    // Formata o valor como moeda
+    if (value) {
+        value = (parseInt(value) / 100).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+        this.value = value;
+    } else {
+        this.value = '';
+    }
+});
+
+
 let btnAbrirAddProduto = document.getElementById("addInsumo")
 let btnFecharAddProduto = document.getElementById("cancelar")
 let btnAddProduto = document.getElementById("confirmarAddProduto")
@@ -15,58 +36,85 @@ btnFecharAddProduto.addEventListener("click", function(){
     addProdutoModal.style.display = "none";
 })
 
+// Adiciona a lista de insumos incluidos no produto
+var selectInsumos = document.getElementById("insumos");
+var listaInsumos = document.getElementById("listaInsumos");
+var insumos = [];
+
 // Traz os insumos para o select
 if(addProdutoModal.style.display = "flex"){
     fetch("http://localhost:8080/insumos", {
         headers: {
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${localStorage.getItem("authToken")}`,
             'Accept': 'application/json'
         },
     })
     .then(response => response.json())
     .then(dados => {
         console.log(dados)
-        var insumos = document.getElementById("insumos")
+        let insumoslista = document.getElementById("insumos")
     
         dados.forEach(element => {
-            var option = document.createElement("option");
+            let option = document.createElement("p");
+            let addInsumo = document.createElement('i')
+            addInsumo.classList.add('fas');
+            addInsumo.classList.add('fa-plus');
+            addInsumo.classList.add('novoInsumo');
             option.value = element.name;
             option.textContent = element.name;
-            insumos.appendChild(option)
-        });  
+            option.appendChild(addInsumo)
+            insumoslista.appendChild(option)
+            addInsumo.addEventListener('click', (event) => {
+                let novoInsumo = document.createElement("li");
+                novoInsumo.classList.add("ms-1");
+                let removerInsumo = document.createElement("i");
+                let p =  event.target.parentNode;
+                removerInsumo.classList.add("fa");
+                removerInsumo.classList.add("fa-times");
+                removerInsumo.id = `excluir-${p.value}`
+
+                
+                if(!insumos.some((insumo) => {return insumo === p.value})){
+                    novoInsumo.textContent = p.value;
+                    novoInsumo.appendChild(removerInsumo);
+                    listaInsumos.appendChild(novoInsumo);
+                    insumos.push(p.value)
+                }
+
+
+                removerInsumo.addEventListener('click', () => {
+                    listaInsumos.removeChild(novoInsumo);
+                    insumos =  insumos.filter(insumo => insumo !== novoInsumo.textContent)
+                });
+                console.log(insumos);
+            });
+        });
     })
     .catch(erro => console.log(erro))
-}
-
-// Adiciona a lista de insumos incluidos no produto
-const selectInsumos = document.getElementById("insumos");
-const listaInsumos = document.getElementById("listaInsumos");
-var insumos = [];
+};
 
 selectInsumos.addEventListener("change", function(){
     if(this.value !== "Insumos"){
-        let novoInsumo = document.createElement("li");
-        let removerInsumo = document.createElement("i");
-        removerInsumo.classList.add("fa");
-        removerInsumo.classList.add("fa-times");
-        removerInsumo.id = `excluir-${this.value}`
-
-
-        if(!insumos.some((insumo) => {return insumo === this.value})){
-            novoInsumo.textContent = this.value;
-            novoInsumo.appendChild(removerInsumo);
-            listaInsumos.appendChild(novoInsumo);
-            insumos.push(this.value)
-        }
-
-        selectInsumos.value = "";
-
-        removerInsumo.addEventListener('click', () => {
-            listaInsumos.removeChild(novoInsumo);
-            insumos =  insumos.filter(insumo => insumo !== novoInsumo.textContent)
-        });
+        
     }
 })
+
+const adicionarInsumo = document.querySelectorAll('.novoInsumo');
+const listaAdicionados = document.getElementById('listaInsumos');
+
+        addButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const produto = button.parentElement.querySelector('span').textContent;
+                
+                // Cria um novo elemento para a lista de adicionados
+                const novoProduto = document.createElement('div');
+                novoProduto.textContent = produto;
+                novoProduto.classList.add('adicionado');
+                
+                // Adiciona o novo produto à lista de adicionados
+                listaAdicionados.appendChild(novoProduto);
+            });
+        });
 
 
 

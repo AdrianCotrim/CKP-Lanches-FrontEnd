@@ -39,7 +39,7 @@ modalAltFunc.addEventListener('click', (event) => {
         }
         const id = parseInt(document.getElementById('id').value);
 
-        fetch(`http://localhost:8080/userManager`, {
+        fetch(`http://localhost:8080/userManager/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',

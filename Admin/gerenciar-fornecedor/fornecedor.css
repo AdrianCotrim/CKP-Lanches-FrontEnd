@@ -1,0 +1,139 @@
+.fornecedores {
+    background-color: var(--branco);
+    height: 65vh;
+    max-height: 65vh;
+    border-radius: 1vh;
+    overflow-y: auto;
+}
+
+.fornecedor {
+    background-color: var(--branco-hover);
+    border-radius: 0.5vh;
+    max-height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.campo{
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.valor {
+    color: var(--verde);
+}
+
+.info {
+    border-radius: 1vh;
+    height: 65vh;
+    max-height: 65vh;
+    width: 50vh;
+    display: inline-flex;
+}
+
+.info h5{
+    color: var(--cinza-texto);
+}
+
+.info p{
+    color: var(--cinza-scroll);
+    margin-bottom: 3vh;
+}
+
+.info-fornecedor{
+    padding: 2vh;
+}
+
+.pedido label{
+    font-weight: 600;
+}
+
+.desc-valor{
+    font-size: 2vh;
+    font-weight: 500;
+    color: var(--cinza-texto);
+}
+
+.label-valor{
+    font-weight: 500;
+    color: var(--cinza-scroll);
+}
+
+.label-valor-final{
+    font-weight: 600;
+    color: var(--verde);
+    font-size: 2vh;
+}
+
+.desc-valor-final{
+    padding-top: 1vh;
+    font-weight: 600;
+    color: var(--cinza-texto);
+    font-size: 2vh;
+}
+
+.botao{
+    width: 30vh !important; 
+}
+
+.mensagem-confirmar{
+    width: 40vh;
+    margin-top: 4vh;
+}
+
+.modalContainer {
+    background-color: #E9E9E9;
+    margin: 15% auto !important;
+    width: 50vh !important;
+    border-radius: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    overflow: hidden;
+}
+
+.rodape button{
+    width: 20vh !important;
+}
+
+.cadastro{
+    width: 50vh;
+}
+
+.input{
+    width: 30vh !important;
+    margin-bottom: 1vh;
+}
+
+.footer .botao{
+    width: 20vh !important;
+}
+
+.footer{
+    margin-top: 5vh;
+    height: fit-content !important;
+}
+
+.form-group {
+    width: 50vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1vh;
+}
+
+h5 {
+    margin: 0;
+    width: fit-content;
+}
+
+.input {
+    width: 65%;
+}
+
+.row {
+    display: flex;
+    justify-content: space-evenly;
+}

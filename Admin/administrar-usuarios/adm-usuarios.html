@@ -34,7 +34,7 @@
         document.addEventListener('DOMContentLoaded', async function iniciar() {
             try {
                 // Faz a solicitação de login
-                const response = await fetch("http://localhost:8080/user/name", {
+                const response = await fetch("http://localhost:8080/user/role", {
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem("authToken")}`
@@ -46,7 +46,16 @@
                     window.location.href = "/Tela-de-login/index.html"
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
+
+                const data = await response.json();
+
+                if(data.role != 'ADMIN'){
+                    window.location.href = "/Tela-de-login/index.html"
+                    throw new Error(`Você não tem permissão!`);
+                }
+
                 else {
+                    console.log('Admin')
                     document.body.classList.add('visible');
                 }
             }
@@ -58,7 +67,7 @@
 
     <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center topo">
-            <img src="/ckp - lanches/imagens/ckp-logo.png" alt="CKP Logo">
+            <img src="/imagens/ckp-logo.png" alt="CKP Logo">
 
             <div class="dropdown pe-3">
                 <div id="dropdown-content" class="dropdown-content">
@@ -68,7 +77,7 @@
                 </div>
                 <div class="dropdown-button p-2" onclick="toggleDropdown()">
                     <i class="fa-solid fa-user ps-2"></i>
-                    <label class="ps-3">Usuário</label>
+                    <label id="usuario" class="ps-3">Usuário</label>
                 </div>
             </div>
         </div>
@@ -76,30 +85,31 @@
         <div class="col-0 col-sm-2 menu">
             <nav>
                 <ul class="list-unstyled display-4">
-                    <li><a href="/ckp - lanches/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
+                    <li><a href="/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
                             inicial</a></li>
-                    <li><a href="/ckp - lanches/Admin/registrar-pedidos/registrar-pedidos.html"><i
-                                class="fas fa-plus pe-3"></i>
+                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-2"></i>
                             Registrar pedidos</a></li>
-                    <li><a href="/ckp - lanches/Admin/verificar-estoque/verificar-estoque.html"><i
-                                class="fas fa-search pe-3"></i>
+                    <li><a href="/Admin/gerenciar-entrega/entrega.html"><i class="fas fa-motorcycle pe-2"></i>
+                            Entrega</a></li>
+                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-2"></i>
                             Verificar estoque</a></li>
-                    <li><a href="/ckp - lanches/Admin/historico-de-vendas/historico-vendas.html"><i
-                                class="fas fa-history pe-3"></i>
+                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-2"></i>
                             Histórico de vendas</a></li>
-                    <li><a href="/ckp - lanches/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i
-                                class="fas fa-utensils pe-3"></i>
+                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-2"></i>
                             Gerenciar cardápio</a></li>
-                    <li><a href="/ckp - lanches/Admin/administrar-usuarios/adm-usuarios.html"><i
-                                class="fas fa-users pe-3"></i>
+                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-2"></i>
                             Administrar usuários</a></li>
+                    <li><a href="/Admin/gerenciar-fornecedor/fornecedor.html"><i class="fas fa-truck pe-2"></i>
+                            Administrar fornecedores</a></li>
+                    <li><a href="/Admin/registrar-lote/lote.html"><i class="fas fa-box pe-2"></i>
+                            Registrar lote</a></li>
                 </ul>
             </nav>
         </div>
 
         <div class="col-12 col-sm-10 conteudo">
             <header class="pt-5 ps-5 pe-5 cabecalho justify-content-between align-items-center">
-                <h1>Administrar usuários</h1>
+                <h1><i class="fas fa-users me-3"></i>Administrar usuários</h1>
                 <hr class="linha">
             </header>
 
@@ -125,7 +135,7 @@
                             </select>
                         </form>
                     </div>
-                    <button id="registrarPedido" class="botao botao--vermelho"><i class="fas fa-plus"></i>Adicionar</button>
+                    <button id="addFunc" class="botao botao--vermelho"><i class="fas fa-plus"></i>Adicionar</button>
                 </div>
 
                 <!--TABELA-->

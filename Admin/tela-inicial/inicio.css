@@ -27,17 +27,10 @@
 
 .valor--gasto{
     background-color: var(--vermelho-secundario);
-    transition: 200ms;
 }
 
 .valor--lucro{
     background-color: var(--azul);
-}
-
-.valor--gasto:hover{
-    cursor: pointer;
-    background-color: var(--vermelho-principal);
-    transform: scale(1.1);
 }
 
 /*LABELS E INPUTS DO MODAL*/

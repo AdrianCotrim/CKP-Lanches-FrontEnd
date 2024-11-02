@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="imagex/png" href="/ckp - lanches/Imagens/ckp-logo.png">
+    <title>CKP - Entrega</title>
+
+    <!--STYLESHEETS-->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="fornecedor.css">
+    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
+    <!--SCRIPTS-->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <!--FONTES-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body class="container-fluid">
+    <script>
+        document.addEventListener('DOMContentLoaded', async function iniciar() {
+            try {
+                // Faz a solicitação de login
+                const response = await fetch("http://localhost:8080/user/role", {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`
+                    },
+                });
+
+                // Verifica se a resposta foi bem-sucedida
+                if (!response.ok) {
+                    window.location.href = "/Tela-de-login/index.html"
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.role != 'ADMIN') {
+                    window.location.href = "/Tela-de-login/index.html"
+                    throw new Error(`Você não tem permissão!`);
+                }
+
+                else {
+                    console.log('Admin')
+                    document.body.classList.add('visible');
+                }
+            }
+            catch (erro) {
+                console.error('Erro:', erro);
+            }
+        })
+    </script>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center topo">
+            <img src="/Imagens/ckp-logo.png" alt="CKP Logo">
+
+            <div class="dropdown pe-3">
+                <div id="dropdown-content" class="dropdown-content">
+                    <a class="dropdown-item" onclick="deleteToken()">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair
+                    </a>
+                </div>
+                <div class="dropdown-button p-2" onclick="toggleDropdown()">
+                    <i class="fa-solid fa-user ps-2"></i>
+                    <label id="usuario" class="ps-3">Usuário</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-0 col-sm-2 menu">
+            <nav>
+                <ul class="list-unstyled display-4">
+                    <li><a href="/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
+                            inicial</a></li>
+                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-2"></i>
+                            Registrar pedidos</a></li>
+                    <li><a href="/Admin/gerenciar-entrega/entrega.html"><i class="fas fa-motorcycle pe-2"></i>
+                            Entrega</a></li>
+                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-2"></i>
+                            Verificar estoque</a></li>
+                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-2"></i>
+                            Histórico de vendas</a></li>
+                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-2"></i>
+                            Gerenciar cardápio</a></li>
+                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-2"></i>
+                            Administrar usuários</a></li>
+                    <li><a href="/Admin/gerenciar-fornecedor/fornecedor.html"><i class="fas fa-truck pe-2"></i>
+                            Administrar fornecedores</a></li>
+                    <li><a href="/Admin/registrar-lote/lote.html"><i class="fas fa-box pe-2"></i>
+                            Registrar lote</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-12 col-sm-10 conteudo">
+            <header class="pt-5 ps-5 pe-5 cabecalho">
+                <h1><i class="fas fa-truck me-3"></i>Administrar fornecedores</h1>
+                <hr class="linha">
+            </header>
+
+            <main class="ps-5 pt-4 pe-5 row">
+                <section class="fornecedores col-3">
+                    <div class="campo">
+                        <div class="fornecedor mt-3 me-2 ms-2 mb-1">
+                            <div class="info-fornecedor">
+                                <p>Empresa de Exemplo Lol</p>
+                                <label class="pe-5">(19) 91234-4321</label>
+                                <label class="valor">ID: 06</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cadastrar d-flex justify-content-evenly">
+                        <button class="cadastrar botao botao--vermelho" id="abrirCadastrarFornecedor">Cadastrar</button>
+                    </div>
+                </section>
+
+                <section class="col-9 d-flex justify-content-between">
+                    <div class="info ps-2" id="infoFornecedor">
+                        <div>
+                            <h5>Nome Fantasia</h5>
+                            <p>Empresa de Exemplo Lol</p>
+                            <h5>CNPJ</h5>
+                            <p>12.345.678/0001-90</p>
+                            <h5>Razão Social</h5>
+                            <p>Comércio de Produtos Tecnológicos Ltda.</p>
+                            <h5>Endereço</h5>
+                            <p>R. José Estanislau Ambiel, 927, Jd. Morada do Sol</p>
+                            <h5>Complemento</h5>
+                            <p>-</p>
+                            <h5>Email</h5>
+                            <p>empresa.exemplo@gmail.com</p>
+                            <h5>Telefone</h5>
+                            <p>(19) 91234-4321</p>
+                            <button id="abrirAlterarFornecedor" class="col-4 botao botao--verde">Alterar</button>
+                        </div>
+                    </div>
+
+                    <!--LAYOUT PARA ALTERAR FORNECEDOR-->
+
+                    <div class="cadastro" id="alterarFornecedor" style="display: none;">
+                        <div class="container">
+                            <div class="form-group">
+                                <h5>Nome Fantasia:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>CNPJ:</h5>
+                                <input type="text" id="cnpjAltera" class="input" placeholder="00.000.000/0000-00">
+                            </div>
+                            <div class="form-group">
+                                <h5>Razão Social:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Endereço:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Complemento:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Email:</h5>
+                                <input type="text" class="input" placeholder="exemplo@mail.com">
+                            </div>
+                            <div class="form-group">
+                                <h5>Telefone:</h5>
+                                <input type="text" id="telefoneAltera" class="input" placeholder="(00) 00000-0000">
+                            </div>
+                            <div class="row justify-content-evenly footer">
+                                <button id="cancelarAlteracao" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--verde">Alterar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--LAYOUT PARA CADASTRAR FORNECEDOR-->
+
+                    <div class="cadastro" id="cadastrarFornecedor" style="display: none;">
+                        <div class="container">
+                            <div class="form-group">
+                                <h5>Nome Fantasia:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>CNPJ:</h5>
+                                <input type="text" id="cnpjCadastro" class="input" placeholder="00.000.000/0000-00">
+                            </div>
+                            <div class="form-group">
+                                <h5>Razão Social:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Endereço:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Complemento:</h5>
+                                <input type="text" class="input">
+                            </div>
+                            <div class="form-group">
+                                <h5>Email:</h5>
+                                <input type="text" class="input" placeholder="exemplo@mail.com">
+                            </div>
+                            <div class="form-group">
+                                <h5>Telefone:</h5>
+                                <input type="text" id="telefoneCadastro" class="input" placeholder="(00) 00000-0000">
+                            </div>
+                            <div class="row justify-content-evenly footer">
+                                <button id="cancelarCadastro" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--verde">Cadastrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="formatacao.js"></script>
+    <script src="fornecedor.js"></script>
+    <script src="../script.js"></script>
+</body>
+
+</html>

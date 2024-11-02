@@ -134,3 +134,99 @@ modalInfoPedido.addEventListener("click", function(event) {
         modalInfoPedido.style.display = "none";     
     }
 })
+
+// modalAddItens
+let pedidoItens = []
+
+// Verifica o modal a cada 500ms
+const modalChecker = setInterval(checaVisibilidadeModal, 500);
+
+modalAddItens.addEventListener("click", function(event) {
+    if(event.target.textContent == 'Voltar'){
+        modalAddItens.style.display = "none"
+        adicionaItensAoPedido(pedidoItens, pedido);
+    }
+    if(event.target.textContent == 'Fechar'){
+        modalAddItens.style.display = "none"
+        modalFecharPedido.style.display = "flex"
+        adicionaItensAoPedido(pedidoItens, pedido);
+    }
+})
+
+// Adiciona o pedido
+document.getElementById('itens').addEventListener('change', function() {
+    const selectedItem = this.value;
+    if (selectedItem) {
+            adicionaItem(selectedItem);
+            this.value = ''; // Limpa a seleção
+        }
+});
+
+// Remove Produto do item
+modalAddItens.addEventListener("click", function(event){
+    
+    if(event.target.classList.contains("removerProduto")){
+        
+        const produto = event.target.parentElement.parentElement;
+        const nome = produto.querySelector('.nome').textContent;
+        
+        pedidoItens.forEach((item) => {
+            if(nome == item.name){
+                const index = pedido.indexOf(item);
+                produto.remove()
+                pedidoItens.splice(index, 1)
+                console.log(pedido);
+            };
+        });
+    };
+});
+
+let ultimoItemSelecionado
+let itemSelecionado
+// Seleciona item
+modalAddItens.addEventListener("click", function(event){
+    if(event.target.classList.contains("nome")){
+        // Desmarca último item clicado
+        if(ultimoItemSelecionado){
+            ultimoItemSelecionado.classList.remove("selecionado");
+        }
+        itemSelecionado = event.target.parentElement;
+        ultimoItemSelecionado = itemSelecionado;
+        itemSelecionado.classList.add("selecionado");
+
+        const nomeProduto = itemSelecionado.querySelector(".nome").textContent;
+        const item = pedido.find(item => item.name == nomeProduto);
+        obs.value = item.obs;
+        
+    }
+})
+
+// Observação
+obs.addEventListener('input', function() {
+    const valor = obs.value; 
+    const nomeProduto = itemSelecionado.querySelector(".nome").textContent;
+    const item = pedidoItens.find(item => item.name == nomeProduto);
+    
+
+    item.obs = valor;
+})
+
+//formatação monetária
+
+const input = document.getElementById('taxa');
+
+input.addEventListener('input', function () {
+    // Remove tudo que não é dígito
+    let value = this.value.replace(/\D/g, '');
+
+    // Formata o valor como moeda
+    if (value) {
+        value = (parseInt(value) / 100).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+        this.value = value;
+    } else {
+        this.value = '';
+    }
+});

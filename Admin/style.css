@@ -105,10 +105,6 @@
     }
 }
 
-/* Animação de efeito de luz piscando no texto */
-
-
-
 /*MENU DE NAVEGAÇÃO LATERAL*/
 
 .menu {
@@ -193,13 +189,14 @@ ul a:hover {
 
 .modalContainer {
     background-color: #E9E9E9;
-    margin: 11% auto;
+    margin: 7% auto;
     width: 60vh;
     border-radius: 2vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: fit-content;
+    overflow: hidden;
 }
 
 .modalContainer header {
@@ -229,6 +226,30 @@ ul a:hover {
 
 .label-input {
     padding: 2vh;
+}
+
+
+.grid-form {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 3vh;
+    align-items: center;
+    font-weight: 500;
+    max-height: 50vh;
+    overflow-y: auto;
+    overflow: hidden;
+}
+
+.grupo-form {
+    display: contents;
+}
+
+.grupo-form label {
+    text-align: left;
+}
+
+.grupo-form select {
+    width: 15vh;
 }
 
 .label-input label {
@@ -288,6 +309,11 @@ input {
 
 .table-hover {
     cursor: pointer;
+}
+
+.table select{
+    height: 4vh;
+    padding: 1vh;
 }
 
 .table td {
@@ -373,6 +399,10 @@ select {
     background-color: var(--verde-escuro);
 }
 
+.botao--azul{
+    background-color: var(--azul);
+}
+
 .botao--login::before {
     background-color: var(--amarelo-escuro);
 }
@@ -450,8 +480,3 @@ select {
 .fa-user {
     color: var(--vermelho-secundario);
 }
-
-/*RADIO-BUTTON*/
-
-input[type="radio"]{
-    height: 2vh;

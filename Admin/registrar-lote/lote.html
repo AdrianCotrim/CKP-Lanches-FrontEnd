@@ -6,23 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="imagex/png" href="/ckp - lanches/Imagens/ckp-logo.png">
     <title>CKP - Registrar Pedidos</title>
-    
+
     <!--STYLESHEETS-->
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="stylesheet" type="text/css" href="registrar-pedidos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-    
+
     <!--SCRIPTS-->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    
+
     <!--FONTES-->
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
@@ -47,7 +48,7 @@
 
                 const data = await response.json();
 
-                if(data.role != 'ADMIN'){
+                if (data.role != 'ADMIN') {
                     window.location.href = "/Tela-de-login/index.html"
                     throw new Error(`Você não tem permissão!`);
                 }
@@ -107,7 +108,7 @@
 
         <div class="col-12 col-sm-10 conteudo">
             <header class="pt-5 ps-5 pe-5 cabecalho">
-                <h1><i class="fas fa-plus me-3"></i>Registrar pedidos</h1>
+                <h1><i class="fas fa-box me-3"></i>Registrar lote</h1>
                 <hr class="linha">
             </header>
 
@@ -116,104 +117,88 @@
                 <div class="row pesquisa pb-4">
                     <div class="col-10">
                         <form class=" label-input" action="">
-                            <label class="" for="pesquisa-andamento">Filtrar:</label>
-                            <select class="col-2 select" name="pesquisa-andamento" id="pesquisa-andamento">
-                                <option value="todos">Todos</option>
-                                <option value="preparando">Preparando</option>
-                                <option value="pedido-pronto">Pedido pronto</option>
-                                <option value="finalizado">Finalizado</option>
-                            </select>
-
                             <label class="">Buscar:</label>
-                            <input id="pesquisa-numero" placeholder="Número" oninput="this.value = this.value.replace(/[^0-9]/g, '');" class="col-2 input" name="text" type="text">
+                            <input id="pesquisa-numero" placeholder="Número" class="col-2 input" name="text"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '');"    type="text">
                         </form>
                     </div>
-                    <button id="registrarPedido" class="botao botao--vermelho"><i class="fas fa-plus"></i>Adicionar</button>
+                    <button id="botaoAddLote" class="botao botao--vermelho"><i
+                            class="fas fa-plus"></i>Adicionar</button>
                 </div>
 
                 <!--TABELA-->
 
                 <div class="tabela-responsiva">
-                    <table id="pedidos" class="table table-hover">
+                    <table id="lotes" class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Andamento</th>
-                                <th>Número</th>
-                                <th>Nome</th>
-                                <th>Itens</th>
-                                <th>Tipo</th>
-                                <th>Forma Pagamento</th>
+                                <th>ID</th>
+                                <th>Data Val.</th>
+                                <th>Qtde.</th>
+                                <th>ID fornecedor</th>
+                                <th>ID Insumo</th>
                                 <th>Valor Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
                     </table>
                 </div>
 
                 <!--JANELA REGISTRO DE PEDIDO-->
 
-                <div id="infoPedido" class="modal">
+                <div id="addLote" class="modal">
                     <div class="modalContainer">
 
                         <header class="container-fluid">
                             <span><i class="fa-solid fa-plus"></i></span>
-                            <h2>Adicionar Pedido</h2>
+                            <h2>Registrar lote</h2>
                         </header>
 
                         <form class="grid-form mt-4">
+                            <div class="grupo-form">
+                                <label for="nomeCliente">Insumo:</label>
+                                <select class="select">
+                                    <option>Insumo</option>
+                                </select>
+                            </div>
+                            <div class="grupo-form">
+                                <label for="nomeCliente">Fornecedor:</label>
+                                <select class="select">
+                                    <option>Fornecedor</option>
+                                </select>
+                            </div>
                             <div class="grupo-form">
                                 <label for="nomeCliente">Nome do cliente:</label>
                                 <input id="nomeCliente" placeholder="" type="text" required>
                             </div>
                             <div class="grupo-form">
-                                <label for="tipoPedido">Tipo do pedido:</label>
-                                <select class="col-2 select" name="tipoPedido" id="tipoPedido">
-                                    <option value=""></option>
-                                    <option value="entrega">entrega</option>
-                                    <option value="retirada">retirada</option>
-                                </select>
+                                <label for="nomeCliente">Quantidade:</label>
+                                <input id="nomeCliente" placeholder="" type="number" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                             </div>
-
-                            <div style="display: none;" id="entrega" class="grupo-form">
-                                <div class="grupo-form">
-                                    <label for="endereco">Endereço:</label>
-                                    <input id="endereco" placeholder="" type="text">
-                                </div>
-                                <div class="grupo-form">
-                                    <label for="motoboy">Motoboy:</label>
-                                    <input id="motoboy" placeholder="" type="text">
-                                </div>
-                                <div class="grupo-form">
-                                    <label for="troco">Troco:</label>
-                                    <select class="col-2 select" name="troco" id="troco">
-                                        <option value="sim">Sim</option>
-                                        <option value="nao">Não</option>
-                                    </select>
-                                </div>
-                                <div class="grupo-form">
-                                    <label for="complemento">Complemento:</label>
-                                    <input id="complemento" placeholder="" type="text">
-                                </div>
-                                <div class="grupo-form">
-                                    <label for="taxa">Taxa:</label>
-                                    <input id="taxa" placeholder="R$0,00" type="text">
-                                </div>
+                            <div class="grupo-form">
+                                <label for="nomeCliente">Data de validade:</label>
+                                <input id="nomeCliente" placeholder="" type="date" required>
                             </div>
+                            <div class="grupo-form">
+                                <label for="nomeCliente">Valor do lote:</label>
+                                <input id="valor" placeholder="R$0,00" type="text" required>
+                            </div>
+                            
 
                         </form>
 
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button id="cancelar"
+                                <button id="botaoFecharAdd"
                                     class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
                                 <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
                     </div>
                 </div>
-                
+
                 <!---->
 
                 <!--JANELA ALTERAR PEDIDO-->
@@ -242,78 +227,7 @@
                                 <label for="enderecoAlterar">Alterar endereço:</label>
                                 <input id="enderecoAlterar" placeholder="" type="text" disabled>
                             </div>
-                      
-                        </form>
 
-                        <footer class="container">
-                            <div class="row justify-content-evenly">
-                                <button id="cancelar"
-                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
-                            </div>
-                        </footer>
-                    </div>
-                </div>
-                
-                <!---->
-
-                <!--JANELA DE ADIÇÃO DE ITENS-->
-
-                <div id="janelaRegisPedido" class="modal">
-                    <div class="modalContainer">
-                        <header class="container-fluid">
-                            <span><i class="fa-solid fa-list-check"></i></span>
-                            <h2>Registrar novo pedido</h2>
-                        </header>
-
-                        <form class="container">
-
-                            <div class="row container mt-4 justify-content-between conteinerProdutos">
-                                <div class="mb-3 esquerda col-6">
-                                    <select id="itens" class="select select--modal">
-                                        <option value="" disabled selected>Itens</option>
-                                    </select>
-                                    <br>
-                                </div>
-
-                                <div class="item-list direita col-6 text-end" id="itemList">
-                                    
-                                </div>
-
-                            </div>
-                            
-                            <div class="container-textarea pt-3">
-                                <textarea id="observacao" placeholder="Obs: (ex: tirar a cebola)" class="col-11"></textarea>
-                            </div>
-
-                        </form>
-
-                        <footer class="container">
-                            <div class="row justify-content-evenly">
-                                <button class="col-4 botao botao--vermelho botao-cancelar">Voltar</button>
-                                <button class="col-4 botao botao--verde">Fechar</button>
-                            </div>
-                        </footer>
-                    </div>
-                </div>
-
-                <!---->
-
-                <!--JANELA FECHAR PEDIDO-->
-
-                <div id="fecharPedido" class="modal">
-                    <div class="modalContainer">
-
-                        <header class="container-fluid">
-                            <span><i class="fa-solid fa-plus"></i></span>
-                            <h2>Fechar Pedido</h2>
-                        </header>
-
-                        <form class="grid-form">
-                            <div class="grupo-form">
-                                <label for="formaPagamento">Forma de pagamento:</label>
-                                <input id="formaPagamento" placeholder="" type="text">
-                            </div>
                         </form>
 
                         <footer class="container">
@@ -329,12 +243,8 @@
         </div>
     </div>
 
+    <script src="lote.js"></script>
     <script src="../script.js"></script>
-    <script src="conexao-tabela-pedidos.js"></script>
-    <script src="adicionar-pedidos.js"></script>
-    <script src="pesquisa-pedidos.js"></script>
-    <script src="alterar-pedidos.js"></script>
-    <script src="fechar-pedidos.js"></script>
 </body>
 
 </html>

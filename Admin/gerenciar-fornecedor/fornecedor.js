@@ -12,23 +12,23 @@ let botaoFecharCadastro = document.getElementById("cancelarCadastro");
 let botaoFecharAltera = document.getElementById("cancelarAlteracao");
 
 // Quando o usuário clicar no botão, abre o modal
-botaoAbrirCadastro.onclick = function() {
+botaoAbrirCadastro.onclick = function () {
     modalCadastro.style.display = "flex";
     modalAltera.style.display = "none"
     info.style.display = "none";
 }
 
-botaoAbrirAltera.onclick = function() {
+botaoAbrirAltera.onclick = function () {
     modalAltera.style.display = "flex";
     modalCadastro.style.display = "none";
 }
 
 // Quando o usuário clicar no <span> (x), fecha o modal
-botaoFecharCadastro.onclick = function() {
+botaoFecharCadastro.onclick = function () {
     modalCadastro.style.display = "none";
     info.style.display = "flex";
 }
 
-botaoFecharAltera.onclick = function(){
+botaoFecharAltera.onclick = function () {
     modalAltera.style.display = "none";
 }

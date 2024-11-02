@@ -2,6 +2,7 @@
 var modalAddItens = document.getElementById("addProdutos");
 const obs = document.getElementById('observacao');
 let pedidoItens = []
+let idPedidoAlterar = null;
 
 modalAddItens.addEventListener("click", function(event) {
     if(event.target.textContent == 'Voltar'){
@@ -27,7 +28,7 @@ modalAddItens.addEventListener("click", function(event) {
 })
 
 
-function adicionaItensAoPedido(pedidoItens, pedido) {
+function adicionaItensAoPedido(pedidoItens, pedido) {    
     let produtos = [];
     const contagemProdutos = {};
     
@@ -45,28 +46,52 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
     produtos = Object.values(contagemProdutos);
     console.log(produtos);
     
-    produtos.forEach((produto) => {
-        pedido.orderDTO.orderProductDTOs.push(produto);
-    })
-    pedido.orderDTO.endDateTime = "2024-10-14T11:00";
-    pedido.orderDTO.exitDateTime = "2024-10-14T11:00";
-    pedido.orderDTO.paymentMethod = "a pagar";
-    pedidoItens = [];
+    if(idPedidoAlterar == null){
+        produtos.forEach((produto) => {
+            pedido.orderDTO.orderProductDTOs.push(produto);
+        })
+        pedido.orderDTO.endDateTime = "2024-10-14T11:00";
+        pedido.orderDTO.exitDateTime = "2024-10-14T11:00";
+        pedido.orderDTO.paymentMethod = "a pagar";
+        pedidoItens = [];
+        
+        fetch("http://localhost:8080/pedidos", {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type':'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify(pedido)
+        })
+        .then(response =>{
+            console.log(response)
+        })
+        .catch(erro => console.log(erro))
+    }
+    else{
+        const orderProductDTOs = [];
+        produtos.forEach(prod => {
+            orderProductDTOs.push(prod);
+        })
+        console.log(orderProductDTOs);
+        
+        fetch(`http://localhost:8080/pedidos/${idPedidoAlterar}/itens`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/json',
+                'Content-Type':'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify(orderProductDTOs)
+        })
+        .then(response =>{
+            console.log(response)
+        })
+        .catch(erro => console.log(erro))
 
-    /* fetch("http://localhost:8080/pedidos", {
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/json',
-            'Content-Type':'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify(pedido)
-    })
-    .then(response =>{
-        console.log(response)
-    })
-    .catch(erro => console.log(erro)) */
-    console.log(pedido);
+        idPedidoAlterar = null;
+    }
     
 }
 
@@ -76,7 +101,6 @@ function adicionaItem(item, alterar) {
         name: item,
         obs: ""
     }
-
     if(alterar == 0){
         produto.name = item;
         produto.obs = "";
@@ -106,7 +130,7 @@ function adicionaItem(item, alterar) {
     removerProduto.classList.add('fa-solid');
     removerProduto.classList.add('fa-x');
     removerProduto.classList.add('removerProduto');
-    nome.textContent = item;
+    nome.textContent = produto.name;
     nome.classList.add('nome')
     obs.classList.add('obs')
     
@@ -126,8 +150,7 @@ function checaVisibilidadeModal() {
         console.log('Modal está visível');
         
         if(pedidoAlterar){
-            pedidoAlterar.orderProductTableDTOs.forEach(produto => adicionaItem(produto, 1))
-            
+            console.log(pedidoAlterar);
         }
 
         fetch("http://localhost:8080/produtos", {

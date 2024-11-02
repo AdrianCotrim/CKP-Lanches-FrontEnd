@@ -1,6 +1,7 @@
 const token = localStorage.getItem('authToken');
 const entregasArray = [];
 const pedidos = document.getElementById("pedidos");
+let pedidoSelecionado = null;
 
 fetch("http://localhost:8080/pedidos", {
     headers: {
@@ -57,8 +58,10 @@ const valorTotal = document.getElementById("valorTotal");
 
 pedidos.addEventListener("click", (event) => {
     if(event.target.classList.contains("info-pedido")){
-        const pedido = event.target.parentNode;
-        const nome = pedido.querySelector(".info-pedido").firstChild.textContent;
+        pedidoSelecionado = event.target.parentNode;
+        console.log(pedidoSelecionado);
+        
+        const nome = pedidoSelecionado.querySelector(".info-pedido").firstChild.textContent;
         
         entregasArray.forEach(entrega => {
             if(entrega.customerName == nome){

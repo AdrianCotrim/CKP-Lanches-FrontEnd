@@ -1,7 +1,7 @@
 // Modal
 var modalAddItens = document.getElementById("addProdutos");
 const obs = document.getElementById('observacao');
-let pedidoItens = []
+var pedidoItens = []
 let idPedidoAlterar = null;
 
 modalAddItens.addEventListener("click", function(event) {
@@ -110,10 +110,8 @@ function adicionaItem(item, alterar) {
         produto.obs = item.observacao;
     }
     
-
     pedidoItens.push(produto)
     console.log(pedidoItens);
-    
 
     // Adiciona item a lista
     const itemList = document.getElementById('itemList');

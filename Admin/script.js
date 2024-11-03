@@ -15,11 +15,11 @@ function deleteToken() {
 
 
 window.addEventListener('load', () => {
-      const loadingScreen = document.getElementById('loading-screen');
-      const mainContent = document.getElementById('main-content');
-      
-      loadingScreen.style.display = 'none';
-      mainContent.style.display = 'block';
+  const loadingScreen = document.getElementById('loading-screen');
+  const mainContent = document.getElementById('main-content');
+
+  loadingScreen.style.display = 'none';
+  mainContent.style.display = 'block';
 });
 
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function getName() {
   const usuarioLabel = document.getElementById('usuario');
 
-  try{
+  try {
 
     const response = await fetch("http://localhost:8080/user/name", {
       method: 'GET',
@@ -49,7 +49,7 @@ async function getName() {
 
     usuarioLabel.textContent = data.username;
 
-  } catch(erro){
+  } catch (erro) {
     console.error(erro);
   }
 }

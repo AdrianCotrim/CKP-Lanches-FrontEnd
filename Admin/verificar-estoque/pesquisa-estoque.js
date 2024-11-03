@@ -1,6 +1,6 @@
-var estoque = document.getElementById('estoque')
-var pesquisa_nome = document.getElementById('pesquisa-nome')
-var pesquisa_numero = document.getElementById('pesquisa-numero')
+let estoque = document.getElementById('estoque')
+let pesquisa_nome = document.getElementById('pesquisa-nome')
+let pesquisa_numero = document.getElementById('pesquisa-numero')
 
 pesquisa_nome.addEventListener('input', (event) => {  
 

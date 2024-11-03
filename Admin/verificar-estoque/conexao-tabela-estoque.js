@@ -51,7 +51,7 @@ fetch("http://localhost:8080/insumos", {
             });
     
             // Adiciona o select à linha
-            var td = document.createElement('td');
+            let td = document.createElement('td');
             td.appendChild(select);
             tr.appendChild(td);
     

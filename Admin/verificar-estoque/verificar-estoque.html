@@ -113,7 +113,7 @@
 
                         <label class="me-2" for="search">Pesquisar:</label>
                         <input placeholder="Nome" class="me-2" name="text" id="pesquisa-nome" type="text">
-<!-- 
+                        <!-- 
                         <label class="me-2" for="search">Buscar:</label>
                         <input placeholder="Número" class="me-2" name="text" id="pesquisa-numero" type="number"> -->
 
@@ -124,7 +124,10 @@
                             <span class="me-2" id="listaCompras" onclick="imprimirTabela()"><i
                                     class="fa-solid fa-cart-plus"></i></span>
                             <span class="me-2"><i class="fa-solid fa-file-lines"></i></span>
-                            <button id="addInsumo" class="botao botao--vermelho"><i class="fas fa-plus"></i> Adicionar</button>
+                            <button id="addInsumo" class="botao botao--vermelho"><i class="fas fa-plus"></i>
+                                Adicionar</button>
+                            <button id="abrirMovimentacao" class="botao botao--vermelho">
+                                Retirar produto</button>
                         </div>
                     </div>
                 </div>
@@ -169,17 +172,17 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="qtdMinima">Quantidade mínima:</label>
-                                <input id="qtdMinima" placeholder="" type="number">
+                                <input id="qtdMinima" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="number">
                             </div>
                             <div class="grupo-form">
                                 <label for="qtdMaxima">Quantidade máxima:</label>
-                                <input id="qtdMaxima" placeholder="" type="number">
+                                <input id="qtdMaxima" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="number">
                             </div>
                             <div class="grupo-form">
                                 <label for="quantidade">Quantidade inicial:</label>
-                                <input id="quantidade" placeholder="" type="number">
+                                <input id="quantidade" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="number">
                             </div>
-                      
+
                         </form>
 
                         <footer class="container">
@@ -214,11 +217,13 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="qtdMinimaAlterar">Alterar quantidade mínima:</label>
-                                <input id="qtdMinimaAlterar" placeholder="" type="number">
+                                <input id="qtdMinimaAlterar" oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                    placeholder="" type="number">
                             </div>
                             <div class="grupo-form">
                                 <label for="qtdMaximaAlterar">Alterar quantidade máxima:</label>
-                                <input id="qtdMaximaAlterar" placeholder="" type="number">
+                                <input id="qtdMaximaAlterar" oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                    placeholder="" type="number">
                             </div>
                         </form>
 
@@ -226,6 +231,37 @@
                             <div class="row justify-content-evenly">
                                 <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
                                 <button class="col-4 botao botao--verde">Concluir</button>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+                <!--JANELA PARA MOVIMENTAÇÃO-->
+
+                <div id="movimentacao" class="modal">
+                    <div class="modalContainer">
+
+                        <header class="container-fluid">
+                            <span><i class="fas fa-sign-out-alt"></i></span>
+                            <h2>Retirar Insumo</h2>
+                        </header>
+
+                        <form class="grid-form">
+                            <input id="id" value="" type="hidden">
+                            <div class="grupo-form">
+                                <label for="nomeAlterar">ID insumo:</label>
+                                <input id="nomeAlterar" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="text">
+                            </div>
+                            <div class="grupo-form">
+                                <label for="descricaoAlterar">Quantidade:</label>
+                                <input id="descricaoAlterar" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="text">
+                            </div>
+                        </form>
+
+                        <footer class="container">
+                            <div class="row justify-content-evenly">
+                                <button id="cancelarMov" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button class="col-4 botao botao--verde">Retirar</button>
                             </div>
                         </footer>
                     </div>
@@ -296,7 +332,7 @@
         </div>
     </div>
 
-    <!--LISTA DE COMPRAS-->
+    <!--LISTA DE COMPRAS
 
     <table id="lista-de-compras">
         <thead>
@@ -309,9 +345,10 @@
         </thead>
         <tbody>
         </tbody>
-    </table>
+    </table>-->
 
     <script src="adicionar-insumo.js"></script>
+    <script src="movimentacao.js"></script>
     <script src="verificar-estoque.js"></script>
     <script src="../script.js"></script>
     <script src="conexao-tabela-estoque.js"></script>

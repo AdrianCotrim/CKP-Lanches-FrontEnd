@@ -15,6 +15,10 @@
     justify-content: space-between;
 }
 
+.pedido:hover {
+    cursor: pointers;
+}
+
 .valor {
     color: var(--verde);
 }

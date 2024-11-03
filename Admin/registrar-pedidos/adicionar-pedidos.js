@@ -3,7 +3,6 @@ var btnAdd = document.getElementById("registrarPedido");
 var modalInfoPedido = document.getElementById("infoPedido");
 var modalAddProd = document.getElementById("addProdutos");
 var modalFecharPedido = document.getElementById("fecharPedido");
-const listaPedidos = [];
 const pedido = {
     orderDTO: {
       orderStatus: "PREPARANDO",
@@ -19,13 +18,13 @@ const pedido = {
       address: "",
       complement: null,
       change: "",
-      fee: 0
+      fee: 0,
+      telefone: "(19) 91234-5678"
     }
 };
 
 
 async function adicionaPedido(pedido) {
-    listaPedidos.push(pedido);
     try {
         const response = await fetch("http://localhost:8080/pedidos", {
             headers: {
@@ -46,8 +45,6 @@ async function adicionaPedido(pedido) {
     } catch (erro) {
         console.log(erro);
     }
-    console.log(listaPedidos);
-    
 }
 
 // Exibe modal na tela
@@ -78,13 +75,13 @@ modalInfoPedido.addEventListener("click", function(event) {
     
 
     if(event.target.textContent == 'Concluir' && tipoPedido != ""){
-        pedido["orderDTO"]["customerName"] = nomeCliente;
-        pedido["orderDTO"]['exitMethod'] = tipoPedido;
+        pedido.orderDTO.customerName = nomeCliente;
+        pedido.orderDTO.exitMethod = tipoPedido;
         
         if(tipoPedido == "RETIRADA"){
-            pedido["deliveryDTO"] = null;
+            pedido.deliveryDTO = null;
             console.log(pedido);
-
+            
             // Reseta os valores do modal
             nomeCliente.value = "";
             tipoPedido.value = "";
@@ -93,18 +90,19 @@ modalInfoPedido.addEventListener("click", function(event) {
             troco.value = "";
             complemento.value = "";
             taxa.value = "";
-
-            //adicionaPedido(pedido);
+            
             modalInfoPedido.style.display = "none";
             modalAddProd.style.display = "flex";
         }
 
         if(tipoPedido == "ENTREGA"){
-            pedido["deliveryDTO"]["motoboy"] = motoboyNome;    
-            pedido["deliveryDTO"]["address"] = endereco;    
-            pedido["deliveryDTO"]["complement"] = complemento == "" ? null : complemento;   
-            pedido["deliveryDTO"]["change"] = troco;    
-            pedido["deliveryDTO"]["fee"] = taxa;
+            pedido.deliveryDTO.motoboy = motoboyNome;    
+            pedido.deliveryDTO.address = endereco;    
+            pedido.deliveryDTO.complement = complemento == "" ? null : complemento;   
+            pedido.deliveryDTO.change = troco;
+            const valor = taxa.replace(/[^\d,]/g, '');
+            const valorReal = parseFloat(valor.replace(',', '.'));   
+            pedido.deliveryDTO.fee = valorReal;
             console.log(pedido);
 
             // Reseta os valores do modal
@@ -133,82 +131,6 @@ modalInfoPedido.addEventListener("click", function(event) {
 
         modalInfoPedido.style.display = "none";     
     }
-})
-
-// modalAddItens
-let pedidoItens = []
-
-// Verifica o modal a cada 500ms
-const modalChecker = setInterval(checaVisibilidadeModal, 500);
-
-modalAddItens.addEventListener("click", function(event) {
-    if(event.target.textContent == 'Voltar'){
-        modalAddItens.style.display = "none"
-        adicionaItensAoPedido(pedidoItens, pedido);
-    }
-    if(event.target.textContent == 'Fechar'){
-        modalAddItens.style.display = "none"
-        modalFecharPedido.style.display = "flex"
-        adicionaItensAoPedido(pedidoItens, pedido);
-    }
-})
-
-// Adiciona o pedido
-document.getElementById('itens').addEventListener('change', function() {
-    const selectedItem = this.value;
-    if (selectedItem) {
-            adicionaItem(selectedItem);
-            this.value = ''; // Limpa a seleção
-        }
-});
-
-// Remove Produto do item
-modalAddItens.addEventListener("click", function(event){
-    
-    if(event.target.classList.contains("removerProduto")){
-        
-        const produto = event.target.parentElement.parentElement;
-        const nome = produto.querySelector('.nome').textContent;
-        
-        pedidoItens.forEach((item) => {
-            if(nome == item.name){
-                const index = pedido.indexOf(item);
-                produto.remove()
-                pedidoItens.splice(index, 1)
-                console.log(pedido);
-            };
-        });
-    };
-});
-
-let ultimoItemSelecionado
-let itemSelecionado
-// Seleciona item
-modalAddItens.addEventListener("click", function(event){
-    if(event.target.classList.contains("nome")){
-        // Desmarca último item clicado
-        if(ultimoItemSelecionado){
-            ultimoItemSelecionado.classList.remove("selecionado");
-        }
-        itemSelecionado = event.target.parentElement;
-        ultimoItemSelecionado = itemSelecionado;
-        itemSelecionado.classList.add("selecionado");
-
-        const nomeProduto = itemSelecionado.querySelector(".nome").textContent;
-        const item = pedido.find(item => item.name == nomeProduto);
-        obs.value = item.obs;
-        
-    }
-})
-
-// Observação
-obs.addEventListener('input', function() {
-    const valor = obs.value; 
-    const nomeProduto = itemSelecionado.querySelector(".nome").textContent;
-    const item = pedidoItens.find(item => item.name == nomeProduto);
-    
-
-    item.obs = valor;
 })
 
 //formatação monetária

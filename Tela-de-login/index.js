@@ -19,8 +19,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
             });
 
+            
+
             if (!response.ok) {
-                throw new Error("Login falhou")
+
+                const erro = await response.text();
+
+                console.log(erro);
+
+                if(response.status == 404) throw new Error("Usuário não cadastrado!")
+                
+                throw new Error(erro)
             }
 
             const data = await response.json();
@@ -39,14 +48,14 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (userRole === 'USER') {
                 window.location.href = "/Usuario/Tela inicial/inicio.html";
             } else {
-                let message = "Usuário ou Senha incorretos";
                 const mensagemLabel = document.getElementById("mensagem-erro");
-                mensagemLabel.textContent = message;
+                mensagemLabel.textContent = erro;
             }
         } catch (error) {
-                let message = "Usuário ou Senha incorretos";
                 const mensagemLabel = document.getElementById("mensagem-erro");
-                mensagemLabel.textContent = message;
+                const erro = error.toString().split("Error: ");
+                console.log(erro[1]);
+                mensagemLabel.textContent = erro[1];
         }
     }
 
@@ -90,4 +99,12 @@ document.addEventListener('DOMContentLoaded', function () {
     button.addEventListener('click', function() {
         logar();
     });
+});
+
+window.addEventListener('load', () => {
+    const loadingScreen = document.getElementById('loading-screen');
+    const mainContent = document.getElementById('main-content');
+    
+    loadingScreen.style.display = 'none';
+    mainContent.style.display = 'block';
 });

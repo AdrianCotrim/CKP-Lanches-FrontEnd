@@ -113,7 +113,7 @@
             </header>
 
             <main class="ps-5 pt-4 pe-5 row">
-                <section class="pedidos col-3">
+                <section id="pedidos" class="pedidos col-3">
                     <div class="pedido mt-3 me-2 ms-2 mb-1">
                         <div class="info-pedido">
                             <p>Éder Júnior</p>
@@ -128,16 +128,16 @@
                     <div class="info ps-2">
                         <div>
                             <h5>Cliente</h5>
-                            <p>Éder Júnior</p>
+                            <p id="cliente">Éder Júnior</p>
                             <h5>Endereço</h5>
-                            <p>R. José Estanislau Ambiel, 927, Jd. Morada do Sol</p>
+                            <p id="endereco">R. José Estanislau Ambiel, 927, Jd. Morada do Sol</p>
                         </div>
 
                         <div class="ms-5">
                             <h5>Complemento</h5>
-                            <p>Casa 4</p>
+                            <p id="complemento">Casa 4</p>
                             <h5>Telefone</h5>
-                            <p>(19) 91234-5678</p>
+                            <p id="telefone">(19) 91234-5678</p>
                         </div>
                     </div>
 
@@ -147,7 +147,7 @@
                     <div class="info ps-2 mt-3">
                         <div class="me-5">
                             <h5>Forma de pagamento</h5>
-                            <p class="label-valor">Pix</p>
+                            <p id="formaPagamento" class="label-valor">Pix</p>
                         </div>
 
                         <div class="ms-5">
@@ -162,7 +162,7 @@
                     <div class="ps-2 d-flex justify-content-between">
                             <button class="botao botao--vermelho" id="abrirConfirmarCancel">Cancelar</button>
                             <button class="botao botao--azul">Concluir</button>
-                            <button class="botao botao--verde">Finalizar</button>
+                            <button class="botao botao--verde" id="botaoFinalizar">Finalizar</button>
                     </div>
                 </section>
 
@@ -179,7 +179,7 @@
                         <footer class="container pt-5 rodape">
                             <div class="row justify-content-evenly">
                                 <button class="col-4 botao botao--vermelho" id="cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Confirmar</button>
+                                <button class="col-4 botao botao--verde" id="confirmar">Confirmar</button>
                             </div>
                         </footer>
                     </div>
@@ -189,6 +189,9 @@
     </div>
 
     <script src="entrega.js"></script>
+    <script src="conexao-tabela.js"></script>
+    <script src="finalizar-entrega.js"></script>
+    <script src="deletar-entrega.js"></script>
     <script src="../script.js"></script>
 </body>
 

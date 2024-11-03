@@ -127,7 +127,7 @@
                             <button id="addInsumo" class="botao botao--vermelho"><i class="fas fa-plus"></i>
                                 Adicionar</button>
                             <button id="abrirMovimentacao" class="botao botao--vermelho">
-                                Retirar produto</button>
+                                Retirar insumo</button>
                         </div>
                     </div>
                 </div>
@@ -205,6 +205,7 @@
                             <h2>Alterar Insumo</h2>
                         </header>
 
+                        
                         <form class="grid-form">
                             <input id="id" value="" type="hidden">
                             <div class="grupo-form">
@@ -227,6 +228,7 @@
                             </div>
                         </form>
 
+
                         <footer class="container">
                             <div class="row justify-content-evenly">
                                 <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
@@ -239,29 +241,31 @@
                 <!--JANELA PARA MOVIMENTAÇÃO-->
 
                 <div id="movimentacao" class="modal">
-                    <div class="modalContainer">
+                    <div class="modalContainer" id="modal-retirar">
 
                         <header class="container-fluid">
                             <span><i class="fas fa-sign-out-alt"></i></span>
                             <h2>Retirar Insumo</h2>
                         </header>
 
-                        <form class="grid-form">
+                        <form class="grid-form" id="retirar-insumo">
                             <input id="id" value="" type="hidden">
                             <div class="grupo-form">
-                                <label for="nomeAlterar">ID insumo:</label>
-                                <input id="nomeAlterar" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="text">
+                                <label for="id-retirar">ID insumo:</label>
+                                <input id="id-retirar" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="descricaoAlterar">Quantidade:</label>
-                                <input id="descricaoAlterar" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="text">
+                                <label for="quantidade-retirar">Quantidade:</label>
+                                <input id="quantidade-retirar" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="text">
                             </div>
                         </form>
+
+                        <div id="msgErro"></div>
 
                         <footer class="container">
                             <div class="row justify-content-evenly">
                                 <button id="cancelarMov" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Retirar</button>
+                                <button class="col-4 botao botao--verde" id="confirmar-retirar">Retirar</button>
                             </div>
                         </footer>
                     </div>
@@ -354,6 +358,7 @@
     <script src="conexao-tabela-estoque.js"></script>
     <script src="alterar-estoque.js"></script>
     <script src="pesquisa-estoque.js"></script>
+    <script src="retirar-insumo.js"></script>
 </body>
 
 </html>

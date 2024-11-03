@@ -7,17 +7,32 @@
     background-color: var(--cinza-claro);
     height: 45vh;
     border-radius: 2vh;
+    width: fit-content;
 }
 
 .card{
     border: none;
     background-color: var(--cinza-claro);
     height: 45vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+
+.card:hover{
+    cursor: pointer;
+    background-color: var(--cinza-bg);
+}
+
+.produto:hover{
+    cursor: pointer;
+    background-color: var(--cinza-bg);
 }
 
 .card img{
     border-radius: 1vh;
     height: 22vh;
+    max-height: 22vh;
+    width: 37vh;
 }
 
 .produto p{

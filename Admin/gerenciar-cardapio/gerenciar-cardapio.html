@@ -132,6 +132,16 @@
                 <!--PRODUTOS-->
 
                 <section class="row cardapio" id="cardapio">
+                    <!-- <div class="card col-3 m-3" id="abrirAlteraProd">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSU7lS-9pXVRVRzCu80X0ynHGF7C0AAXoTOQ&s"
+                            class="mt-3">
+                        <h2 class="mt-3">Lol</h2>
+                        <p class="mt-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed dolor
+                            recusandae ullam voluptatem expedita maiores cum atque odio magni sunt pariatur dicta
+                            obcaecati nemo dolore soluta adipisci assumenda aut ea dolores iste ad quam repellendus,
+                            cupiditate optio. Est, tempora quia?</p>
+                        <h3 class="align-items-right">R$00,00</h3>
+                    </div> -->
                 </section>
 
                 <!--JANELA PARA ADICIONAR PRODUTO-->
@@ -189,48 +199,56 @@
                     </div>
                 </div>
 
-                <!-- JANELA PARA ALTERAR ITEM -->
+                
+                <!--JANELA PARA ALTERAR PRODUTO-->
 
-                <div id="alterarInsumo" class="modal">
-                    <div class="modalContainer">
+                <div id="alterarProd" class="modal" style="display: none;">
+                    <div class="modalContainer modal--larger">
 
                         <header class="container-fluid">
-                            <span><i class="fas fa-edit"></i></span>
-                            <h2>Alterar Insumo</h2>
+                            <span><i class="fas fa-utensils"></i></span>
+                            <h2>Alterar produto</h2>
                         </header>
 
-                        <form class="grid-form">
-                            <input id="id" value="" type="hidden">
+                        <form class="grid-form" id="adicionar-produto">
                             <div class="grupo-form">
-                                <label for="nomeAlterar">Alterar nome:</label>
-                                <input id="nomeAlterar" value="" placeholder="Ex: Tomate" type="text">
+                                <label for="alteraNome">Nome do produto:</label>
+                                <input id="alteraNome" placeholder="Ex: X-Tudo" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="descricaoAlterar">Alterar descrição:</label>
-                                <input id="descricaoAlterar" placeholder="Ex: Para salada" type="text">
+                                <label for="alteraDesc">Descrição:</label>
+                                <input id="alteraDesc" placeholder="Pão, queijo, hambúrguer" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="qtdMinimaAlterar">Alterar quantidade mínima:</label>
-                                <input id="qtdMinimaAlterar" placeholder="" type="text">
+                                <label for="alteraValor">Valor:</label>
+                                <input id="alteraValor" placeholder="R$0,00" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="qtdMaximaAlterar">Alterar quantidade máxima:</label>
-                                <input id="qtdMaximaAlterar" placeholder="" type="text">
+                                <label for="alteraImg">Anexar imagem:</label>
+                                <input id="alteraImg" placeholder="" type="file" accept="image/jpeg, image/png">
                             </div>
                             <div class="grupo-form">
-                                <label for="quantidadeAlterar">Alterar quantidade:</label>
-                                <input id="quantidadeAlterar" placeholder="" type="text">
+                                <label for="">Tipo de produto:</label>
+                                <select id="alteraCateg" class="select select--modal">
+                                    <option value="LANCHES"  selected>Lanches</option>
+                                    <option value="BEBIDAS">Bebidas</option>
+                                </select>
                             </div>
+                            
                             <div class="grupo-form">
-                                <label for="loteAlterar">Alterar lote:</label>
-                                <input id="loteAlterar" placeholder="" type="text">
+                                <div id="alteraInsumos" class="insumos">
+                                </div>
+                                <div class="listaInsumosContainer direita">
+                                    <ul id="listaAlteraInsumos">
+                                        
+                                    </ul>
+                                </div>
                             </div>
                         </form>
-
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Concluir</button>
+                                <button id="cancelarAltera" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="confirmarAlteraProduto" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
                     </div>
@@ -240,6 +258,7 @@
     </div>
 
     <script src="adicionar-produto.js"></script>
+    <script src="alterar-produto.js"></script>
     <script src="../script.js"></script>
     <script src="conexao-cardapio.js"></script>
 </body>

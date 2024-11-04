@@ -69,7 +69,7 @@ pedidos.addEventListener("click", (event) => {
                 endereco.textContent = entrega.deliveryDTO.address;
                 complemento.textContent = entrega.deliveryDTO.complement ? entrega.deliveryDTO.complement : "*"
                 //telefone.textContent = entrega.deliveryDTO.telefone;
-                valorPedido.textContent = "R$"+entrega.totalValue;
+                valorPedido.textContent = "R$"+entrega.subValue;
                 valorTaxa.textContent = "R$"+entrega.deliveryDTO.fee;
                 valorTotal.textContent = "R$"+entrega.totalValue;
                 

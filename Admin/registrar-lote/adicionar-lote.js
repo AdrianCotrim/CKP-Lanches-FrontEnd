@@ -1,16 +1,33 @@
 var modalAddLote = document.getElementById("addLote");
-
 var btnAbrirAdd = document.getElementById("botaoAddLote");
 let btnFecharAdd = document.getElementById("botaoFecharAdd");
 
 btnAbrirAdd.addEventListener("click", function () {
     modalAddLote.style.display = "flex"
+    
+    // Select insumos
+    fetch("http://localhost:8080/insumos", {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(dados => {
+        const insumos = document.getElementById("insumos");
+        dados.forEach(insumo => {
+            let insumoOption = document.createElement("option");
+            insumoOption.textContent = insumo.name;
+            insumos.appendChild(insumoOption);
+            
+        })
+    })
+    .catch(erro => console.log(erro))
 });
 
 btnFecharAdd.addEventListener("click", function () {
     modalAddLote.style.display = "none"
 })
-
 
 //formatação monetária
 

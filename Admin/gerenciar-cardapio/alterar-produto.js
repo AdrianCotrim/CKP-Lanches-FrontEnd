@@ -186,6 +186,8 @@ modalAlterarProduto.addEventListener("click", (event) => {
         // document.getElementById("categoriaAlterar").value = "";
         // produtoElement = null;
         // produtoObject = null;
+        insumos_alterar = [];
+        listaInsumos_alterar.innerHTML = "";
 
         modalAlterarProduto.style.display = "none";
     }

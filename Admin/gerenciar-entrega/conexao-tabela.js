@@ -1,6 +1,7 @@
 const token = localStorage.getItem('authToken');
 const entregasArray = [];
 const pedidos = document.getElementById("pedidos");
+pedidos.style.cursor = "pointer"
 let pedidoSelecionado = null;
 
 fetch("http://localhost:8080/pedidos", {
@@ -75,6 +76,7 @@ pedidos.addEventListener("click", (event) => {
         entregasArray.forEach(entrega => {
             if(entrega.customerName == nome){
                 id.value = entrega.deliveryDTO.id;
+                console.log(id.value);
                 cliente.textContent = entrega.customerName;
                 endereco.textContent = entrega.deliveryDTO.address;
                 complemento.textContent = entrega.deliveryDTO.complement ? entrega.deliveryDTO.complement : "*"

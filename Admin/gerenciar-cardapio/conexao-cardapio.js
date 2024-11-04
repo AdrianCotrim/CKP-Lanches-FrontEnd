@@ -62,6 +62,7 @@ fetch("http://localhost:8080/produtos", {
             var div = document.createElement("div");
             div.classList.add("card")
             div.innerHTML = `<img src="" class="mt-3"> 
+            <p style="display: none">${element.product_id}</p>
             <h2 class="mt-3 produtoNome">${element.product_name}</h2>
             <p class="mt-1">${element.description}</p>
             <h3 class="align-items-right">R$${formatNumber(element.product_value.toFixed(2))}</h3>`

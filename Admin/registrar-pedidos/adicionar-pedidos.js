@@ -118,26 +118,51 @@ modalInfoPedido.addEventListener("click", function(event) {
             modalAddProd.style.display = "flex";
         }
     }
-    
-    if(event.target.textContent == 'Cancelar'){
-        // Reseta os valores do modal
-        nomeCliente.value = "";
-        tipoPedido.value = "";
-        endereco.value = "";
-        motoboyNome.value = "";
-        troco.value = "";
-        complemento.value = "";
-        taxa.value = "";
 
-        modalInfoPedido.style.display = "none";     
-    }
+    var btnCancelar = document.getElementById("cancelar");
+    var inputNomeCliente = document.getElementById("nomeCliente")
+
+    btnCancelar.addEventListener("click", function(){
+        inputNomeCliente.value = "";
+        modalInfoPedido.style.display = "none";
+    })
+    
+    // if(event.target.textContent == 'Cancelar'){
+    //     // Reseta os valores do modal
+    //     nomeCliente.value = "";
+    //     tipoPedido.value = "";
+    //     endereco.value = "";
+    //     motoboyNome.value = "";
+    //     troco.value = "";
+    //     complemento.value = "";
+    //     taxa.value = "";
+
+    //     modalInfoPedido.style.display = "none";     
+    // }
 })
 
 //formatação monetária
 
-const input = document.getElementById('taxa');
+const inputTaxa = document.getElementById('taxa');
+const inputAlteraTaxa = document.getElementById('taxaAlterar');
 
-input.addEventListener('input', function () {
+inputTaxa.addEventListener('input', function () {
+    // Remove tudo que não é dígito
+    let value = this.value.replace(/\D/g, '');
+
+    // Formata o valor como moeda
+    if (value) {
+        value = (parseInt(value) / 100).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+        this.value = value;
+    } else {
+        this.value = '';
+    }
+});
+
+inputAlteraTaxa.addEventListener('input', function () {
     // Remove tudo que não é dígito
     let value = this.value.replace(/\D/g, '');
 

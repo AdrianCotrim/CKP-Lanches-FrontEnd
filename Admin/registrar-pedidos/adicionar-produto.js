@@ -17,7 +17,6 @@ modalAddItens.addEventListener("click", function(event) {
     if(event.target.textContent == 'Fechar'){
         if(pedidoItens.length > 0){
             modalAddItens.style.display = "none"
-            modalFecharPedido.style.display = "flex"
             adicionaItensAoPedido(pedidoItens, pedido);
         }
         else {

@@ -6,8 +6,8 @@ pesquisa_nome.addEventListener('input', (event) => {
 
     const linhas = estoque.querySelectorAll('.linha');
     linhas.forEach(linha => {
-        let nome_insumo = linha.querySelector("td:nth-child(1)").textContent.toLowerCase();
-        if(!nome_insumo.includes(pesquisa_nome.value.toLowerCase())) linha.style.display = "none";
+        let nome_produto = linha.querySelector("h2").textContent.toLowerCase();
+        if(!nome_produto.includes(pesquisa_nome.value.toLowerCase())) linha.style.display = "none";
         else linha.style.display = "table-row";
     });
   }   

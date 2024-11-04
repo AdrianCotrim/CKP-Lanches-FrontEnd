@@ -132,16 +132,6 @@
                 <!--PRODUTOS-->
 
                 <section class="row cardapio" id="cardapio">
-                    <!-- <div class="card col-3 m-3" id="abrirAlteraProd">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSU7lS-9pXVRVRzCu80X0ynHGF7C0AAXoTOQ&s"
-                            class="mt-3">
-                        <h2 class="mt-3">Lol</h2>
-                        <p class="mt-1">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed dolor
-                            recusandae ullam voluptatem expedita maiores cum atque odio magni sunt pariatur dicta
-                            obcaecati nemo dolore soluta adipisci assumenda aut ea dolores iste ad quam repellendus,
-                            cupiditate optio. Est, tempora quia?</p>
-                        <h3 class="align-items-right">R$00,00</h3>
-                    </div> -->
                 </section>
 
                 <!--JANELA PARA ADICIONAR PRODUTO-->
@@ -199,10 +189,8 @@
                     </div>
                 </div>
 
-                
-                <!--JANELA PARA ALTERAR PRODUTO-->
-
-                <div id="alterarProd" class="modal" style="display: none;">
+                <!-- JANELA PARA ALTERAR ITEM -->
+                <div id="alterarInsumo" class="modal" style="display: none;">
                     <div class="modalContainer modal--larger">
 
                         <header class="container-fluid">
@@ -211,35 +199,36 @@
                         </header>
 
                         <form class="grid-form" id="adicionar-produto">
+                            <input id="id-produto-alterar" type="hidden">
                             <div class="grupo-form">
-                                <label for="alteraNome">Nome do produto:</label>
-                                <input id="alteraNome" placeholder="Ex: X-Tudo" type="text">
+                                <label for="nomeAlterar">Alterar nome do produto:</label>
+                                <input id="nomeAlterar" placeholder="Ex: X-Tudo" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="alteraDesc">Descrição:</label>
-                                <input id="alteraDesc" placeholder="Pão, queijo, hambúrguer" type="text">
+                                <label for="descricaoAlterar">Alterar descrição:</label>
+                                <input id="descricaoAlterar" placeholder="Pão, queijo, hambúrguer" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="alteraValor">Valor:</label>
-                                <input id="alteraValor" placeholder="R$0,00" type="text">
+                                <label for="valorAlterar">Alterar valor:</label>
+                                <input id="valorAlterar" placeholder="R$0,00" type="text">
                             </div>
                             <div class="grupo-form">
-                                <label for="alteraImg">Anexar imagem:</label>
-                                <input id="alteraImg" placeholder="" type="file" accept="image/jpeg, image/png">
+                                <label for="imagemAlterar">Alterar imagem:</label>
+                                <input id="imagemAlterar" placeholder="" type="file" accept="image/jpeg, image/png">
                             </div>
                             <div class="grupo-form">
-                                <label for="">Tipo de produto:</label>
-                                <select id="alteraCateg" class="select select--modal">
+                                <label for="categoriaAlterar">Alterar tipo de produto:</label>
+                                <select id="categoriaAlterar" class="select select--modal">
                                     <option value="LANCHES"  selected>Lanches</option>
                                     <option value="BEBIDAS">Bebidas</option>
                                 </select>
                             </div>
                             
                             <div class="grupo-form">
-                                <div id="alteraInsumos" class="insumos">
+                                <div id="insumos-alterar" class="insumos">
                                 </div>
                                 <div class="listaInsumosContainer direita">
-                                    <ul id="listaAlteraInsumos">
+                                    <ul id="listaInsumos-alterar">
                                         
                                     </ul>
                                 </div>
@@ -247,20 +236,22 @@
                         </form>
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button id="cancelarAltera" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button id="confirmarAlteraProduto" class="col-4 botao botao--verde">Concluir</button>
+                                <button id="cancelar" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="confirmarAddProduto" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
                     </div>
                 </div>
+
             </main>
         </div>
     </div>
 
-    <script src="adicionar-produto.js"></script>
-    <script src="alterar-produto.js"></script>
     <script src="../script.js"></script>
     <script src="conexao-cardapio.js"></script>
+    <script src="adicionar-produto.js"></script>
+    <script src="alterar-produto.js"></script>
+    <script src="pesquisa-cardapio.js"></script>
 </body>
 
 </html>

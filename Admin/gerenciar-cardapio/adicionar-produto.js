@@ -174,19 +174,19 @@ selectInsumos.addEventListener("change", function () {
 const adicionarInsumo = document.querySelectorAll('.novoInsumo');
 const listaAdicionados = document.getElementById('listaInsumos');
 
-addButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const produto = button.parentElement.querySelector('span').textContent;
+// addButtons.forEach(button => {
+//     button.addEventListener('click', () => {
+//         const produto = button.parentElement.querySelector('span').textContent;
 
-        // Cria um novo elemento para a lista de adicionados
-        const novoProduto = document.createElement('div');
-        novoProduto.textContent = produto;
-        novoProduto.classList.add('adicionado');
+//         // Cria um novo elemento para a lista de adicionados
+//         const novoProduto = document.createElement('div');
+//         novoProduto.textContent = produto;
+//         novoProduto.classList.add('adicionado');
 
-        // Adiciona o novo produto à lista de adicionados
-        listaAdicionados.appendChild(novoProduto);
-    });
-});
+//         // Adiciona o novo produto à lista de adicionados
+//         listaAdicionados.appendChild(novoProduto);
+//     });
+// });
 
 
 

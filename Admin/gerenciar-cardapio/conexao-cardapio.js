@@ -1,6 +1,6 @@
 const token = localStorage.getItem('authToken');
 
-document.addEventListener('DOMContentLoaded', () => {
+/* document.addEventListener('DOMContentLoaded', () => {
     getName()
   })
   
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch(erro){
       console.error(erro);
     }
-  }
+  } */
 
 // Traz produtos do banco
 fetch("http://localhost:8080/produtos", {
@@ -62,7 +62,7 @@ fetch("http://localhost:8080/produtos", {
             var div = document.createElement("div");
             div.classList.add("card")
             div.innerHTML = `<img src="" class="mt-3"> 
-            <h2 class="mt-3">${element.product_name}</h2>
+            <h2 class="mt-3 produtoNome">${element.product_name}</h2>
             <p class="mt-1">${element.description}</p>
             <h3 class="align-items-right">R$${formatNumber(element.product_value.toFixed(2))}</h3>`
             const imgDocument = div.querySelector('img');
@@ -76,9 +76,6 @@ fetch("http://localhost:8080/produtos", {
     });  
 })
 .catch(erro => console.error('Erro ao carregar os produtos:', erro));
-
-
-
 
 function formatNumber(value) {
     // Criar um NumberFormat para o locale brasileiro

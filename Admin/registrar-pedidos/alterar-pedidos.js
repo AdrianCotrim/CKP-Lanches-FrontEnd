@@ -104,7 +104,7 @@ pedidos.addEventListener('click', (event) => {
       if(pedido.orderId == pedidoId){
         pedido.orderProductTableDTOs.forEach(item => {
           for(let i = 0; i < item.quantity; i++){
-            adicionaItem(item, 1)
+            adicionaItem(item, 1);
           }
         })
       }

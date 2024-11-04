@@ -4,7 +4,6 @@ var modalAltFunc = document.getElementById('editarFunc')
 
 // Exibe modal na tela
 funcionarios.addEventListener('click', (event) => {  
-      if(event.target.nodeName == 'TD'){
         modalAltFunc.style.display = 'flex'
 
         var funcionario = event.target.parentNode

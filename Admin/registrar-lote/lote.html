@@ -146,7 +146,7 @@
                     </table>
                 </div>
 
-                <!--JANELA REGISTRO DE INSUMO-->
+                <!--JANELA REGISTRO DE LOTE-->
 
                 <div id="addLote" class="modal">
                     <div class="modalContainer">
@@ -158,31 +158,27 @@
 
                         <form class="grid-form mt-4">
                             <div class="grupo-form">
-                                <label for="nomeCliente">Insumo:</label>
+                                <label for="insumos">Insumo:</label>
                                 <select id="insumos" class="select">
                                     <option>Insumo</option>
                                 </select>
                             </div>
                             <div class="grupo-form">
-                                <label for="nomeCliente">Fornecedor:</label>
-                                <select class="select">
+                                <label for="fornecedores">Fornecedor:</label>
+                                <select id="fornecedores" class="select">
                                     <option>Fornecedor</option>
                                 </select>
                             </div>
                             <div class="grupo-form">
-                                <label for="nomeCliente">Nome do cliente:</label>
-                                <input id="nomeCliente" placeholder="" type="text" required>
+                                <label for="quantidade">Quantidade:</label>
+                                <input id="quantidade" placeholder="" type="number" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
                             </div>
                             <div class="grupo-form">
-                                <label for="nomeCliente">Quantidade:</label>
-                                <input id="nomeCliente" placeholder="" type="number" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+                                <label for="dataValidade">Data de validade:</label>
+                                <input id="dataValidade" placeholder="" type="date" required>
                             </div>
                             <div class="grupo-form">
-                                <label for="nomeCliente">Data de validade:</label>
-                                <input id="nomeCliente" placeholder="" type="date" required>
-                            </div>
-                            <div class="grupo-form">
-                                <label for="nomeCliente">Valor do lote:</label>
+                                <label for="valor">Valor do lote:</label>
                                 <input id="valor" placeholder="R$0,00" type="text" required>
                             </div>
                             
@@ -201,40 +197,48 @@
 
                 <!---->
 
-                <!--JANELA ALTERAR PEDIDO-->
+                <!--JANELA ALTERAR LOTE-->
 
-                <div id="alterarInfoPedido" class="modal">
+                <div style="display: none;" id="alterarInfoPedido" class="modal">
                     <div class="modalContainer">
 
                         <header class="container-fluid">
                             <span><i class="fa-solid fa-plus"></i></span>
-                            <h2>Alterar Pedido</h2>
+                            <h2>Alterar Lote</h2>
                         </header>
 
                         <form class="grid-form">
                             <div class="grupo-form">
-                                <label for="nomeAlterar">Alterar nome do cliente:</label>
-                                <input id="nomeAlterar" placeholder="" type="text">
-                            </div>
-                            <div class="grupo-form">
-                                <label for="tipoPedidoAlterar">Alterar tipo do pedido:</label>
-                                <select class="col-2 select" name="tipoPedidoAlterar" id="tipoPedidoAlterar">
-                                    <option value="entrega">entrega</option>
-                                    <option value="retirada">retirada</option>
+                                <label for="insumosAlterar">Insumo:</label>
+                                <select id="insumosAlterar" class="select">
+                                    <option>Insumo</option>
                                 </select>
                             </div>
                             <div class="grupo-form">
-                                <label for="enderecoAlterar">Alterar endereço:</label>
-                                <input id="enderecoAlterar" placeholder="" type="text" disabled>
+                                <label for="fornecedoresAlterar">Fornecedor:</label>
+                                <select id="fornecedoresAlterar" class="select">
+                                    <option>Fornecedor</option>
+                                </select>
+                            </div>
+                            <div class="grupo-form">
+                                <label for="quantidadeAlterar">Quantidade:</label>
+                                <input id="quantidadeAlterar" placeholder="" type="number" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required>
+                            </div>
+                            <div class="grupo-form">
+                                <label for="dataValidadeAlterar">Data de validade:</label>
+                                <input id="dataValidadeAlterar" placeholder="" type="date" required>
+                            </div>
+                            <div class="grupo-form">
+                                <label for="valorAlterar">Valor do lote:</label>
+                                <input id="valorAlterar" placeholder="R$0,00" type="text" required>
                             </div>
 
                         </form>
 
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button id="cancelar"
-                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button id="confirmar" class="col-4 botao botao--verde">Concluir</button>
+                                <button id="cancelar" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="concluir" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>
                     </div>
@@ -244,8 +248,10 @@
     </div>
 
     <script src="../script.js"></script>
-    <script src="adicionar-lote.js"></script>
     <script src="conexao-lote.js"></script>
+    <script src="adicionar-lote.js"></script>
+    <script src="alterar-lote.js"></script>
+    <script src="pesquisar-lote.js"></script>
 </body>
 
 </html>

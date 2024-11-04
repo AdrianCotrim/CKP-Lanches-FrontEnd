@@ -6,6 +6,7 @@ var btnAdd = document.getElementById("addFunc")
 // Exibe modal na tela
 btnAdd.addEventListener("click", function() {
     modalAddFunc.style.display = "flex"
+    document.getElementById('erro-confirmaSenha').style.display = "none";
 })
 
 modalAddFunc.addEventListener('click', (event) => {
@@ -13,7 +14,6 @@ modalAddFunc.addEventListener('click', (event) => {
     
     // Adiciona o usuário ao banco
     if(event.target.textContent == 'Concluir'){
-        modalAddFunc.style.display = 'none'
 
         const usuario = {
             username: document.getElementById("nome").value,
@@ -24,6 +24,17 @@ modalAddFunc.addEventListener('click', (event) => {
             statusConta: "ATIVO"
         }
         console.log(usuario)
+
+        let userPassword = document.getElementById("senha").value;
+        let userPasswordConfirm = document.getElementById("senhaConfirma").value;
+        if(userPassword != userPasswordConfirm) {
+            const mensagemErroConfirmarSenha = "A senhas devem ser iguais!";
+            document.getElementById('erro-confirmaSenha').style.display = "block";
+            document.getElementById('erro-confirmaSenha').textContent = mensagemErroConfirmarSenha;
+            throw new Error(mensagemErroConfirmarSenha);
+        }
+
+        modalAddFunc.style.display = 'none'
         
         fetch("http://localhost:8080/userManager", {
             headers: {

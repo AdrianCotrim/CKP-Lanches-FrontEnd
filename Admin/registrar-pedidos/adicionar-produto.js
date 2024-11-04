@@ -2,7 +2,6 @@
 var modalAddItens = document.getElementById("addProdutos");
 const obs = document.getElementById('observacao');
 var pedidoItens = []
-let idPedidoAlterar = null;
 
 modalAddItens.addEventListener("click", function(event) {
     if(event.target.textContent == 'Voltar'){
@@ -77,7 +76,6 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
             orderProductDTOs.push(prod);
         })
         console.log(orderProductDTOs);
-        idPedidoAlterar = null;
         pedidoItens = [];
 
         fetch(`http://localhost:8080/pedidos/${idPedidoAlterar}/itens`, {

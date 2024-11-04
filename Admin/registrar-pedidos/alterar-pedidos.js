@@ -3,6 +3,7 @@ const modalAlterarInfoPedido = document.getElementById("alterarInfoPedido");
 var modalAddProdutos = document.getElementById("addProdutos");
 var tipoPedidoSelect = document.getElementById("tipoPedidoAlterar");
 var modalFecharPedido = document.getElementById("fecharPedido");
+var idPedidoAlterar = null;
 var pedidoAlterar = null
 let novoPedidoAlterar = {
   id: 30,

@@ -19,6 +19,12 @@ botaoAbrirCadastro.onclick = function () {
 }
 
 botaoAbrirAltera.onclick = function () {
+    document.getElementById('nome-fantasia-input-alterar').value = nome.textContent;
+    document.getElementById('cnpjAltera').value = cnpj.textContent;
+    document.getElementById('razao-social-input-alterar').value = social.textContent;
+    document.getElementById('endereco-input-alterar').value = endereco.textContent;
+    document.getElementById('email-input-alterar').value = email.textContent;
+    document.getElementById('telefoneAltera').value = telefone.textContent;
     modalAltera.style.display = "flex";
     modalCadastro.style.display = "none";
 }
@@ -26,7 +32,7 @@ botaoAbrirAltera.onclick = function () {
 // Quando o usuário clicar no <span> (x), fecha o modal
 botaoFecharCadastro.onclick = function () {
     modalCadastro.style.display = "none";
-    info.style.display = "flex";
+    //info.style.display = "flex";
 }
 
 botaoFecharAltera.onclick = function () {

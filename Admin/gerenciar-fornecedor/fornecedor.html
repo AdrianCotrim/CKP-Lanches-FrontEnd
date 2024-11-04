@@ -114,7 +114,14 @@
 
             <main class="ps-5 pt-4 pe-5 row">
                 <section class="fornecedores col-3">
-                    <div class="campo">
+                    <div class="campo" id="lista-fornecedor">
+                        <!-- <div class="fornecedor mt-3 me-2 ms-2 mb-1" >
+                            <div class="info-fornecedor">
+                                <p>Empresa de Exemplo Lol</p>
+                                <label class="pe-5">(19) 91234-4321</label>
+                                <label class="valor">ID: 06</label>
+                            </div>
+                        </div>
                         <div class="fornecedor mt-3 me-2 ms-2 mb-1">
                             <div class="info-fornecedor">
                                 <p>Empresa de Exemplo Lol</p>
@@ -122,6 +129,21 @@
                                 <label class="valor">ID: 06</label>
                             </div>
                         </div>
+                        <div class="fornecedor mt-3 me-2 ms-2 mb-1">
+                            <div class="info-fornecedor">
+                                <p>Empresa de Exemplo Lol</p>
+                                <label class="pe-5">(19) 91234-4321</label>
+                                <label class="valor">ID: 06</label>
+                            </div>
+                        </div>
+                        <div class="fornecedor mt-3 me-2 ms-2 mb-1">
+                            <div class="info-fornecedor">
+                                <p>Empresa de Exemplo Lol</p>
+                                <label class="pe-5">(19) 91234-4321</label>
+                                <label class="valor">ID: 06</label>
+                            </div>
+                        </div> -->
+
                     </div>
                     <div class="cadastrar d-flex justify-content-evenly">
                         <button class="cadastrar botao botao--vermelho" id="abrirCadastrarFornecedor">Cadastrar</button>
@@ -129,22 +151,21 @@
                 </section>
 
                 <section class="col-9 d-flex justify-content-between">
-                    <div class="info ps-2" id="infoFornecedor">
+                    <div class="info ps-2" id="infoFornecedor" style="display: none;">
                         <div>
+                            <p style="display: none;" id="id_fornecedor"></p>
                             <h5>Nome Fantasia</h5>
-                            <p>Empresa de Exemplo Lol</p>
+                            <p id="nome-fantasia">Empresa de Exemplo Lol</p>
                             <h5>CNPJ</h5>
-                            <p>12.345.678/0001-90</p>
+                            <p id="cnpj">12.345.678/0001-90</p>
                             <h5>Razão Social</h5>
-                            <p>Comércio de Produtos Tecnológicos Ltda.</p>
+                            <p id="razao-social">Comércio de Produtos Tecnológicos Ltda.</p>
                             <h5>Endereço</h5>
-                            <p>R. José Estanislau Ambiel, 927, Jd. Morada do Sol</p>
-                            <h5>Complemento</h5>
-                            <p>-</p>
+                            <p id="endereco">R. José Estanislau Ambiel, 927, Jd. Morada do Sol</p>
                             <h5>Email</h5>
-                            <p>empresa.exemplo@gmail.com</p>
+                            <p id="email">empresa.exemplo@gmail.com</p>
                             <h5>Telefone</h5>
-                            <p>(19) 91234-4321</p>
+                            <p id="telefone">(19) 91234-4321</p>
                             <button id="abrirAlterarFornecedor" class="col-4 botao botao--verde">Alterar</button>
                         </div>
                     </div>
@@ -155,7 +176,7 @@
                         <div class="container">
                             <div class="form-group">
                                 <h5>Nome Fantasia:</h5>
-                                <input type="text" class="input">
+                                <input type="text" class="input" id="nome-fantasia-input-alterar">
                             </div>
                             <div class="form-group">
                                 <h5>CNPJ:</h5>
@@ -163,19 +184,15 @@
                             </div>
                             <div class="form-group">
                                 <h5>Razão Social:</h5>
-                                <input type="text" class="input">
+                                <input type="text" class="input" id="razao-social-input-alterar">
                             </div>
                             <div class="form-group">
                                 <h5>Endereço:</h5>
-                                <input type="text" class="input">
-                            </div>
-                            <div class="form-group">
-                                <h5>Complemento:</h5>
-                                <input type="text" class="input">
+                                <input type="text" class="input" id="endereco-input-alterar">
                             </div>
                             <div class="form-group">
                                 <h5>Email:</h5>
-                                <input type="text" class="input" placeholder="exemplo@mail.com">
+                                <input type="text" class="input" placeholder="exemplo@mail.com" id="email-input-alterar">
                             </div>
                             <div class="form-group">
                                 <h5>Telefone:</h5>
@@ -183,7 +200,7 @@
                             </div>
                             <div class="row justify-content-evenly footer">
                                 <button id="cancelarAlteracao" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Alterar</button>
+                                <button class="col-4 botao botao--verde" id="button-alterar">Alterar</button>
                             </div>
                         </div>
                     </div>
@@ -194,7 +211,7 @@
                         <div class="container">
                             <div class="form-group">
                                 <h5>Nome Fantasia:</h5>
-                                <input type="text" class="input">
+                                <input type="text" class="input" id="nome-fantasia-input">
                             </div>
                             <div class="form-group">
                                 <h5>CNPJ:</h5>
@@ -202,19 +219,15 @@
                             </div>
                             <div class="form-group">
                                 <h5>Razão Social:</h5>
-                                <input type="text" class="input">
+                                <input type="text" class="input" id="razao-social-input">
                             </div>
                             <div class="form-group">
                                 <h5>Endereço:</h5>
-                                <input type="text" class="input">
-                            </div>
-                            <div class="form-group">
-                                <h5>Complemento:</h5>
-                                <input type="text" class="input">
+                                <input type="text" class="input" id="endereco-input">
                             </div>
                             <div class="form-group">
                                 <h5>Email:</h5>
-                                <input type="text" class="input" placeholder="exemplo@mail.com">
+                                <input type="text" class="input" placeholder="exemplo@mail.com" id="email-input">
                             </div>
                             <div class="form-group">
                                 <h5>Telefone:</h5>
@@ -222,7 +235,7 @@
                             </div>
                             <div class="row justify-content-evenly footer">
                                 <button id="cancelarCadastro" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Cadastrar</button>
+                                <button class="col-4 botao botao--verde" id="cadastrar-button">Cadastrar</button>
                             </div>
                         </div>
                     </div>
@@ -235,6 +248,9 @@
     <script src="formatacao.js"></script>
     <script src="fornecedor.js"></script>
     <script src="../script.js"></script>
+    <script src="conexao-fornecedor.js"></script>
+    <script src="cadastrar-fornecedores.js"></script>
+    <script src="alterar-fornecedores.js"></script>
 </body>
 
 </html>

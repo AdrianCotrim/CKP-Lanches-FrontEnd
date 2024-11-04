@@ -97,17 +97,7 @@
     margin-top: 4vh;
 }
 
-.modalContainer {
-    background-color: #E9E9E9;
-    margin: 15% auto !important;
-    width: 50vh !important;
-    border-radius: 2vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: fit-content;
-    overflow: hidden;
-}
+
 
 .rodape button{
     width: 20vh !important;

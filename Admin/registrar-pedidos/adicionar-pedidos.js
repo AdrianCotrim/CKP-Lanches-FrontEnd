@@ -5,21 +5,21 @@ var modalAddProd = document.getElementById("addProdutos");
 var modalFecharPedido = document.getElementById("fecharPedido");
 const pedido = {
     orderDTO: {
-      orderStatus: "PREPARANDO",
-      customerName: "",
-      exitMethod: "",
-      paymentMethod: "",
-      endDateTime: "",
-      exitDateTime: "",
-      orderProductDTOs: []
+        orderStatus: "PREPARANDO",
+        customerName: "",
+        exitMethod: "",
+        paymentMethod: "",
+        endDateTime: "",
+        exitDateTime: "",
+        orderProductDTOs: []
     },
     deliveryDTO: {
-      motoboy: "",
-      address: "",
-      complement: null,
-      change: "",
-      fee: 0,
-      telefone: "(19) 91234-5678"
+        motoboy: "",
+        address: "",
+        complement: null,
+        change: "",
+        fee: 0,
+        telefone: "(19) 91234-5678"
     }
 };
 
@@ -41,29 +41,30 @@ async function adicionaPedido(pedido) {
         }
 
         const data = await response.json();
-        console.log(data); 
+        console.log(data);
     } catch (erro) {
         console.log(erro);
     }
 }
 
+
 // Exibe modal na tela
-btnAdd.addEventListener("click", function() {
+btnAdd.addEventListener("click", function () {
     modalInfoPedido.style.display = "flex"
 });
 
 // Habilita campos de "entrega"
 const entrega = document.getElementById('entrega');
 const tipoPedido = document.getElementById('tipoPedido');
-tipoPedido.addEventListener('change', function() {
+tipoPedido.addEventListener('change', function () {
     if (this.value === 'ENTREGA') {
         entrega.style.display = ""
     } else {
         entrega.style.display = "none"
-    } 
+    }
 });
 
-modalInfoPedido.addEventListener("click", function(event) {
+modalInfoPedido.addEventListener("click", function (event) {
     // Coleta dados do modal
     var nomeCliente = document.getElementById("nomeCliente").value;
     var tipoPedido = document.getElementById("tipoPedido").value;
@@ -72,16 +73,16 @@ modalInfoPedido.addEventListener("click", function(event) {
     var complemento = document.getElementById("complemento").value;
     var troco = document.getElementById("troco").value;
     var taxa = document.getElementById("taxa").value;
-    
 
-    if(event.target.textContent == 'Concluir' && tipoPedido != ""){
+
+    if (event.target.textContent == 'Concluir' && tipoPedido != "") {
         pedido.orderDTO.customerName = nomeCliente;
         pedido.orderDTO.exitMethod = tipoPedido;
-        
-        if(tipoPedido == "RETIRADA"){
+
+        if (tipoPedido == "RETIRADA") {
             pedido.deliveryDTO = null;
             console.log(pedido);
-            
+
             // Reseta os valores do modal
             nomeCliente.value = "";
             tipoPedido.value = "";
@@ -90,18 +91,18 @@ modalInfoPedido.addEventListener("click", function(event) {
             troco.value = "";
             complemento.value = "";
             taxa.value = "";
-            
+
             modalInfoPedido.style.display = "none";
             modalAddProd.style.display = "flex";
         }
 
-        if(tipoPedido == "ENTREGA"){
-            pedido.deliveryDTO.motoboy = motoboyNome;    
-            pedido.deliveryDTO.address = endereco;    
-            pedido.deliveryDTO.complement = complemento == "" ? null : complemento;   
+        if (tipoPedido == "ENTREGA") {
+            pedido.deliveryDTO.motoboy = motoboyNome;
+            pedido.deliveryDTO.address = endereco;
+            pedido.deliveryDTO.complement = complemento == "" ? null : complemento;
             pedido.deliveryDTO.change = troco;
             const valor = taxa.replace(/[^\d,]/g, '');
-            const valorReal = parseFloat(valor.replace(',', '.'));   
+            const valorReal = parseFloat(valor.replace(',', '.'));
             pedido.deliveryDTO.fee = valorReal;
             console.log(pedido);
 
@@ -113,13 +114,17 @@ modalInfoPedido.addEventListener("click", function(event) {
             troco.value = "";
             complemento.value = "";
             taxa.value = "";
-            
+
             modalInfoPedido.style.display = "none";
             modalAddProd.style.display = "flex";
         }
     }
-    
-    if(event.target.textContent == 'Cancelar'){
+
+    var btnCancelar = document.getElementById("cancelar");
+    var inputNomeCliente = document.getElementById("nomeCliente")
+
+    btnCancelar.addEventListener("click", function () {
+        inputNomeCliente.value = "";
         // Reseta os valores do modal
         nomeCliente.value = "";
         tipoPedido.value = "";
@@ -128,16 +133,32 @@ modalInfoPedido.addEventListener("click", function(event) {
         troco.value = "";
         complemento.value = "";
         taxa.value = "";
-
-        modalInfoPedido.style.display = "none";     
-    }
+        modalInfoPedido.style.display = "none";
+    })
 })
 
 //formatação monetária
 
-const input = document.getElementById('taxa');
+const inputTaxa = document.getElementById('taxa');
+const inputAlteraTaxa = document.getElementById('taxaAlterar');
 
-input.addEventListener('input', function () {
+inputTaxa.addEventListener('input', function () {
+    // Remove tudo que não é dígito
+    let value = this.value.replace(/\D/g, '');
+
+    // Formata o valor como moeda
+    if (value) {
+        value = (parseInt(value) / 100).toLocaleString('pt-BR', {
+            style: 'currency',
+            currency: 'BRL'
+        });
+        this.value = value;
+    } else {
+        this.value = '';
+    }
+});
+
+inputAlteraTaxa.addEventListener('input', function () {
     // Remove tudo que não é dígito
     let value = this.value.replace(/\D/g, '');
 

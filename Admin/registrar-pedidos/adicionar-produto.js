@@ -2,22 +2,22 @@
 var modalAddItens = document.getElementById("addProdutos");
 const obs = document.getElementById('observacao');
 var pedidoItens = []
-let idPedidoAlterar = null;
 
 modalAddItens.addEventListener("click", function(event) {
     if(event.target.textContent == 'Voltar'){
         if(pedidoItens.length > 0){
             modalAddItens.style.display = "none"
-            adicionaItensAoPedido(pedidoItens, pedido);
+            pedidoItens = [];
+            document.getElementById('itemList').innerHTML = "";
+            
         }
         else {
             document.getElementById("mensagemErro").style.display = "block"
         }
     }
-    if(event.target.textContent == 'Fechar'){
+    if(event.target.textContent == 'Concluir'){
         if(pedidoItens.length > 0){
             modalAddItens.style.display = "none"
-            modalFecharPedido.style.display = "flex"
             adicionaItensAoPedido(pedidoItens, pedido);
         }
         else {
@@ -65,6 +65,7 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
             body: JSON.stringify(pedido)
         })
         .then(response =>{
+            window.location.reload();
             console.log(response)
         })
         .catch(erro => console.log(erro))
@@ -75,7 +76,8 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
             orderProductDTOs.push(prod);
         })
         console.log(orderProductDTOs);
-        
+        pedidoItens = [];
+
         fetch(`http://localhost:8080/pedidos/${idPedidoAlterar}/itens`, {
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -89,10 +91,7 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
             console.log(response)
         })
         .catch(erro => console.log(erro))
-
-        idPedidoAlterar = null;
     }
-    
 }
 
 // Adiciona produtos a comanda
@@ -207,6 +206,7 @@ function checaVisibilidadeModal() {
       // Opcional: Para parar de monitorar após o modal ser exibido
       clearInterval(modalChecker);
     }
+    
 }
 // Verifica o modal a cada 500ms
 const modalChecker = setInterval(checaVisibilidadeModal, 500);

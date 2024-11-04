@@ -1,13 +1,13 @@
-const botaoFinalizar = document.getElementById("botaoFinalizar");
+const botaoPronto = document.getElementById("botao-pronto");
 
-botaoFinalizar.addEventListener("click", async function(){
+botaoPronto.addEventListener("click", async function(){
     const statusPedido = pedidoSelecionado.children[1];
-    statusPedido.style.backgroundColor = "var(--verde)";
+    statusPedido.style.backgroundColor = "var(--azul)";
 
     const id = document.getElementById('id-entrega').value;
 
     try{
-        const response = await fetch(`http://localhost:8080/pedidos/${id}/orderstatus/finalizado`, {
+        const response = await fetch(`http://localhost:8080/pedidos/${id}/orderstatus/pronto`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

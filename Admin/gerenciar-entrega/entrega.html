@@ -114,18 +114,19 @@
 
             <main class="ps-5 pt-4 pe-5 row">
                 <section id="pedidos" class="pedidos col-3">
-                    <div class="pedido mt-3 me-2 ms-2 mb-1">
+                    <!-- <div class="pedido mt-3 me-2 ms-2 mb-1">
                         <div class="info-pedido">
                             <p>Éder Júnior</p>
                             <label class="pe-5">Nº 26</label>
                             <label class="valor">R$70,00</label>
                         </div>
                         <div class="situacao-pedido" id="statusPedido"></div>
-                    </div>
+                    </div> -->
                 </section>
                 
-                <section class="col-9">
-                    <div class="info ps-2">
+                <section class="col-9" id="info-entrega" style="display: none;">
+                    <div class="info ps-2" >
+                        <input id="id-entrega" type="hidden"></input>
                         <div>
                             <h5>Cliente</h5>
                             <p id="cliente">Éder Júnior</p>
@@ -136,8 +137,6 @@
                         <div class="ms-5">
                             <h5>Complemento</h5>
                             <p id="complemento">Casa 4</p>
-                            <h5>Telefone</h5>
-                            <p id="telefone">(19) 91234-5678</p>
                         </div>
                     </div>
 
@@ -161,7 +160,7 @@
                     </div>
                     <div class="ps-2 d-flex justify-content-between">
                             <button class="botao botao--vermelho" id="abrirConfirmarCancel">Cancelar</button>
-                            <button class="botao botao--azul">Concluir</button>
+                            <button class="botao botao--azul" id="botao-pronto">Concluir</button>
                             <button class="botao botao--verde" id="botaoFinalizar">Finalizar</button>
                     </div>
                 </section>
@@ -193,6 +192,7 @@
     <script src="finalizar-entrega.js"></script>
     <script src="deletar-entrega.js"></script>
     <script src="../script.js"></script>
+    <script src="pronto-entrega.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,7 @@
 const token = localStorage.getItem('authToken');
 const entregasArray = [];
 const pedidos = document.getElementById("pedidos");
+pedidos.style.cursor = "pointer"
 let pedidoSelecionado = null;
 
 fetch("http://localhost:8080/pedidos", {
@@ -35,6 +36,14 @@ function buscaEntregas(pedido){
     valor.classList.add("valor");
     situacaoPedido.classList.add("situacao-pedido");
 
+    if(pedido.orderStatus == 'FINALIZADO'){
+        situacaoPedido.style.backgroundColor = "var(--verde)";
+    } else if(pedido.orderStatus == 'PRONTO'){
+        situacaoPedido.style.backgroundColor = "var(--azul)";
+    } else{
+        situacaoPedido.style.backgroundColor = "var(--vermelho)";
+    }
+
     nomeCliente.textContent = pedido.customerName;
     numero.textContent = "Nº "+pedido.orderId;
     valor.textContent = "R$"+pedido.totalValue;
@@ -48,16 +57,17 @@ function buscaEntregas(pedido){
     pedidos.appendChild(entregaDiv);
 }
 /////////
+const id = document.getElementById('id-entrega');
 const cliente = document.getElementById("cliente");
 const endereco = document.getElementById("endereco");
 const complemento = document.getElementById("complemento");
-const telefone = document.getElementById("cliente");
 const valorPedido = document.getElementById("valorPedido");
 const valorTaxa = document.getElementById("valorTaxa");
 const valorTotal = document.getElementById("valorTotal");
 
 pedidos.addEventListener("click", (event) => {
     if(event.target.classList.contains("info-pedido")){
+        document.getElementById('info-entrega').style.display = 'block';
         pedidoSelecionado = event.target.parentNode;
         console.log(pedidoSelecionado);
         
@@ -65,11 +75,12 @@ pedidos.addEventListener("click", (event) => {
         
         entregasArray.forEach(entrega => {
             if(entrega.customerName == nome){
+                id.value = entrega.deliveryDTO.id;
+                console.log(id.value);
                 cliente.textContent = entrega.customerName;
                 endereco.textContent = entrega.deliveryDTO.address;
                 complemento.textContent = entrega.deliveryDTO.complement ? entrega.deliveryDTO.complement : "*"
-                //telefone.textContent = entrega.deliveryDTO.telefone;
-                valorPedido.textContent = "R$"+entrega.totalValue;
+                valorPedido.textContent = "R$"+entrega.subValue;
                 valorTaxa.textContent = "R$"+entrega.deliveryDTO.fee;
                 valorTotal.textContent = "R$"+entrega.totalValue;
                 

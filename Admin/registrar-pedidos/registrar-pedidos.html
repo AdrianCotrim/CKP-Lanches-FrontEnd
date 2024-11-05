@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="grupo-form">
                                     <label for="taxa">Taxa:</label>
-                                    <input id="taxa" placeholder="R$0,00" type="text">
+                                    <input id="taxa" oninput="formatCurrency(this)" placeholder="R$0,00" type="text">
                                 </div>
                             </div>
 
@@ -220,7 +220,7 @@
 
                 <!--JANELA ALTERAR PEDIDO-->
 
-                <div id="alterarInfoPedido" class="modal">
+                <div id="alterarInfoPedido" style="display: flex;" class="modal">
                     <div class="modalContainer modal-alterar" id="telaAlterarInfoPedido">
 
                         <header class="container-fluid">
@@ -296,7 +296,7 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="taxaAlterar">Alterar taxa:</label>
-                                <input id="taxaAlterar" placeholder="R$0,00" type="text">
+                                <input id="taxaAlterar" oninput="formatCurrency(this)" placeholder="R$0,00" type="text">
                             </div>
                         </form>
 

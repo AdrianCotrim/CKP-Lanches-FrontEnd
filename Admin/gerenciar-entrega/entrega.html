@@ -125,7 +125,7 @@
                     </div>
                     </div>
                     <div class="cadastrar d-flex justify-content-evenly">
-                        <button class="cadastrar botao botao--vermelho" id="abrirCadastrarFornecedor">Alterar</button>
+                        <button class="cadastrar botao botao--vermelho" id="abrirAlterarEndereco">Alterar</button>
                     </div>
                 </section>
 
@@ -172,14 +172,12 @@
                 </section>
 
 
-                <div id="alterarInfoPedido" style="display: flex;" class="modal">
-                         
-                    <!-- JANELA PARA ADICIONAR ENTREGA -->
+                <div id="alterarInfoEntrega" class="modal">
 
                     <div class="modalContainer" id="entregaAlterar">
                         <header class="container-fluid">
-                            <span><i class="fa-solid fa-plus"></i></span>
-                            <h2>Alterar Pedido</h2>
+                            <span><i class="fa-solid fa-edit"></i></span>
+                            <h2>Alterar endereço</h2>
                         </header>
 
                         <form class="grid-form">
@@ -204,7 +202,7 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="taxaAlterar">Alterar taxa:</label>
-                                <input id="taxaAlterar" placeholder="R$0,00" type="text">
+                                <input id="taxaAlterar" oninput="formatCurrency(this)" placeholder="R$0,00" type="text">
                             </div>
                         </form>
 

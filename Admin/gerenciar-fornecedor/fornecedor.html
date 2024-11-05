@@ -146,7 +146,7 @@
 
                     </div>
                     <div class="alterar d-flex justify-content-evenly">
-                        <button class="cadastrar botao botao--vermelho">Cadastrar</button>
+                        <button id="abrirCadastrarFornecedor" class="cadastrar botao botao--vermelho">Cadastrar</button>
                     </div>
                 </section>
 
@@ -180,7 +180,7 @@
                             </div>
                             <div class="form-group">
                                 <h5>CNPJ:</h5>
-                                <input type="text" id="cnpjAltera" class="input" placeholder="00.000.000/0000-00">
+                                <input type="text" oninput="formatCNPJ(this)" id="cnpjAltera" class="input" placeholder="00.000.000/0000-00">
                             </div>
                             <div class="form-group">
                                 <h5>Razão Social:</h5>
@@ -196,7 +196,7 @@
                             </div>
                             <div class="form-group">
                                 <h5>Telefone:</h5>
-                                <input type="text" id="telefoneAltera" class="input" placeholder="(00) 00000-0000">
+                                <input type="text" oninput="formatTelefone(this)" id="telefoneAltera" class="input" placeholder="(00) 00000-0000">
                             </div>
                             <div class="row justify-content-evenly footer">
                                 <button id="cancelarAlteracao" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
@@ -215,7 +215,7 @@
                             </div>
                             <div class="form-group">
                                 <h5>CNPJ:</h5>
-                                <input type="text" id="cnpjCadastro" class="input" placeholder="00.000.000/0000-00">
+                                <input type="text" oninput="formatCNPJ(this)" id="cnpjCadastro" class="input" placeholder="00.000.000/0000-00">
                             </div>
                             <div class="form-group">
                                 <h5>Razão Social:</h5>
@@ -231,7 +231,7 @@
                             </div>
                             <div class="form-group">
                                 <h5>Telefone:</h5>
-                                <input type="text" id="telefoneCadastro" class="input" placeholder="(00) 00000-0000">
+                                <input type="text" oninput="formatTelefone(this)" id="telefoneCadastro" class="input" placeholder="(00) 00000-0000">
                             </div>
                             <div class="row justify-content-evenly footer">
                                 <button id="cancelarCadastro" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>

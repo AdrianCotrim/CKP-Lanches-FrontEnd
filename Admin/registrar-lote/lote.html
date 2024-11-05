@@ -179,7 +179,7 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="valor">Valor do lote:</label>
-                                <input id="valor" placeholder="R$0,00" type="text" required>
+                                <input id="valor" oninput="formatCurrency(this)" placeholder="R$0,00" type="text" required>
                             </div>
                             
 
@@ -230,7 +230,7 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="valorAlterar">Valor do lote:</label>
-                                <input id="valorAlterar" placeholder="R$0,00" type="text" required>
+                                <input id="valorAlterar" oninput="formatCurrency(this)" placeholder="R$0,00" type="text" required>
                             </div>
 
                         </form>

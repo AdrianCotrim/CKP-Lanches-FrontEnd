@@ -156,7 +156,7 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="valor">Valor:</label>
-                                <input id="valor" placeholder="R$0,00" type="text">
+                                <input id="valor" oninput="formatCurrency(this)" placeholder="R$0,00" type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="imagem">Anexar imagem:</label>
@@ -211,7 +211,7 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="valorAlterar">Alterar valor:</label>
-                                <input id="valorAlterar" placeholder="R$0,00" type="text">
+                                <input id="valorAlterar" oninput="formatCurrency(this)" placeholder="R$0,00" type="text">
                             </div>
                             <div class="grupo-form">
                                 <label for="imagemAlterar">Alterar imagem:</label>

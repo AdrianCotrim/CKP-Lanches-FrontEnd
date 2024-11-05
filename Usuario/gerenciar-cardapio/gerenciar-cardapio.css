@@ -1,0 +1,81 @@
+.cardapio{
+    overflow-y: auto;
+    height: 60vh;
+}
+
+.card{
+    border: none;
+    background-color: var(--cinza-claro);
+    height: 45vh;
+    padding-left: 2vh;
+    padding-right: 2vh;
+    border-radius: 2vh;
+}
+
+.card:hover{
+    cursor: pointer;
+    background-color: var(--cinza-bg);
+}
+
+.produto:hover{
+    cursor: pointer;
+    background-color: var(--cinza-bg);
+}
+
+.card img{
+    border-radius: 1vh;
+    height: 22vh;
+    max-height: 22vh;
+    width: 100%;
+}
+
+.card p{
+    height: 10vh;
+    overflow-y: auto;
+    color: var(--cinza-texto);
+}
+
+
+#listaInsumos li{
+    display: inline-flex;
+    background-color: #F1363A;
+    color: white;
+    padding: 0.2vh 0.8vh;
+    margin-bottom: 1vh;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 25px;
+}
+
+#listaInsumos i{
+    margin-left: 0.5vh;
+    font-size: 1.4vh;
+}
+
+.insumos{
+    height: 10vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 21vh;
+}
+
+.insumos i{
+    color: var(--verde);
+    margin-left: 0.5vh;
+}
+
+.direita {
+    border-left: 0.15rem solid var(--cinza-bg);
+    height: 10vh;
+    max-height: 10vh;
+    overflow-y: auto;
+    font-weight: 500;
+    color: var(--cinza-texto);
+    width: 40vh;
+    max-width: 40vh;
+    overflow-x: hidden;
+}
+
+.modal--larger{
+    width: 80vh !important;
+}

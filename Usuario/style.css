@@ -30,6 +30,81 @@
     height: 10vh;
 }
 
+
+/*LOADING*/
+
+/* Estilos para a tela de loading */
+#loading-screen {
+    position: fixed;
+    /* Fixa o overlay em relação à tela */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    /* Fundo preto semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Faz com que a tela de loading fique sobre os outros conteúdos */
+}
+
+.loader {
+    width: 35vh;
+    height: 18vh;
+    border-radius: 2vh;
+    background: var(--branco);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 3vh;
+    box-shadow: 0.2vh 0.2vh 1vh -0.5vh;
+    color: var(--cinza-texto);
+    font-weight: 500;
+    font-size: 2vh;
+    z-index: 9999;
+}
+
+.loading {
+    width: 50%;
+    height: 1vh;
+    background: var(--cinza-bg);
+    border-radius: 1vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 1vh;
+    background: var(--vermelho-principal);
+    border-radius: 1vh;
+    z-index: 1;
+    animation: loading 0.6s alternate infinite;
+}
+
+.loading label {
+    font-size: 1.8vh;
+    animation: bit 0.6s alternate infinite;
+}
+
+/* Animação de carregamento */
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
 /*MENU DE NAVEGAÇÃO LATERAL*/
 
 .menu {
@@ -72,6 +147,32 @@ ul a:hover {
     background-color: var(--branco-bg);
 }
 
+.select {
+    border-radius: 0.9vh;
+    background-color: var(--cinza-bg);
+    color: var(--cinza-texto);
+    height: 4vh;
+    width: 22vh;
+}
+
+.select--modal {
+    width: 22vh;
+    margin-bottom: 1rem;
+}
+
+.pesquisa label {
+    align-content: center;
+    font-size: 2vh;
+}
+
+.pesquisa {
+    align-items: center;
+}
+
+.botao {
+    align-self: center;
+}
+
 /*MODAL*/
 
 .modal {
@@ -83,20 +184,22 @@ ul a:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(26, 26, 26, 0.5);
+    overflow: hidden;
 }
 
 .modalContainer {
     background-color: #E9E9E9;
-    margin: 11% auto;
+    margin: 7% auto;
     width: 60vh;
     border-radius: 2vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: fit-content;
+    overflow: hidden;
 }
 
-.modalContainer header{
+.modalContainer header {
     background-color: var(--vermelho-principal);
     border-top-left-radius: 2vh;
     border-top-right-radius: 2vh;
@@ -106,42 +209,70 @@ ul a:hover {
     padding: 2vh 5vh;
 }
 
-.modalContainer span{
+.modalContainer header span {
     width: 5vh;
     height: 8vh;
     margin-right: 2vh;
     font-size: 5vh;
 }
 
-.modalContainer form{
+.modalContainer form {
     padding: 2vh;
 }
 
-.modalContainer footer{
+.modalContainer footer {
     padding: 3vh;
 }
 
-.label-input{
+.label-input {
     padding: 2vh;
 }
 
-.label-input label{
+
+.grid-form {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 3vh;
+    align-items: center;
+    font-weight: 500;
+    max-height: 50vh;
+    overflow-y: auto;
+    overflow: hidden;
+}
+
+.grupo-form {
+    display: contents;
+}
+
+.grupo-form label {
+    text-align: left;
+}
+
+.grupo-form select {
+    width: 15vh;
+}
+
+.label-input label {
     font-weight: 500;
     color: var(--cinza-texto);
     font-size: larger;
 }
 
-input:focus{
+input:focus {
     outline: none;
 }
 
-input{
+input {
     background-color: var(--cinza-bg);
     border-radius: 1vh;
     height: 4vh;
     border: none;
     color: var(--cinza-texto);
     padding: 1vh;
+}
+
+.label-input select {
+    height: 4vh;
 }
 
 /*FORMATAÇÃO DE TABELA*/
@@ -176,8 +307,11 @@ input{
     top: 0;
 }
 
-.table select{
+.table-hover {
     cursor: pointer;
+}
+
+.table select{
     height: 4vh;
     padding: 1vh;
 }
@@ -223,7 +357,7 @@ select {
     border: none;
 }
 
-.botao--login{
+.botao--login {
     background-color: var(--amarelo);
     color: var(--cinza-texto);
     font-weight: 600;
@@ -257,19 +391,23 @@ select {
     transition: 500ms;
 }
 
-.botao--vermelho::before{
+.botao--vermelho::before {
     background-color: var(--vermelho-principal);
 }
 
-.botao--verde::before{
+.botao--verde::before {
     background-color: var(--verde-escuro);
 }
 
-.botao--login::before{
+.botao--azul{
+    background-color: var(--azul);
+}
+
+.botao--login::before {
     background-color: var(--amarelo-escuro);
 }
 
-.botao--login:hover{
+.botao--login:hover {
     color: var(--cinza-texto);
 }
 
@@ -341,4 +479,22 @@ select {
 
 .fa-user {
     color: var(--vermelho-secundario);
+}
+
+.modal-confirmar {
+    background-color: #E9E9E9;
+    margin: 15% auto !important;
+    width: 50vh !important;
+    border-radius: 2vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+    overflow: hidden;
+}
+
+.botao--vazio{
+    border: solid 0.3vh var(--vermelho-secundario) !important;
+    background-color: "none" !important;
+    color: var(--vermelho-secundario) !important;
 }

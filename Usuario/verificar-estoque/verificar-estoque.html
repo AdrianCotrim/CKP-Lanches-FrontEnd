@@ -34,21 +34,17 @@
         document.addEventListener('DOMContentLoaded', async function iniciar() {
             try {
                 // Faz a solicitação de login
-                const response = await fetch("http://localhost:8080/user/name", {
+                const response = await fetch("http://localhost:8080/user/role", {
                     headers: {
                         'Accept': 'application/json',
                         'Authorization': `Bearer ${localStorage.getItem("authToken")}`
                     },
                 });
 
-                // Verifica se a resposta foi bem-sucedida
-                if (!response.ok) {
-                    window.location.href = "/Tela-de-login/index.html"
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                else {
+                const data = await response.json();
+                    console.log('Admin')
                     document.body.classList.add('visible');
-                }
+                
             }
             catch (erro) {
                 console.error('Erro:', erro);
@@ -76,19 +72,24 @@
         <div class="col-0 col-sm-2 menu">
             <nav>
                 <ul class="list-unstyled display-4">
-                    <li><a href="/Usuario/tela inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
+                    <li><a href="/Usuario/Tela inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
                             inicial</a></li>
-                    <li><a href="/Usuario/registrar pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
+                    <li><a href="/Usuario/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
                             Registrar pedidos</a></li>
+                    <li><a href="/Usuario/gerenciar-entrega/entrega.html"><i class="fas fa-motorcycle pe-2"></i>
+                            Entrega</a></li>
                     <li><a href="/Usuario/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
+                    <li><a href="/Usuario/gerenciar-cardapio/gerenciar-cardapio.html"><i
+                                class="fas fa-utensils pe-2"></i>
+                            Gerenciar cardápio</a></li>
                 </ul>
             </nav>
         </div>
 
         <div class="col-12 col-sm-10 conteudo">
             <header class="pt-5 ps-5 pe-5 cabecalho justify-content-between align-items-center">
-                <h1>Verificar estoque</h1>
+                <h1><i class="fas fa-search me-3"></i>Verificar estoque</h1>
                 <hr class="linha">
             </header>
 
@@ -145,19 +146,19 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="qtdMinima">Quantidade mínima:</label>
-                                <input id="qtdMinima" placeholder="" type="number">
+                                <input id="qtdMinima" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="number">
                             </div>
                             <div class="grupo-form">
                                 <label for="qtdMaxima">Quantidade máxima:</label>
-                                <input id="qtdMaxima" placeholder="" type="number">
+                                <input id="qtdMaxima" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="number">
                             </div>
                             <div class="grupo-form">
                                 <label for="quantidade">Quantidade inicial:</label>
-                                <input id="quantidade" placeholder="" type="number">
+                                <input id="quantidade" oninput="this.value = this.value.replace(/[^0-9]/g, '');" type="number">
                             </div>
 
                         </form>
-
+                        
                         <footer class="container">
                             <div class="row justify-content-evenly">
                                 <button id="cancelar"
@@ -167,91 +168,16 @@
                         </footer>
                     </div>
                 </div>
+
                 
-                <!--JANELA PARA FILTRAR HISTORICO DE MOVIMENTAÇÃO-->
-
-                <div id="filtrarMovimentacao" class="modal">
-                    <div class="modalContainer">
-
-                        <header class="container-fluid">
-                            <span><i class="fa-solid fa-file-alt"></i></span>
-                            <h2>Gerar relatório de movimentação</h2>
-                        </header>
-
-                        <form class="gerar-relatorio">
-                            <div>
-                                <p>Produto:</p>
-                                <div class="input-radio-group">
-                                    <input class="radio" type="radio" name="produto">
-                                    <label for="Todos">Todos</label>
-                                </div>
-                                <div class="input-radio-group">
-                                    <input type="radio" name="produto">
-                                    <input type="text" placeholder="Ex: Tomate">
-                                </div>
-                            </div>
-
-                            <div>
-                                <p class="pt-4">Data:</p>
-                                <div class="input-radio-group">
-                                    <input class="radio" type="radio" name="produto">
-                                    <label for="Todos">Todos</label>
-                                </div>
-                                <div class="input-radio-group">
-                                    <input type="radio" name="produto">
-                                    <input type="date">
-                                </div>
-                            </div>
-
-                            <div>
-                                <p class="pt-4">Usuário:</p>
-                                <div class="input-radio-group">
-                                    <input class="radio" type="radio" name="produto">
-                                    <label for="Todos">Todos</label>
-                                </div>
-                                <div class="input-radio-group">
-                                    <input type="radio" name="produto">
-                                    <input type="text" placeholder="Usuário">
-                                </div>
-                            </div>
-                            <div class="grupo-form">
-                                <label for="lote">Alterar lote:</label>
-                                <input id="loteAlterar" placeholder="" type="text">
-                            </div>
-                        </form>
-
-                        <footer class="container">
-                            <div class="row justify-content-evenly">
-                                <button class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
-                                <button class="col-4 botao botao--verde">Concluir</button>
-                            </div>
-                        </footer>
-                    </div>
-                </div>
             </main>
         </div>
     </div>
 
-    <!--LISTA DE COMPRAS-->
-
-    <table id="lista-de-compras">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Qtde. Mín.</th>
-                <th>Qtde.</th>
-                <th>Desc.</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
+   
     <script src="verificar-estoque.js"></script>
     <script src="../script.js"></script>
     <script src="conexao-tabela-estoque.js"></script>
-    <script src="alterar-estoque.js"></script>
-    <script src="adicionar-insumo.js"></script>
     <script src="pesquisa-estoque.js"></script>
 </body>
 

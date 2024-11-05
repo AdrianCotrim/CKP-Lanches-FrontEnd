@@ -28,12 +28,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-
-
 // Gerar PDF - Lista de compras
 function imprimirTabela() {
     // Cria uma nova janela para impressão
     const janelaImpressao = window.open('', '', 'height=1000,width=1000');
+    console.log(janelaImpressao)
 
     let trs = document.querySelectorAll('tbody tr');
 

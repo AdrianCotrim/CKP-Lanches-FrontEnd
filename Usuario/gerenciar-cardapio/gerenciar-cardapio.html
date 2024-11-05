@@ -49,15 +49,9 @@
 
                 const data = await response.json();
 
-                if(data.role != 'ADMIN'){
-                    window.location.href = "/Tela-de-login/index.html"
-                    throw new Error(`Você não tem permissão!`);
-                }
+                console.log('Admin')
+                document.body.classList.add('visible');
 
-                else {
-                    console.log('Admin')
-                    document.body.classList.add('visible');
-                }
             }
             catch (erro) {
                 console.error('Erro:', erro);
@@ -85,24 +79,17 @@
         <div class="col-0 col-sm-2 menu">
             <nav>
                 <ul class="list-unstyled display-4">
-                    <li><a href="/Admin/tela-inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
+                    <li><a href="/Usuario/Tela inicial/inicio.html"><i class="fas fa-home pe-2"></i> Página
                             inicial</a></li>
-                    <li><a href="/Admin/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-2"></i>
+                    <li><a href="/Usuario/registrar-pedidos/registrar-pedidos.html"><i class="fas fa-plus pe-3"></i>
                             Registrar pedidos</a></li>
-                    <li><a href="/Admin/gerenciar-entrega/entrega.html"><i class="fas fa-motorcycle pe-2"></i>
+                    <li><a href="/Usuario/gerenciar-entrega/entrega.html"><i class="fas fa-motorcycle pe-2"></i>
                             Entrega</a></li>
-                    <li><a href="/Admin/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-2"></i>
+                    <li><a href="/Usuario/Verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
-                    <li><a href="/Admin/historico-de-vendas/historico-vendas.html"><i class="fas fa-history pe-2"></i>
-                            Histórico de vendas</a></li>
-                    <li><a href="/Admin/gerenciar-cardapio/gerenciar-cardapio.html"><i class="fas fa-utensils pe-2"></i>
+                    <li><a href="/Usuario/gerenciar-cardapio/gerenciar-cardapio.html"><i
+                                class="fas fa-utensils pe-2"></i>
                             Gerenciar cardápio</a></li>
-                    <li><a href="/Admin/administrar-usuarios/adm-usuarios.html"><i class="fas fa-users pe-2"></i>
-                            Administrar usuários</a></li>
-                    <li><a href="/Admin/gerenciar-fornecedor/fornecedor.html"><i class="fas fa-truck pe-2"></i>
-                            Administrar fornecedores</a></li>
-                    <li><a href="/Admin/registrar-lote/lote.html"><i class="fas fa-box pe-2"></i>
-                            Registrar lote</a></li>
                 </ul>
             </nav>
         </div>
@@ -121,18 +108,54 @@
                         <input placeholder="Nome" class="me-2" name="text" id="pesquisa-nome" type="text">
 
                     </form>
-
-                    <div class="col-8 d-flex justify-content-end align-items-center">
-                        <div class="botoes d-flex align-items-center">
-                            <button id="addInsumo" class="botao botao--vermelho"><i class="fas fa-plus"></i>Adicionar</button>
-                        </div>
-                    </div>
                 </div>
 
                 <!--PRODUTOS-->
 
                 <section class="row cardapio" id="cardapio">
-                    
+                    <div class="produto col-3 m-3">
+                        <div class="card">
+                            <img src="/Imagens/images.jpg" class="mt-3">
+                            <p style="display: none">7</p>
+                            <h2 class="mt-3 produtoNome">Especial da casa</h2>
+                            <p class="mt-1">Pão, alface, tomate, dois hambúrgueres, bacon, calabresa e molho especial
+                            </p>
+                            <h3 class="align-items-right">R$27,90</h3>
+                        </div>
+                    </div>
+
+                    <div class="produto col-3 m-3">
+                        <div class="card">
+                            <img src="/Imagens/lanche5.jpg" class="mt-3">
+                            <p style="display: none">11</p>
+                            <h2 class="mt-3 produtoNome">Frango Crispy</h2>
+                            <p class="mt-1">Pão de brioche, peito de frango empanado, queijo muçarela, alface e molho
+                                barbecue</p>
+                            <h3 class="align-items-right">R$26,90</h3>
+                        </div>
+                    </div>
+
+                    <div class="produto col-3 m-3">
+                        <div class="card">
+                            <img src="/Imagens/lanche4.jpg" class="mt-3">
+                            <p style="display: none">12</p>
+                            <h2 class="mt-3 produtoNome">Burguer Bacon BBQ</h2>
+                            <p class="mt-1">Pão, hambúrguer de carne, queijo cheddar, bacon crocante, cebola roxa e
+                                molho barbecue</p>
+                            <h3 class="align-items-right">R$28,50</h3>
+                        </div>
+                    </div>
+
+                    <div class="produto col-3 m-3">
+                        <div class="card">
+                            <img src="/Imagens/lanche3.jpg" class="mt-3">
+                            <p style="display: none">8</p>
+                            <h2 class="mt-3 produtoNome">Cheddar Bacon</h2>
+                            <p class="mt-1">Pão, alface, tomate, hambúrguer, bacon crocante e queijo cheddar</p>
+                            <h3 class="align-items-right">R$22,50</h3>
+                        </div>
+                    </div>
+
                 </section>
 
                 <!--JANELA PARA ADICIONAR PRODUTO-->
@@ -165,17 +188,17 @@
                             <div class="grupo-form">
                                 <label for="imagem">Tipo de produto:</label>
                                 <select id="categoria" class="select select--modal">
-                                    <option value="LANCHES"  selected>Lanches</option>
+                                    <option value="LANCHES" selected>Lanches</option>
                                     <option value="BEBIDAS">Bebidas</option>
                                 </select>
                             </div>
-                            
+
                             <div class="grupo-form">
                                 <div id="insumos" class="insumos">
                                 </div>
                                 <div class="listaInsumosContainer direita">
                                     <ul id="listaInsumos">
-                                        
+
                                     </ul>
                                 </div>
                             </div>
@@ -220,24 +243,25 @@
                             <div class="grupo-form">
                                 <label for="categoriaAlterar">Alterar tipo de produto:</label>
                                 <select id="categoriaAlterar" class="select select--modal">
-                                    <option value="LANCHES"  selected>Lanches</option>
+                                    <option value="LANCHES" selected>Lanches</option>
                                     <option value="BEBIDAS">Bebidas</option>
                                 </select>
                             </div>
-                            
+
                             <div class="grupo-form">
                                 <div id="insumos-alterar" class="insumos">
                                 </div>
                                 <div class="listaInsumosContainer direita">
                                     <ul id="listaInsumos-alterar">
-                                        
+
                                     </ul>
                                 </div>
                             </div>
                         </form>
                         <footer class="container">
                             <div class="row justify-content-evenly">
-                                <button id="cancelar" class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
+                                <button id="cancelar"
+                                    class="col-4 botao botao--vermelho botao-cancelar">Cancelar</button>
                                 <button id="confirmarAddProduto" class="col-4 botao botao--verde">Concluir</button>
                             </div>
                         </footer>

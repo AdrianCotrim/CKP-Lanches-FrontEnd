@@ -16,7 +16,11 @@
 }
 
 .pedido:hover {
-    cursor: pointers;
+    cursor: pointer;
+}
+
+.pedido label:hover {
+    cursor: pointer;
 }
 
 .valor {

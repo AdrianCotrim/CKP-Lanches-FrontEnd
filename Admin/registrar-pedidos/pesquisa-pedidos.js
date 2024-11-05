@@ -3,6 +3,7 @@ const pesquisaAndamento = document.getElementById("pesquisa-andamento");
 const pesquisaNumero = document.getElementById("pesquisa-numero");
 
 pesquisaAndamento.addEventListener("change", function(){
+    console.log("andamento")
     const linhas = document.querySelectorAll(".linhaPedido")
     linhas.forEach((linha) => {
         let andamento_pedido = linha.querySelector("td:nth-child(1)").textContent

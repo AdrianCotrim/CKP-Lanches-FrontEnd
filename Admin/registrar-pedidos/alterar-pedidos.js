@@ -5,6 +5,7 @@ var tipoPedidoSelect = document.getElementById("tipoPedidoAlterar");
 var modalFecharPedido = document.getElementById("fecharPedido");
 var idPedidoAlterar = null;
 var pedidoAlterar = null
+let pedidoEmQuestao = null;
 let novoPedidoAlterar = {
   id: 30,
   orderStatus: "PREPARANDO",
@@ -23,6 +24,21 @@ let novoPedidoAlterar = {
   }
 }
 
+// Coloca os valores do pedido nos inputs
+const nomeAlterar = document.getElementById("nomeAlterar");
+const andamentoAlterar = document.getElementById("andamentoAlterar");
+const formaPagamentoAlterar = document.getElementById("formaPagamentoAlterar");
+const tipoPedidoAlterar = document.getElementById("tipoPedidoAlterar");
+const enderecoAlterar = document.getElementById("enderecoAlterar");
+const motoboyAlterar = document.getElementById("motoboyAlterar");
+const trocoAlterar = document.getElementById("trocoAlterar");
+const complementoAlterar = document.getElementById("complementoAlterar");
+const taxaAlterar = document.getElementById("taxaAlterar");
+
+document.addEventListener('DOMContentLoaded', () => {
+  tipoPedidoSelect.value = "TIPO"
+})
+
 // Exibe modal na tela
 pedidos.addEventListener('click', (event) => {
   let linha = null;
@@ -35,6 +51,7 @@ pedidos.addEventListener('click', (event) => {
 
     pedidosArray.forEach(pedido => {
       if (pedido.orderId == pedidoId) {
+        pedidoEmQuestao = pedido;
         pedidoAlterar = pedido;
         // Cria o pedido a ser alterado
         novoPedidoAlterar.id = pedido.orderId;
@@ -59,33 +76,26 @@ pedidos.addEventListener('click', (event) => {
         }
         console.log(novoPedidoAlterar);
 
-        // Coloca os valores do pedido nos inputs
-        const nomeAlterar = document.getElementById("nomeAlterar");
-        const andamentoAlterar = document.getElementById("andamentoAlterar");
-        const formaPagamentoAlterar = document.getElementById("formaPagamentoAlterar");
-        const tipoPedidoAlterar = document.getElementById("tipoPedidoAlterar");
-        const enderecoAlterar = document.getElementById("enderecoAlterar");
-        const motoboyAlterar = document.getElementById("motoboyAlterar");
-        const trocoAlterar = document.getElementById("trocoAlterar");
-        const complementoAlterar = document.getElementById("complementoAlterar");
-        const taxaAlterar = document.getElementById("taxaAlterar");
+        
 
 
         nomeAlterar.value = pedido.customerName;
         andamentoAlterar.value = pedido.orderStatus;
         formaPagamentoAlterar.value = pedido.paymentMethod;
-        tipoPedidoAlterar.value = pedido.exitMethod;
+        //tipoPedidoAlterar.value = pedido.exitMethod;
 
         // Mostra inputs de entrega
         if (tipoPedidoAlterar.value == 'ENTREGA') {
           document.getElementById('entregaAlterar').style.display = "flex";
-          enderecoAlterar.value = pedido.deliveryDTO.address;
-          motoboyAlterar.value = pedido.deliveryDTO.motoboy;
-          trocoAlterar.value = pedido.deliveryDTO.change;
-          complementoAlterar.value = pedido.deliveryDTO.complement;
-          taxaAlterar.value = pedido.deliveryDTO.fee;
+          if(pedido.deliveryDTO != null){
+            enderecoAlterar.value = pedido.deliveryDTO.address;
+            motoboyAlterar.value = pedido.deliveryDTO.motoboy;
+            trocoAlterar.value = pedido.deliveryDTO.change;
+            complementoAlterar.value = pedido.deliveryDTO.complement;
+            taxaAlterar.value = pedido.deliveryDTO.fee;
+          }
         }
-        if (tipoPedidoAlterar.value == 'RETIRADA') {
+        else if (tipoPedidoAlterar.value == 'RETIRADA') {
           document.getElementById('entregaAlterar').style.display = "none";
         }
 
@@ -130,12 +140,26 @@ tipoPedidoSelect.addEventListener('change', (event) => {
   if(tipoPedidoSelect.value == "ENTREGA"){
     document.getElementById("telaAlterarInfoPedido").style.display = "none";
     document.getElementById("entregaAlterar").style.display = "flex";
+    if(pedidoEmQuestao.deliveryDTO != null){
+      enderecoAlterar.value = pedidoEmQuestao.deliveryDTO.address;
+      motoboyAlterar.value = pedidoEmQuestao.deliveryDTO.motoboy;
+      trocoAlterar.value = pedidoEmQuestao.deliveryDTO.change;
+      complementoAlterar.value = pedidoEmQuestao.deliveryDTO.complement;
+      taxaAlterar.value = pedidoEmQuestao.deliveryDTO.fee;
+    } 
   }
 })
 
 var btnAlterar = document.getElementById("alterarPedido");
 
-btnAlterar.addEventListener("click", function(){
+function atualizarPedido(){
+  if(tipoPedidoSelect.value != 'ENTREGA' && tipoPedidoSelect.value != 'RETIRADA') {
+    let messageErroAlterar = "Selecione um tipo de pedido (Entrega ou Retirada).";
+    const msgErroDiv = document.getElementById('msg-erro-alterar');
+    msgErroDiv.style.display = 'block';
+    msgErroDiv.textContent = messageErroAlterar;
+    throw new Error(messageErroAlterar);
+  }
   novoPedidoAlterar.customerName = nomeAlterar.value;
     novoPedidoAlterar.orderStatus = andamentoAlterar.value;
     novoPedidoAlterar.paymentMethod = formaPagamentoAlterar.value;
@@ -148,7 +172,10 @@ btnAlterar.addEventListener("click", function(){
       novoPedidoAlterar.deliveryDTO.motoboy = motoboyAlterar.value;
       novoPedidoAlterar.deliveryDTO.change = trocoAlterar.value;
       novoPedidoAlterar.deliveryDTO.complement = complementoAlterar.value;
-      novoPedidoAlterar.deliveryDTO.fee = taxaAlterar.value;
+      const value = (taxaAlterar.value);
+      const valor = value.replace(/[^\d,]/g, '');
+      const valorReal = parseFloat(valor.replace(',', '.'));
+      novoPedidoAlterar.deliveryDTO.fee = valorReal;
     }
     if (tipoPedidoSelect.value == 'RETIRADA') {
       novoPedidoAlterar.exitMethod = 'RETIRADA';
@@ -186,7 +213,17 @@ btnAlterar.addEventListener("click", function(){
 
     modalAlterarInfoPedido.style.display = "none";
     
-})
+}
+
+btnAlterar.addEventListener("click", function(){
+  atualizarPedido();
+});
+
+const confirmarAlterarEntrega = document.getElementById('confirmar-entrega');
+
+confirmarAlterarEntrega.addEventListener('click', () => {
+  atualizarPedido();
+});
 
 modalAlterarInfoPedido.addEventListener("click", function (event) {
   // if (event.target.textContent == 'Alterar') {

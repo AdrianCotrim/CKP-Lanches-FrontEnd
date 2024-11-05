@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
 async function valores() {
   const valorRecebido = document.getElementById("valor-recebido");
   const valorGasto = document.getElementById("valor-gasto");
-  const valorGastoM = document.getElementById("valor-gasto-modal");
   const valorLucro = document.getElementById("valor-lucro");
   
   try {
@@ -38,7 +37,6 @@ async function valores() {
     valorRecebido.textContent = `R$${valorR}`;
     valorGasto.textContent = `R$${valorG}`;
     valorLucro.textContent = `R$${valorL}`;
-    valorGastoM.textContent = `R$${valorG}`;
 
     // GRÁFICO
 

@@ -5,15 +5,15 @@ var pedidoItens = []
 
 modalAddItens.addEventListener("click", function(event) {
     if(event.target.textContent == 'Voltar'){
-        if(pedidoItens.length > 0){
+        // if(pedidoItens.length > 0){
             modalAddItens.style.display = "none"
             pedidoItens = [];
             document.getElementById('itemList').innerHTML = "";
             
-        }
-        else {
-            document.getElementById("mensagemErro").style.display = "block"
-        }
+        //}
+        // else {
+        //     document.getElementById("mensagemErro").style.display = "block"
+        // }
     }
     if(event.target.textContent == 'Concluir'){
         if(pedidoItens.length > 0){

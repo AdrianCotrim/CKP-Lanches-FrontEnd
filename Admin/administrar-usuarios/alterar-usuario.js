@@ -20,8 +20,7 @@ funcionarios.addEventListener('click', (event) => {
         document.getElementById('id').value = id;
         document.getElementById('nivelAcessoAlterar').value = funcao;
         document.getElementById('statusAlterar').value = status;
-    }   
-})
+    }   )
 
 modalAltFunc.addEventListener('click', (event) => {
 

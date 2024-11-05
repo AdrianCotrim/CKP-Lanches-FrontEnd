@@ -7,6 +7,7 @@ let AltLotDTO = {
     supplierId: 0,
     quantity: 0, 
     expirationDate: "",
+    loteDate: "",
     value: 0
 }
 let lotId = 0;
@@ -33,13 +34,17 @@ lotes.addEventListener("click", (event) => {
                     document.getElementById("quantidadeAlterar").value = element.quantity;
                     const dateTimeString = element.expirationDate;
                     const formattedDate = dateTimeString.split('T')[0];
+                    const dateTimeCompraString = element.loteDate;
+                    const formattedDateCompra = dateTimeCompraString.split('T')[0];
                     document.getElementById("dataValidadeAlterar").value = formattedDate;
+                    document.getElementById("dataCompraAlterar").value = formattedDateCompra;
                     document.getElementById("valorAlterar").value = element.value;
 
                     AltLotDTO.supplyId = element.supplyTableDTO.id;
                     AltLotDTO.supplierId = element.supplierTableDTO.id;
                     AltLotDTO.quantity = element.quantity;
                     AltLotDTO.expirationDate = element.expirationDate;
+                    AltLotDTO.loteDate = element.lotDate;
                     AltLotDTO.value = element.value;
                     console.log(AltLotDTO);
 
@@ -101,6 +106,7 @@ btnconcluir.addEventListener("click", (event) => {
     AltLotDTO.supplierId = parseInt(document.getElementById("fornecedoresAlterar").value);
     AltLotDTO.quantity = parseInt(document.getElementById("quantidadeAlterar").value);
     AltLotDTO.expirationDate = document.getElementById("dataValidadeAlterar").value + "T00:00:00";
+    AltLotDTO.loteDate = document.getElementById("dataCompraAlterar").value + "T00:00:00";
     const value = document.getElementById("valorAlterar").value;
     const valor = value.replace(/[^\d,]/g, '');
     const valorReal = parseFloat(valor.replace(',', '.'));

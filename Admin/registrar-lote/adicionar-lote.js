@@ -7,6 +7,7 @@ let LotDTO = {
     supplierId: 0,
     quantity: 0, 
     expirationDate: "",
+    loteDate: "",
     value: 0
 }
 
@@ -64,6 +65,7 @@ btnConcluir.addEventListener("click", function () {
     LotDTO.supplierId = parseInt(document.getElementById("fornecedores").value);
     LotDTO.quantity = parseInt(document.getElementById("quantidade").value);
     LotDTO.expirationDate = document.getElementById("dataValidade").value + "T00:00:00";
+    LotDTO.loteDate = document.getElementById("dataCompra").value + "T00:00:00";
     const value = document.getElementById("valor").value;
     const valor = value.replace(/[^\d,]/g, '');
     const valorReal = parseFloat(valor.replace(',', '.'));

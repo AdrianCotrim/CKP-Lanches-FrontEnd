@@ -121,7 +121,8 @@ produtos.addEventListener("click", (event) => {
                         document.getElementById("id-produto-alterar").value = produto.product_id;
                         document.getElementById("nomeAlterar").value = produto.product_name;
                         document.getElementById("descricaoAlterar").value = produto.description;
-                        document.getElementById("valorAlterar").value = produto.product_value;
+                        document.getElementById("valorAlterar").value = "R$ " + formatNumber(produto.product_value);
+                        console.log(document.getElementById("valorAlterar").value);
                         document.getElementById("categoriaAlterar").value = produto.category;
                     }
                 })
@@ -136,7 +137,10 @@ modalAlterarProduto.addEventListener("click", (event) => {
         const id = document.getElementById("id-produto-alterar").value;
         produtoObject.productName = document.getElementById("nomeAlterar").value;
         produtoObject.description = document.getElementById("descricaoAlterar").value;
-        produtoObject.productValue = parseInt(document.getElementById("valorAlterar").value);
+        const value = (document.getElementById('valorAlterar').value);
+        const valor = value.replace(/[^\d,]/g, '');
+        const valorReal = parseFloat(valor.replace(',', '.'));
+        produtoObject.productValue = valorReal;
         produtoObject.category = document.getElementById("categoriaAlterar").value;
         console.log(produtoObject);
         console.log(document.getElementById("imagemAlterar").files[0]);

@@ -110,7 +110,7 @@ produtos.addEventListener("click", (event) => {
 
                             removerInsumo.addEventListener('click', () => {
                                 listaInsumos_alterar.removeChild(novoInsumo);
-                                insumos_alterar = insumos_alterar.filter(insumo => insumo !== novoInsumo.textContent)
+                                insumos_alterar = insumos_alterar.filter(insumo => insumo !== novoInsumo.textContent);
                             });
                             console.log(insumos_alterar);
                         });
@@ -127,7 +127,6 @@ produtos.addEventListener("click", (event) => {
                 })
             })
             .catch(erro => console.error(erro))
-        
     }
 })
 
@@ -136,6 +135,7 @@ modalAlterarProduto.addEventListener("click", (event) => {
         const id = document.getElementById("id-produto-alterar").value;
         produtoObject.productName = document.getElementById("nomeAlterar").value;
         produtoObject.description = document.getElementById("descricaoAlterar").value;
+        produtoObject.supplieNames = insumos_alterar;
         const value = (document.getElementById('valorAlterar').value);
         const valor = value.replace(/[^\d,]/g, '');
         const valorReal = parseFloat(valor.replace(',', '.'));
@@ -181,6 +181,7 @@ modalAlterarProduto.addEventListener("click", (event) => {
         produtoElement = null;
 
         modalAlterarProduto.style.display = "none";
+        window.location.reload();
     }
     if (event.target.textContent == "Cancelar") {
         // document.getElementById("nomeAlterar").value = "";

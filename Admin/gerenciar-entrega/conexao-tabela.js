@@ -56,6 +56,8 @@ function buscaEntregas(pedido){
             console.log(entregaDiv)
             infoEntrega.style.display = 'block';
             document.getElementById('info-entrega').style.display = 'block';
+
+            pedidoSelecionado = entregaDiv;
     
             // Define 'pedidoSelecionado' como o elemento clicado com a classe 'pedido'
             // event.currentTarget já se refere ao 'pedidoSelecionado'
@@ -65,7 +67,7 @@ function buscaEntregas(pedido){
             entregasArray.forEach(entrega => {
                 if (entrega.customerName === nome) {
                     // Atualiza os valores dos campos com as informações da entrega
-                    id.value = entrega.deliveryDTO.id;
+                    id.value = entrega.orderId;
                     cliente.textContent = entrega.customerName;
                     endereco.textContent = entrega.deliveryDTO.address;
                     complemento.textContent = entrega.deliveryDTO.complement ? entrega.deliveryDTO.complement : "*";
@@ -111,7 +113,7 @@ pedidosClass.forEach(pedidoSelecionado => {
         entregasArray.forEach(entrega => {
             if (entrega.customerName === nome) {
                 // Atualiza os valores dos campos com as informações da entrega
-                id.value = entrega.deliveryDTO.id;
+                id.value = entrega.orderId;
                 cliente.textContent = entrega.customerName;
                 endereco.textContent = entrega.deliveryDTO.address;
                 complemento.textContent = entrega.deliveryDTO.complement ? entrega.deliveryDTO.complement : "*";

@@ -1,9 +1,9 @@
 // Modal
-let estoque = document.getElementById('estoque')
+let estoqueInsumos = document.getElementById('estoque')
 let modalAltInsumo = document.getElementById('alterarInsumo')
 
 // Exibe modal na tela
-estoque.addEventListener('click', (event) => {
+estoqueInsumos.addEventListener('click', (event) => {
     if (event.target.nodeName == 'TD') {
         modalAltInsumo.style.display = 'flex'
 
@@ -44,6 +44,20 @@ modalAltInsumo.addEventListener('click', (event) => {
         const maxQuantity = document.getElementById("qtdMaximaAlterar")
         const minQuantity = document.getElementById("qtdMinimaAlterar")
 
+        if(insumo.name == "" || insumo.name == null) {
+            //Mensagem de erro
+            const span = document.createElement('span');
+            span.textContent = "Você deve colocar o nome do insumo!"
+            span.style.color = 'red';
+            form.appendChild(span);
+
+            // //Limpar campos
+            // maxQuantity.value = null;
+            // minQuantity.value = null;
+
+            throw new Error(span.textContent);
+        }
+
         if (insumo.minQuantity >= insumo.maxQuantity) {
             //Mensagem de erro
             const span = document.createElement('span');
@@ -51,9 +65,9 @@ modalAltInsumo.addEventListener('click', (event) => {
             span.style.color = 'red';
             form.appendChild(span);
 
-            //Limpar campos
-            maxQuantity.value = null;
-            minQuantity.value = null;
+            // //Limpar campos
+            // maxQuantity.value = null;
+            // minQuantity.value = null;
 
             throw new Error("A quantidade mínima não pode ser maior do que a quantidade máxima!");
         }
@@ -70,8 +84,9 @@ modalAltInsumo.addEventListener('click', (event) => {
             body: JSON.stringify(insumo)
         })
             .then(response => {
-                console.log(response.json())
-                window.location.reload();
+                console.log(response.json());
+                limparEstoqueTabela();
+                getVerificarEstoque();
             })
             .catch(erro => console.log(erro))
 

@@ -24,7 +24,6 @@ var getVerificarEstoque = () => {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
         
                 // Cria o select
                 let select = document.createElement('select');
@@ -86,6 +85,10 @@ var getVerificarEstoque = () => {
         
     })
     .catch(erro => console.log(erro))
+}
+
+function limparEstoqueTabela(){
+    document.querySelector('#estoque tbody').innerHTML = '';
 }
 
 getVerificarEstoque();

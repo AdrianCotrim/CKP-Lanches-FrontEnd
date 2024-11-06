@@ -2,6 +2,7 @@ const divMsg = document.getElementById("msgErro");
 const id = document.getElementById("id-retirar");
 const quantidade = document.getElementById("quantidade-retirar");
 const button = document.getElementById("confirmar-retirar");
+const modal = document.getElementById("movimentacao")
 
 const estoqueTbody = document.querySelector("#estoque tbody");
 
@@ -33,10 +34,12 @@ button.addEventListener('click', async () => {
         }
 
         const data = await response.json()
-        
 
         estoqueTbody.innerHTML= "";
         getVerificarEstoque();
+        id.value = "";
+        quantidade.value = "";
+        modal.style.display = "none";
 
     } catch(error){
         console.log(error);

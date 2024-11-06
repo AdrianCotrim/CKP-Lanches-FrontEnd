@@ -26,7 +26,21 @@ modalAddInsumo.addEventListener('click', (event) => {
             quantity: parseInt(quantity.value) > 0 ? parseInt(quantity.value) : 0,
             name: name.value,
         }
-        console.log(insumo)
+        console.log(insumo);
+
+        if(insumo.name == "" || insumo.name == null) {
+            //Mensagem de erro
+            const span = document.createElement('span');
+            span.textContent = "Você deve colocar o nome do insumo!"
+            span.style.color = 'red';
+            form.appendChild(span);
+
+            // //Limpar campos
+            // maxQuantity.value = null;
+            // minQuantity.value = null;
+
+            throw new Error(span.textContent);
+        }
 
         if(insumo.minQuantity >= insumo.maxQuantity){
             //Mensagem de erro
@@ -35,9 +49,9 @@ modalAddInsumo.addEventListener('click', (event) => {
             span.style.color = 'red';
             form.appendChild(span);
 
-            //Limpar campos
-            maxQuantity.value = null;
-            minQuantity.value = null;
+            // //Limpar campos
+            // maxQuantity.value = null;
+            // minQuantity.value = null;
 
             throw new Error("Quantidade Mínima ou Máxima inválida!");
         }
@@ -55,7 +69,8 @@ modalAddInsumo.addEventListener('click', (event) => {
         })
         .then(response =>{
             console.log(response)
-            window.location.reload()
+            limparEstoqueTabela();
+            getVerificarEstoque();
     })
         .catch(erro => console.log(erro))
     }

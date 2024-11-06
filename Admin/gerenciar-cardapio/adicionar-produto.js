@@ -1,64 +1,93 @@
 let btnAddProduto = document.getElementById("confirmarAddProduto");
 
 btnAddProduto.addEventListener('click', function (event) {
-    event.preventDefault();  // Prevenir o comportamento padrão do formulário, se houver
-    fetch("http://localhost:8080/insumos", {
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem("authToken")}`,
-            'Accept': 'application/json'
-        },
-        method: 'GET'
-    })
-        .then(response => response.json())
-        .then(dados => {
-            let insumosIds = [];
+    if (insumos.length > 0 && document.getElementById('nome').value && document.getElementById('valor').value) {
+        event.preventDefault();  // Prevenir o comportamento padrão do formulário, se houver
+        fetch("http://localhost:8080/insumos", {
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("authToken")}`,
+                'Accept': 'application/json'
+            },
+            method: 'GET'
+        })
+            .then(response => response.json())
+            .then(dados => {
+                let insumosIds = [];
 
-            dados.forEach(element => {
-                insumos.forEach(insumo => {
-                    if (insumo == element.name) {
+                dados.forEach(element => {
+                    insumos.forEach(insumo => {
+                        if (insumo == element.name) {
 
-                        insumosIds.push(element.id)
-                    }
+                            insumosIds.push(element.id)
+                        }
+                    })
                 })
             })
-        })
-        .catch(erro => console.log(erro))
+            .catch(erro => console.log(erro))
 
-    // Pegando os valores do formulário
-    console.log(insumos);
+        // Pegando os valores do formulário
+        console.log(insumos);
 
-    const value = (document.getElementById('valor').value);
-    const valor = value.replace(/[^\d,]/g, '');
-    const valorReal = parseFloat(valor.replace(',', '.'));
-    const produtoDTO = {
-        productName: document.getElementById('nome').value,
-        productValue: valorReal,
-        description: document.getElementById('descricao').value,
-        supplieNames: insumos,
-        category: document.getElementById('categoria').value
-    };
+        const value = (document.getElementById('valor').value);
+        const valor = value.replace(/[^\d,]/g, '');
+        const valorReal = parseFloat(valor.replace(',', '.'));
+        const produtoDTO = {
+            productName: document.getElementById('nome').value,
+            productValue: valorReal,
+            description: document.getElementById('descricao').value,
+            supplieNames: insumos,
+            category: document.getElementById('categoria').value
+        };
 
-    // Criando o FormData
-    const formData = new FormData();
-    formData.append("produtoDTO", new Blob([JSON.stringify(produtoDTO)], { type: "application/json" }));  // Adiciona os dados do produto como JSON
-    formData.append("imagem", document.getElementById('imagem').files[0]);  // Adiciona a imagem do input 'file'
+        async function enviarProduto() {
+            // Criando o FormData
+            const formData = new FormData();
+            const placeholder = 'placeholder.png';
+            formData.append("produtoDTO", new Blob([JSON.stringify(produtoDTO)], { type: "application/json" }));  // Adiciona os dados do produto como JSON
 
-    // Enviando a requisição POST
-    fetch('http://localhost:8080/produtos', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${localStorage.getItem("authToken")}`  // Adiciona o token de autorização
-        },
-        body: formData  // O corpo agora é o FormData com o JSON e a imagem
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Produto cadastrado:', data);
-            // Atualizar o grid de produtos, ou realizar alguma ação adicional
-        })
-        .catch(error => console.error('Erro ao cadastrar produto:', error));
+            // Verifica se o usuário escolheu uma imagem
+            if (document.getElementById('imagem').files[0]) {
+                formData.append("imagem", document.getElementById('imagem').files[0]); // Adiciona a imagem do input 'file'
+                console.log(document.getElementById('imagem').files[0]);
+            } else {
+                // Carrega a imagem placeholder
+                try {
+                    const response = await fetch(placeholder);
+                    if (!response.ok) {
+                        throw new Error("Erro ao carregar a imagem placeholder.");
+                    }
+                    const blob = await response.blob();
+                    const file = new File([blob], "placeholder.png", { type: "image/png" });
+                    formData.append("imagem", file);
+                } catch (error) {
+                    console.error('Erro ao carregar imagem placeholder:', error);
+                    return;  // Impede o envio se houver erro ao carregar a imagem
+                }
+            }
 
-    window.location.reload()
+            // Enviando a requisição POST
+            try {
+                const response = await fetch('http://localhost:8080/produtos', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem("authToken")}`  // Adiciona o token de autorização
+                    },
+                    body: formData  // O corpo agora é o FormData com o JSON e a imagem
+                });
+                const data = await response.json();
+                console.log('Produto cadastrado:', data);
+                // Atualizar o grid de produtos ou realizar alguma ação adicional
+            } catch (error) {
+                console.error('Erro ao cadastrar produto:', error);
+            }
+        }
+
+        // Chama a função para enviar o produto
+        enviarProduto();
+        window.location.reload()
+
+    }
+
 });
 
 let btnAbrirAddProduto = document.getElementById("addInsumo");

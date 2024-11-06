@@ -16,7 +16,6 @@ const listaInsumos_alterar = document.getElementById("listaInsumos-alterar");
 let insumos_alterar = [];
 
 // Traz os insumos para o select
-
 fetch("http://localhost:8080/insumos", {
     headers: {
         'Authorization': `Bearer ${localStorage.getItem("authToken")}`,

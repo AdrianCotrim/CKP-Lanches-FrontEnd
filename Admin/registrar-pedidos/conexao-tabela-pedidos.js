@@ -55,7 +55,7 @@ fetch("http://localhost:8080/pedidos", {
         <td>${element.exitMethod}</td>
         <td>${element.paymentMethod}</td>
         <td>${element.totalValue == null ? "$00,00": "$" + element.totalValue}</td>`
-        tr.classList.add("linha");
+        tr.classList.add("linhaPedido");
         tbody.appendChild(tr)
     });
       

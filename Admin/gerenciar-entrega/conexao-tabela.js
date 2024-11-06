@@ -4,7 +4,6 @@ const entregasArray = [];
 const pedidosClass = document.querySelectorAll(".pedido")
 const pedidos = document.getElementById("pedidos");
 const entregas = document.getElementById("lista-entrega");
-pedidos.style.cursor = "pointer"
 let pedidoSelecionado = null;
 
 fetch("http://localhost:8080/pedidos", {

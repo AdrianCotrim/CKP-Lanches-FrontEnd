@@ -109,8 +109,7 @@ pedidos.addEventListener('click', (event) => {
     modalAddProdutos.style.display = "flex";
     linha = event.target.parentNode.parentNode;
     pedidoId = linha.children[1].textContent;
-    idPedidoAlterar = pedidoId;
-
+    idPedidoAlterar = pedidoId
     pedidosArray.forEach(pedido => {
       if(pedido.orderId == pedidoId){
         pedido.orderProductTableDTOs.forEach(item => {

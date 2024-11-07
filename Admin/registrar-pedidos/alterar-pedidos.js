@@ -128,16 +128,19 @@ var btnVoltar = document.getElementById("voltar");
 btnVoltar.addEventListener("click", function(){
     document.getElementById("telaAlterarInfoPedido").style.display = "flex";
     document.getElementById("entregaAlterar").style.display = "none";
-    tipoPedidoSelect.value = "RETIRADA";
 
     enderecoAlterar.value = '';
     motoboyAlterar.value = '';
     complementoAlterar.value = '';
     taxaAlterar.value = '';
+    document.getElementById('msg-erro-alterar').textContent = '';
+    document.getElementById('msg-erro-entrega').textContent = '';
+    tipoPedidoSelect.value = '';
 })
 
 tipoPedidoSelect.addEventListener('change', (event) => {
   if(tipoPedidoSelect.value == "ENTREGA"){
+    document.getElementById('msg-erro-entrega').textContent = '';
     document.getElementById("telaAlterarInfoPedido").style.display = "none";
     document.getElementById("entregaAlterar").style.display = "flex";
     if(pedidoEmQuestao.deliveryDTO != null){
@@ -152,14 +155,22 @@ tipoPedidoSelect.addEventListener('change', (event) => {
 
 var btnAlterar = document.getElementById("alterarPedido");
 
+function mensagemErroPadrao(mensagem){
+  const msgErroDiv = document.getElementById('msg-erro-alterar');
+  document.getElementById('msg-erro-entrega').textContent = mensagem;
+  document.getElementById('msg-erro-entrega').style.display = 'block';
+  msgErroDiv.style.display = 'block';
+  msgErroDiv.textContent = mensagem;
+  throw new Error(mensagem);
+}
+
 function atualizarPedido(){
-  if(tipoPedidoSelect.value != 'ENTREGA' && tipoPedidoSelect.value != 'RETIRADA') {
-    let messageErroAlterar = "Selecione um tipo de pedido (Entrega ou Retirada).";
-    const msgErroDiv = document.getElementById('msg-erro-alterar');
-    msgErroDiv.style.display = 'block';
-    msgErroDiv.textContent = messageErroAlterar;
-    throw new Error(messageErroAlterar);
-  }
+
+  //Mensagens de erro (Validação)
+  if(tipoPedidoSelect.value != 'ENTREGA' && tipoPedidoSelect.value != 'RETIRADA') mensagemErroPadrao("Selecione um tipo de pedido (Entrega ou Retirada).");
+  if(nomeAlterar.value == '' || nomeAlterar.value == null) mensagemErroPadrao("Você deve colocar o nome do cliente!");
+  if(formaPagamentoAlterar.value == '' || formaPagamentoAlterar.value == null) mensagemErroPadrao("Você deve colocar uma forma de pagamento!");
+
   novoPedidoAlterar.customerName = nomeAlterar.value;
     novoPedidoAlterar.orderStatus = andamentoAlterar.value;
     novoPedidoAlterar.paymentMethod = formaPagamentoAlterar.value;
@@ -168,6 +179,11 @@ function atualizarPedido(){
     if (tipoPedidoSelect.value == 'ENTREGA') {
       novoPedidoAlterar.exitMethod = 'ENTREGA';
       novoPedidoAlterar.deliveryDTO = {};
+
+      if(enderecoAlterar.value == '' || enderecoAlterar.value == null) mensagemErroPadrao("Você deve colocar um endereço!");
+      if(motoboyAlterar.value == '' || motoboyAlterar.value == null) mensagemErroPadrao("Você deve colocar um motoboy!");
+      if(taxaAlterar.value == '' || taxaAlterar.value == null) mensagemErroPadrao("Você deve colocar uma taxa!");
+
       novoPedidoAlterar.deliveryDTO.address = enderecoAlterar.value;
       novoPedidoAlterar.deliveryDTO.motoboy = motoboyAlterar.value;
       novoPedidoAlterar.deliveryDTO.change = trocoAlterar.value;
@@ -202,7 +218,8 @@ function atualizarPedido(){
       })
       .then(data => {
         console.log("Pedido atualizado com sucesso:", data);
-        // window.location.reload(); // Descomente esta linha para recarregar a página, se necessário
+        limparPedidos();
+        getPedidos();
       })
       .catch(error => {
         console.error("Erro:", error.message);
@@ -217,12 +234,18 @@ function atualizarPedido(){
 
 btnAlterar.addEventListener("click", function(){
   atualizarPedido();
+  document.getElementById('msg-erro-alterar').textContent = '';
+  document.getElementById('msg-erro-entrega').textContent = '';
+  tipoPedidoSelect.value = '';
 });
 
 const confirmarAlterarEntrega = document.getElementById('confirmar-entrega');
 
 confirmarAlterarEntrega.addEventListener('click', () => {
   atualizarPedido();
+  document.getElementById('msg-erro-alterar').textContent = '';
+  document.getElementById('msg-erro-entrega').textContent = '';
+  tipoPedidoSelect.value = '';
 });
 
 modalAlterarInfoPedido.addEventListener("click", function (event) {
@@ -333,5 +356,8 @@ btnConfirmar.addEventListener("click", function(){
   if (event.target.textContent == 'Cancelar') {
     pedidoAlterar = null;
     modalAlterarInfoPedido.style.display = "none";
+    document.getElementById('msg-erro-alterar').textContent = '';
+    document.getElementById('msg-erro-entrega').textContent = '';
+    tipoPedidoSelect.value = '';
   }
 })

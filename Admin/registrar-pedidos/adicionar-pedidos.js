@@ -59,10 +59,19 @@ const tipoPedido = document.getElementById('tipoPedido');
 tipoPedido.addEventListener('change', function () {
     if (this.value === 'ENTREGA') {
         entrega.style.display = ""
+        document.getElementById('msg-erro-adicionar').style.display = 'none';
     } else {
         entrega.style.display = "none"
+        document.getElementById('msg-erro-adicionar').style.display = 'none';
     }
 });
+
+function mensagemErroPadraoAdicionar(mensagem){
+    const msgErroDiv = document.getElementById('msg-erro-adicionar');
+    msgErroDiv.style.display = 'block';
+    msgErroDiv.textContent = mensagem;
+    throw new Error(mensagem);
+  }
 
 modalInfoPedido.addEventListener("click", function (event) {
     // Coleta dados do modal
@@ -74,8 +83,15 @@ modalInfoPedido.addEventListener("click", function (event) {
     var troco = document.getElementById("troco").value;
     var taxa = document.getElementById("taxa").value;
 
-
     if (event.target.textContent == 'Concluir' && tipoPedido != "") {
+        
+        //Mensagens de erro (Validação)
+        console.log(nomeCliente);
+        
+        if(nomeCliente == '' || nomeCliente == null) {
+            mensagemErroPadraoAdicionar("Você deve colocar o nome do cliente!");
+        }
+
         pedido.orderDTO.customerName = nomeCliente;
         pedido.orderDTO.exitMethod = tipoPedido;
 
@@ -97,6 +113,11 @@ modalInfoPedido.addEventListener("click", function (event) {
         }
 
         if (tipoPedido == "ENTREGA") {
+
+            if(endereco == '' || endereco == null) mensagemErroPadraoAdicionar("Você deve colocar um endereço!");
+            if(motoboyNome == '' || motoboyNome == null) mensagemErroPadraoAdicionar("Você deve colocar um motoboy!");
+            if(taxa == '' || taxa == null) mensagemErroPadraoAdicionar("Você deve colocar uma taxa!");
+
             pedido.deliveryDTO.motoboy = motoboyNome;
             pedido.deliveryDTO.address = endereco;
             pedido.deliveryDTO.complement = complemento == "" ? null : complemento;
@@ -134,5 +155,6 @@ modalInfoPedido.addEventListener("click", function (event) {
         complemento.value = "";
         taxa.value = "";
         modalInfoPedido.style.display = "none";
+        document.getElementById('msg-erro-adicionar').style.display = 'none';
     })
 })

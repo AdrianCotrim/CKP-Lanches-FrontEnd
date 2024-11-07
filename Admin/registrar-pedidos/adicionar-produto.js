@@ -3,50 +3,50 @@ var modalAddItens = document.getElementById("addProdutos");
 const obs = document.getElementById('observacao');
 var pedidoItens = []
 
-modalAddItens.addEventListener("click", function(event) {
-    if(event.target.textContent == 'Voltar'){
+modalAddItens.addEventListener("click", function (event) {
+    if (event.target.textContent == 'Voltar') {
         // if(pedidoItens.length > 0){
-            modalAddItens.style.display = "none"
-            pedidoItens = [];
-            document.getElementById('itemList').innerHTML = "";
-            
+        modalAddItens.style.display = "none"
+        pedidoItens = [];
+        document.getElementById('itemList').innerHTML = "";
+
         //}
         // else {
         //     document.getElementById("mensagemErro").style.display = "block"
         // }
     }
-    if(event.target.textContent == 'Concluir'){
-        if(pedidoItens.length > 0){
+    if (event.target.textContent == 'Concluir') {
+        if (pedidoItens.length > 0) {
             modalAddItens.style.display = "none"
             adicionaItensAoPedido(pedidoItens, pedido);
         }
         else {
             document.getElementById("mensagemErro").style.display = "block"
         }
-        
+
     }
 })
 
 
-function adicionaItensAoPedido(pedidoItens, pedido) {    
+function adicionaItensAoPedido(pedidoItens, pedido) {
     let produtos = [];
     const contagemProdutos = {};
-    
+
     pedidoItens.forEach(item => {
-        if(!contagemProdutos[item.name]){
+        if (!contagemProdutos[item.name]) {
             contagemProdutos[item.name] = {
                 productName: item.name,
                 quantity: 0,
-                observacao: item.obs 
+                observacao: item.obs
             };
         }
-        contagemProdutos[item.name].quantity+=1;
+        contagemProdutos[item.name].quantity += 1;
     });
 
     produtos = Object.values(contagemProdutos);
     console.log(produtos);
-    
-    if(idPedidoAlterar == null){
+
+    if (idPedidoAlterar == null) {
         produtos.forEach((produto) => {
             pedido.orderDTO.orderProductDTOs.push(produto);
         })
@@ -54,24 +54,26 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
         pedido.orderDTO.exitDateTime = "2024-10-14T11:00";
         pedido.orderDTO.paymentMethod = "a pagar";
         pedidoItens = [];
-        
+
         fetch("http://localhost:8080/pedidos", {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',
-                'Content-Type':'application/json'
+                'Content-Type': 'application/json'
             },
             method: 'POST',
             body: JSON.stringify(pedido)
         })
-        .then(response =>{
-            window.location.reload();
-            console.log(response)
-        })
-        .catch(erro => console.log(erro))
+            .then(response => {
+                //window.location.reload();
+                limparPedidos();
+                getPedidos();
+                console.log(response)
+            })
+            .catch(erro => console.log(erro))
     }
-    else{
-        const orderProductDTOs = [];
+    else {
+        let orderProductDTOs = [];
         produtos.forEach(prod => {
             orderProductDTOs.push(prod);
         })
@@ -82,16 +84,29 @@ function adicionaItensAoPedido(pedidoItens, pedido) {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Accept': 'application/json',
-                'Content-Type':'application/json'
+                'Content-Type': 'application/json'
             },
             method: 'PUT',
             body: JSON.stringify(orderProductDTOs)
         })
-        .then(response =>{
-            console.log(response)
-        })
-        .catch(erro => console.log(erro))
+            .then(response => {
+                console.log(response)
+                window.location.reload();
+                limparPedidos();
+                getPedidos();
+            })
+            .catch(erro => console.log(erro))
     }
+    document.getElementById('msg-erro-adicionar').style.display = 'none';
+    // Reseta os valores do modal
+    document.getElementById("nomeCliente").value = "";
+    document.getElementById("tipoPedido").value = "";
+    document.getElementById("motoboy").value = "";
+    document.getElementById("endereco").value = "";
+    document.getElementById("complemento").value = "";
+    document.getElementById("troco").value = "";
+    document.getElementById("taxa").value = "";
+    modalInfoPedido.style.display = "none";
 }
 
 // Adiciona produtos a comanda
@@ -100,15 +115,15 @@ function adicionaItem(item, alterar) {
         name: item,
         obs: ""
     }
-    if(alterar == 0){
+    if (alterar == 0) {
         produto.name = item;
         produto.obs = "";
     }
-    if(alterar == 1){
+    if (alterar == 1) {
         produto.name = item.productTableDTO.product_name;
         produto.obs = item.observacao;
     }
-    
+
     pedidoItens.push(produto)
     console.log(pedidoItens);
 
@@ -120,7 +135,7 @@ function adicionaItem(item, alterar) {
     const removerProduto = document.createElement('i');
     const nome = document.createElement('p');
     const obs = document.createElement('p');
-    
+
     itemElement.classList.add('item');
     containerRemoverProduto.classList.add('containerRemoverProduto');
     containerRemoverProduto.appendChild(removerProduto);
@@ -130,97 +145,97 @@ function adicionaItem(item, alterar) {
     nome.textContent = produto.name;
     nome.classList.add('nome')
     obs.classList.add('obs')
-    
+
     itemElement.appendChild(containerRemoverProduto);
     itemElement.appendChild(nome);
     itemElement.appendChild(obs);
     itemList.appendChild(itemElement);
-    
+
 }
 
 // Puxa os produtos para os selects
 function checaVisibilidadeModal() {
     // Verifica se o modal está visível (exemplo usando 'display')
     const isVisible = window.getComputedStyle(modalAddItens).display !== 'none';
-    
+
     if (isVisible) {
         console.log('Modal está visível');
-        
-        if(pedidoAlterar){
+
+        if (pedidoAlterar) {
             console.log(pedidoAlterar);
         }
 
         fetch("http://localhost:8080/produtos", {
             headers: {
                 'Authorization': `Bearer ${token}`,
-            'Accept': 'application/json'
-        },
-        method: 'GET'
+                'Accept': 'application/json'
+            },
+            method: 'GET'
         })
-        .then(response => response.json())
-        .then(dados => {
-            const produtos = document.querySelector(".esquerda");
-            const itens = document.getElementById("itens");
-            const categorias = [];
-            const listaProdutos = [];
+            .then(response => response.json())
+            .then(dados => {
+                const produtos = document.querySelector(".esquerda");
+                const itens = document.getElementById("itens");
+                const categorias = [];
+                const listaProdutos = [];
 
-            dados.forEach(element => {
-                const option = document.createElement("option");
-                option.value = element.product_name;
-                option.textContent = element.product_name;
+                dados.forEach(element => {
+                    const option = document.createElement("option");
+                    option.value = element.product_name;
+                    option.textContent = element.product_name;
 
-                if(!categorias.includes(element.category)){
-                    categorias.push(element.category);
+                    if (!categorias.includes(element.category)) {
+                        categorias.push(element.category);
 
-                    const select = document.createElement("select");
-                    select.classList.add("select");
-                    select.classList.add("select--modal");
-                    select.id = element.category;
-                    select.onchange = function(){
-                        adicionaItem(this.value, 0);
-                        this.value = ""; 
+                        const select = document.createElement("select");
+                        select.classList.add("select");
+                        select.classList.add("select--modal");
+                        select.id = element.category;
+                        select.onchange = function () {
+                            adicionaItem(this.value, 0);
+                            this.value = "";
+                        }
+                        const nomeSelect = document.createElement("option");
+                        nomeSelect.disabled = true;
+                        nomeSelect.selected = true;
+                        nomeSelect.textContent = element.category;
+
+                        select.appendChild(nomeSelect);
+                        listaProdutos.push(select)
+                        produtos.appendChild(select);
                     }
-                    const nomeSelect = document.createElement("option");
-                    nomeSelect.disabled = true;
-                    nomeSelect.selected = true;
-                    nomeSelect.textContent = element.category;
 
-                    select.appendChild(nomeSelect);
-                    listaProdutos.push(select)
-                    produtos.appendChild(select);
-                }
+                    listaProdutos.forEach(lista => {
+                        if (element.category == lista.id) {
+                            const index = listaProdutos.indexOf(lista);
+                            listaProdutos[index].appendChild(option)
+                        }
+                    })
+                    //itens.appendChild(option);
 
-                listaProdutos.forEach(lista => {
-                    if(element.category == lista.id){
-                        const index = listaProdutos.indexOf(lista);
-                        listaProdutos[index].appendChild(option)
-                    }
                 })
-                //itens.appendChild(option);
-                
             })
-        })
-        .catch(erro => console.log(erro))
-        
+            .catch(erro => console.log(erro))
 
-      // Opcional: Para parar de monitorar após o modal ser exibido
-      clearInterval(modalChecker);
+
+        // Opcional: Para parar de monitorar após o modal ser exibido
+        clearInterval(modalChecker);
     }
-    
+
 }
 // Verifica o modal a cada 500ms
 const modalChecker = setInterval(checaVisibilidadeModal, 500);
 
 // Remove Produto do item
-modalAddItens.addEventListener("click", function(event){
-    
-    if(event.target.classList.contains("removerProduto")){
-        
+modalAddItens.addEventListener("click", function (event) {
+
+    if (event.target.classList.contains("removerProduto")) {
+
         const produto = event.target.parentElement.parentElement;
         const nome = produto.querySelector('.nome').textContent;
-        
+
         pedidoItens.forEach((item) => {
-            if(nome == item.name){
+            if (nome == item.name) {
                 const index = pedidoItens.indexOf(item);
                 produto.remove()
                 pedidoItens.splice(index, 1)
@@ -232,10 +247,10 @@ modalAddItens.addEventListener("click", function(event){
 let ultimoItemSelecionado
 let itemSelecionado
 // Seleciona item
-modalAddItens.addEventListener("click", function(event){
-    if(event.target.classList.contains("nome")){
+modalAddItens.addEventListener("click", function (event) {
+    if (event.target.classList.contains("nome")) {
         // Desmarca último item clicado
-        if(ultimoItemSelecionado){
+        if (ultimoItemSelecionado) {
             ultimoItemSelecionado.classList.remove("selecionado");
         }
         itemSelecionado = event.target.parentElement;
@@ -245,15 +260,15 @@ modalAddItens.addEventListener("click", function(event){
         const nomeProduto = itemSelecionado.querySelector(".nome").textContent;
         const item = pedidoItens.find(item => item.name == nomeProduto);
         console.log(item);
-        
+
         obs.value = item.obs;
-        
+
     }
 })
 
 // Observação
-obs.addEventListener('input', function() {
-    const valor = obs.value; 
+obs.addEventListener('input', function () {
+    const valor = obs.value;
     const nomeProduto = itemSelecionado.querySelector(".nome").textContent;
     const item = pedidoItens.find(item => item.name == nomeProduto);
 

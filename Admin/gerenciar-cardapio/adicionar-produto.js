@@ -1,4 +1,5 @@
 let btnAddProduto = document.getElementById("confirmarAddProduto");
+let addProdutoModal = document.getElementById("adicionarInsumo");
 
 btnAddProduto.addEventListener('click', function (event) {
     if (insumos.length > 0 && document.getElementById('nome').value && document.getElementById('valor').value) {
@@ -77,6 +78,8 @@ btnAddProduto.addEventListener('click', function (event) {
                 const data = await response.json();
                 console.log('Produto cadastrado:', data);
                 // Atualizar o grid de produtos ou realizar alguma ação adicional
+                limparProdutos();
+                getProdutos();
             } catch (error) {
                 console.error('Erro ao cadastrar produto:', error);
             }
@@ -84,7 +87,7 @@ btnAddProduto.addEventListener('click', function (event) {
 
         // Chama a função para enviar o produto
         enviarProduto();
-        window.location.reload()
+        addProdutoModal.style.display = 'none';
 
     }
 
@@ -92,7 +95,6 @@ btnAddProduto.addEventListener('click', function (event) {
 
 let btnAbrirAddProduto = document.getElementById("addInsumo");
 let btnFecharAddProduto = document.getElementById("cancelar");
-let addProdutoModal = document.getElementById("adicionarInsumo");
 
 
 const cardapio = document.getElementById("cardapio");

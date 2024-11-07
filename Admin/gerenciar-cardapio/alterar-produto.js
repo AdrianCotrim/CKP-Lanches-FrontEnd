@@ -167,6 +167,8 @@ modalAlterarProduto.addEventListener("click", (event) => {
         .then(data => {
             console.log('Produto atualizado:', data);
             // Atualizar o grid de produtos, ou realizar alguma ação adicional
+            limparProdutos();
+            getProdutos();
         })
         .catch(error => {
             console.error('Erro ao atualizar produto:', error.message);
@@ -181,7 +183,7 @@ modalAlterarProduto.addEventListener("click", (event) => {
         produtoElement = null;
 
         modalAlterarProduto.style.display = "none";
-        window.location.reload();
+        //window.location.reload();
     }
     if (event.target.textContent == "Cancelar") {
         // document.getElementById("nomeAlterar").value = "";

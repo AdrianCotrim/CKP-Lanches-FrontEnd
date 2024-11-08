@@ -115,6 +115,9 @@
             <main class="ps-5 pt-4 pe-5 row">
                 <section id="pedidos" class="pedidos col-3">
                     <div class="campo" id="lista-entrega">
+                        <div id="tem-entregas-conteiner">
+                            <span>Não há entregas.</span>
+                        </div>
                         <!-- <div class="pedido mt-3 me-2 ms-2 mb-1">
                             <div class="info-pedido">
                                 <p>Éder Júnior</p>
@@ -125,13 +128,14 @@
                         </div> -->
                     </div>
                     <div class="cadastrar d-flex justify-content-evenly">
-                        <button class="cadastrar botao botao--vermelho" id="abrirAlterarEndereco">Alterar</button>
+                        <button class="cadastrar botao botao--vermelho" id="abrirAlterarEndereco" style="display: none;">Alterar</button>
                     </div>
                 </section>
 
                 <section class="col-9" id="info-entrega" style="display: none;">
                     <div class="info ps-2">
                         <input id="id-entrega" type="hidden"></input>
+                        <input id="id-pedido" type="hidden"></input>
                         <div>
                             <h5>Cliente</h5>
                             <p id="cliente">Éder Júnior</p>
@@ -142,6 +146,8 @@
                         <div class="ms-5">
                             <h5>Complemento</h5>
                             <p id="complemento">Casa 4</p>
+                            <h5>Motoboy</h5>
+                            <p id="motoboy">Casa 4</p>
                         </div>
                     </div>
 
@@ -210,7 +216,7 @@
                             <div class="row justify-content-evenly">
                                 <button id="voltar" style="width: 20vh !important;"
                                     class="col-2 botao botao--vermelho botao-cancelar">Voltar</button>
-                                <button id="confirmar" style="width: 20vh !important;"
+                                <button id="confirmar-alterar" style="width: 20vh !important;"
                                     class="col-2 botao botao--verde">Alterar</button>
                             </div>
                         </footer>

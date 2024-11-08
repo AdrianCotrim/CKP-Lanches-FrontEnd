@@ -1,30 +1,49 @@
 const token = localStorage.getItem('authToken');
 const infoEntrega = document.getElementById('info-entrega');
-const entregasArray = [];
+var entregasArray = [];
 const pedidosClass = document.querySelectorAll(".pedido")
 const pedidos = document.getElementById("pedidos");
 const entregas = document.getElementById("lista-entrega");
+const temEntregaMsg = document.getElementById('tem-entregas-conteiner');
 let pedidoSelecionado = null;
 
-fetch("http://localhost:8080/pedidos", {
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json'
-    }
-})
-.then(response => response.json())
-.then(dados => dados.forEach(pedido => {
-    if(pedido.deliveryDTO != null){
-        entregasArray.push(pedido);
-        buscaEntregas(pedido);
-    }
-    }))
-.catch(erro => console.log(erro))
+var buscarPedidos = () => {
+    fetch("http://localhost:8080/pedidos", {
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(dados => {
+        dados.forEach(pedido => {
+            if(pedido.deliveryDTO != null){
+                temEntregaMsg.style.display = 'none';
+                entregasArray.push(pedido);
+                buscaEntregas(pedido);
+                console.log("Entro nos pedidos");
+            }
+            })
+        if(entregasArray.length === 0){
+            console.log("Não tem entregas");
+            temEntregaMsg.style.display = 'flex';
+            console.log(temEntregaMsg);
+            
+        }
+    })
+    .catch(erro => console.log(erro))
+    
+    console.log(entregasArray);
+}
 
-console.log(entregasArray);
+buscarPedidos();
+
+var limparEntregas = () => {
+    entregas.innerHTML = '';
+}
 
 
-function buscaEntregas(pedido){
+var buscaEntregas = (pedido) => {
     const entregaDiv = document.createElement("div");
     const entregaCont = document.createElement("div");
     const nomeCliente = document.createElement("p");
@@ -48,11 +67,12 @@ function buscaEntregas(pedido){
 
         nomeCliente.textContent = pedido.customerName;
         numero.textContent = "Nº "+pedido.orderId;
-        valor.textContent = "R$"+pedido.totalValue;
+        valor.textContent = "R$"+pedido.totalValue.toFixed(2);
 
         entregaDiv.addEventListener("click", (event) => {
             // Exibe as informações de entrega
-            console.log(entregaDiv)
+            console.log(entregaDiv);
+            botaoAbrirAlteraEntrega.style.display = 'block';
             infoEntrega.style.display = 'block';
             document.getElementById('info-entrega').style.display = 'block';
 
@@ -66,13 +86,15 @@ function buscaEntregas(pedido){
             entregasArray.forEach(entrega => {
                 if (entrega.customerName === nome) {
                     // Atualiza os valores dos campos com as informações da entrega
-                    id.value = entrega.orderId;
+                    id_pedido.value = entrega.orderId;
+                    id_entrega.value = entrega.deliveryDTO.id;
                     cliente.textContent = entrega.customerName;
                     endereco.textContent = entrega.deliveryDTO.address;
+                    motoboy.textContent = entrega.deliveryDTO.motoboy;
                     complemento.textContent = entrega.deliveryDTO.complement ? entrega.deliveryDTO.complement : "*";
-                    valorPedido.textContent = "R$" + entrega.subValue;
-                    valorTaxa.textContent = "R$" + entrega.deliveryDTO.fee;
-                    valorTotal.textContent = "R$" + entrega.totalValue;
+                    valorPedido.textContent = "R$" + entrega.subValue.toFixed(2);
+                    valorTaxa.textContent = "R$" + entrega.deliveryDTO.fee.toFixed(2);
+                    valorTotal.textContent = "R$" + entrega.totalValue.toFixed(2);
                 }
             });
         });
@@ -88,9 +110,11 @@ function buscaEntregas(pedido){
     
 }
 /////////
-const id = document.getElementById('id-entrega');
+const id_pedido = document.getElementById('id-pedido');
+const id_entrega = document.getElementById('id-entrega');
 const cliente = document.getElementById("cliente");
 const endereco = document.getElementById("endereco");
+const motoboy = document.getElementById("motoboy");
 const complemento = document.getElementById("complemento");
 const valorPedido = document.getElementById("valorPedido");
 const valorTaxa = document.getElementById("valorTaxa");
@@ -102,6 +126,7 @@ pedidosClass.forEach(pedidoSelecionado => {
         // Exibe as informações de entrega
         console.log(pedidoSelecionado)
         infoEntrega.style.display = 'block';
+        botaoAbrirAlteraEntrega.style.display = 'block';
         document.getElementById('info-entrega').style.display = 'block';
 
         // Define 'pedidoSelecionado' como o elemento clicado com a classe 'pedido'
@@ -112,13 +137,15 @@ pedidosClass.forEach(pedidoSelecionado => {
         entregasArray.forEach(entrega => {
             if (entrega.customerName === nome) {
                 // Atualiza os valores dos campos com as informações da entrega
-                id.value = entrega.orderId;
+                id_pedido.value = entrega.orderId;
+                id_entrega.value = entrega.deliveryDTO.id;
                 cliente.textContent = entrega.customerName;
                 endereco.textContent = entrega.deliveryDTO.address;
+                motoboy.textContent = entrega.deliveryDTO.motoboy;
                 complemento.textContent = entrega.deliveryDTO.complement ? entrega.deliveryDTO.complement : "*";
-                valorPedido.textContent = "R$" + entrega.subValue;
-                valorTaxa.textContent = "R$" + entrega.deliveryDTO.fee;
-                valorTotal.textContent = "R$" + entrega.totalValue;
+                valorPedido.textContent = "R$" + entrega.subValue.toFixed(2);
+                valorTaxa.textContent = "R$" + entrega.deliveryDTO.fee.toFixed(2);
+                valorTotal.textContent = "R$" + entrega.totalValue.toFixed(2);
             }
         });
     });

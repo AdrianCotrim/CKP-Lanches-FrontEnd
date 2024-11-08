@@ -109,3 +109,10 @@
 .rodape button{
     width: 20vh !important;
 }
+
+#tem-entregas-conteiner{
+    display: flex;
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+}

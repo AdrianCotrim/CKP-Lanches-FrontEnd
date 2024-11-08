@@ -20,7 +20,20 @@ botaoFechar.onclick = function() {
     modal.style.display = "none";
 }
 
+//Inputs
+
+const endereco_alterar = document.getElementById('enderecoAlterar');
+const motoboy_alterar = document.getElementById('motoboyAlterar');
+const troco_alterar = document.getElementById('trocoAlterar');
+const complemento_alterar = document.getElementById('complementoAlterar');
+const taxa_alterar = document.getElementById('taxaAlterar');
+
 botaoAbrirAlteraEntrega.addEventListener("click", function(){
+    endereco_alterar.value = endereco.textContent;
+    motoboy_alterar.value = motoboy.textContent;
+    troco_alterar.value = 'SIM';
+    complemento_alterar.value = complemento.textContent;
+    taxa_alterar.value = valorTaxa.textContent;
     modalAlteraEntrega.style.display = "flex";
 });
 

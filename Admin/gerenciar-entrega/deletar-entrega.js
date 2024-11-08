@@ -12,8 +12,13 @@ botaoConfirmar.addEventListener("click", function () {
     method: 'DELETE',
   })
     .then(response => {
-      console.log(response)
-      //window.location.reload()
+      console.log(response);
+
+      infoEntrega.style.display = 'none';
+      modal.style.display = 'none';
+
+      window.location.reload();
+      
     })
     .catch(erro => console.log(erro))
 });

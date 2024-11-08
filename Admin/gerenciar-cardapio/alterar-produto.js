@@ -121,7 +121,6 @@ produtos.addEventListener("click", (event) => {
                         document.getElementById("nomeAlterar").value = produto.product_name;
                         document.getElementById("descricaoAlterar").value = produto.description;
                         document.getElementById("valorAlterar").value = "R$ " + formatNumber(produto.product_value);
-                        console.log(document.getElementById("valorAlterar").value);
                         document.getElementById("categoriaAlterar").value = produto.category;
                     }
                 })

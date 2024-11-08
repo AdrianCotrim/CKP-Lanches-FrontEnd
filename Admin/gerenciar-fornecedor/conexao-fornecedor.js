@@ -13,7 +13,6 @@ var limparFornecedores = () => {
     listaFornecedor.innerHTML = "";
 }
 
-
 var listaFornecedores = async () => {
     const response = await fetch('http://localhost:8080/fornecedores', {
         headers: {
@@ -39,7 +38,7 @@ var listaFornecedores = async () => {
         div.classList.add("info-fornecedor");
         div.innerHTML = 
             `<p>${fornecedor.name}</p>
-            <label class="pe-5">${fornecedor.telefone}</label>
+            <label class="telefone pe-5">${fornecedor.telefone}</label>
             <label class="valor">ID: ${fornecedor.id}</label>`;
         divPai.appendChild(div);
         listaFornecedor.appendChild(divPai);

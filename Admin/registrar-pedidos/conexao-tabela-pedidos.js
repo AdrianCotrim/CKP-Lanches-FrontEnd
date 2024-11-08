@@ -28,7 +28,7 @@ var getPedidos = () => {
         tr.innerHTML = `<td>${element.orderStatus}</td>
           <td>${element.orderId}</td>
           <td>${element.customerName}</td>
-          <td><div class="itens">Itens</div></td>
+          <td><div class="itens" onclick="abrirItens()">Itens</div></td>
           <td>${element.exitMethod}</td>
           <td>${element.paymentMethod}</td>
           <td>${element.totalValue == null ? "$00,00" : "$" + element.totalValue.toFixed(2)}</td>`

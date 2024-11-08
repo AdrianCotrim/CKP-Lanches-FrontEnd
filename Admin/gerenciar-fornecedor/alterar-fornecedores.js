@@ -42,6 +42,16 @@ buttonAlterarFornecedor.addEventListener('click', async () => {
 
         limparFornecedores();
         listaFornecedores();
+
+        buttonAlterarFornecedor.value = "";
+        nome_input_alterar.value = "";
+        cnpj_input_alterar.value = "";
+        social_input_alterar.value = "";
+        endereco_input_alterar.value = "";
+        email_input_alterar.value = "";
+        telefone_input_alterar.value = "";
+        modalAltera.style.display = "none";
+        info.style.display = "none";
         
         
     } catch (error) {

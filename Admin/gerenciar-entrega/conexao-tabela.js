@@ -92,6 +92,13 @@ var buscaEntregas = (pedido) => {
                     endereco.textContent = entrega.deliveryDTO.address;
                     motoboy.textContent = entrega.deliveryDTO.motoboy;
                     complemento.textContent = entrega.deliveryDTO.complement ? entrega.deliveryDTO.complement : "*";
+                    itens.innerHTML = "";
+                    entrega.orderProductTableDTOs.forEach(item => {
+                        const itemP = document.createElement("p");
+                        itemP.textContent = `${item.quantity}x ${item.productTableDTO.product_name}`;
+                        itens.append(itemP)
+                    })
+                    formaPagamento.textContent = entrega.paymentMethod;                    
                     valorPedido.textContent = "R$" + entrega.subValue.toFixed(2);
                     valorTaxa.textContent = "R$" + entrega.deliveryDTO.fee.toFixed(2);
                     valorTotal.textContent = "R$" + entrega.totalValue.toFixed(2);
@@ -116,6 +123,8 @@ const cliente = document.getElementById("cliente");
 const endereco = document.getElementById("endereco");
 const motoboy = document.getElementById("motoboy");
 const complemento = document.getElementById("complemento");
+const itens = document.getElementById("itens");
+const formaPagamento = document.getElementById("formaPagamento");
 const valorPedido = document.getElementById("valorPedido");
 const valorTaxa = document.getElementById("valorTaxa");
 const valorTotal = document.getElementById("valorTotal");

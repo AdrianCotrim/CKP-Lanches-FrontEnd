@@ -44,13 +44,14 @@ async function alterarEntrega(deliveryDTO, id_entrega) {
 }
 
 btnAlterarEntrega.addEventListener('click', () => {
-
-    const value = (taxa_alterar.value);
-    const valor = value.replace(/[^\d,]/g, '');
+    const valueTaxa = taxa_alterar.value;
+    const valor = valueTaxa.replace(/[^\d,]/g, ''); // Remove caracteres não numéricos, exceto vírgula
     const valorReal = parseFloat(valor.replace(',', '.'));
+    const valorFinal = valorReal >= 100 ? valorReal / 100 : valorReal;
 
     deliveryDTO.motoboy = motoboy_alterar.value;
-    deliveryDTO.fee = valorReal;
+    deliveryDTO.fee = valorFinal;
+    console.log(valorReal);
     deliveryDTO.complement = complemento_alterar.value;
     deliveryDTO.change = troco_alterar.value;
     deliveryDTO.address = endereco_alterar.value;

@@ -48,7 +48,7 @@ modalAltFunc.addEventListener('click', (event) => {
         })
         .then(response => {
             console.log(response.json())
-            //window.location.reload();
+            window.location.reload();
     })
         .catch(erro => {
             console.log(erro)

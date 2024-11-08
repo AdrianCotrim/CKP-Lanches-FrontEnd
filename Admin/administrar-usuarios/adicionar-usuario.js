@@ -46,7 +46,7 @@ modalAddFunc.addEventListener('click', (event) => {
             body: JSON.stringify(usuario)
         })
         .then(response =>{
-            //window.location.reload();
+            window.location.reload();
             return response.json();
         })
         .then(data => console.log(data))

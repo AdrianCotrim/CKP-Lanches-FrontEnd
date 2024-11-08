@@ -30,7 +30,7 @@ btnCadastrarFornecedor.addEventListener('click', async () => {
             body: JSON.stringify(supplieDTO)
         });
 
-        if(!response.ok){
+        if (!response.ok) {
             const erro = await response.text();
             throw new Error(erro);
         }
@@ -42,8 +42,18 @@ btnCadastrarFornecedor.addEventListener('click', async () => {
 
         limparFornecedores();
         listaFornecedores();
+
+        btnCadastrarFornecedor.value = "";
+        nome_input.value = "";
+        cnpj_input.value = "";
+        social_input.value = "";
+        endereco_input.value = "";
+        email_input.value = "";
+        telefone_input.value = "";
+        modalCadastro.style.display = "none";
         
-        
+
+
     } catch (error) {
         console.log(error);
     }

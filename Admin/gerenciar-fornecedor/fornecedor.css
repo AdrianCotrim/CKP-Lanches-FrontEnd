@@ -20,8 +20,13 @@
     overflow-y: auto;
 }
 
+.telefone{
+    font-weight: bold;
+}
+
 .valor {
     color: var(--verde);
+    font-weight: bold;
 }
 
 .info {

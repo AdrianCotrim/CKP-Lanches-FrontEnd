@@ -27,13 +27,16 @@ const motoboy_alterar = document.getElementById('motoboyAlterar');
 const troco_alterar = document.getElementById('trocoAlterar');
 const complemento_alterar = document.getElementById('complementoAlterar');
 const taxa_alterar = document.getElementById('taxaAlterar');
+const id_entrega_alterar = document.getElementById('id-entrega-alterar');
 
 botaoAbrirAlteraEntrega.addEventListener("click", function(){
+    msgErroAlterarEntrega.style.display = 'none';
     endereco_alterar.value = endereco.textContent;
     motoboy_alterar.value = motoboy.textContent;
     troco_alterar.value = 'SIM';
     complemento_alterar.value = complemento.textContent;
     taxa_alterar.value = valorTaxa.textContent;
+    id_entrega_alterar.value = id_entrega.value;
     modalAlteraEntrega.style.display = "flex";
 });
 

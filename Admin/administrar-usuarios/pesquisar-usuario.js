@@ -27,7 +27,7 @@ filtroStatus.addEventListener("change", function(){
   const linhas = funcionarios.querySelectorAll('.linha');
   linhas.forEach((linha) => {
       let usuario_status = linha.querySelector("td:nth-child(5)").textContent
-      if(!usuario_status.includes(filtroStatus.value) && filtroStatus.value != "todos") linha.style.display = "none";
+      if( !(usuario_status == filtroStatus.value) && filtroStatus.value != "todos") linha.style.display = "none";
       else linha.style.display = "table-row";
   })
 })

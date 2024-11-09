@@ -58,6 +58,7 @@ btnAbrirAdd.addEventListener("click", function () {
 
 btnFecharAdd.addEventListener("click", function () {
     modalAddLote.style.display = "none"
+    window.location.reload();
 })
 
 btnConcluir.addEventListener("click", function () {

@@ -64,7 +64,14 @@ pedidos.addEventListener('click', (event) => {
           quantity: produto.quantity,
           observacao: produto.observacao
         }));
-        if (pedido.deliveryDTO) {
+        if (pedido.deliveryDTO != null) {
+          novoPedidoAlterar.deliveryDTO = {
+            motoboy: "",
+            address: "",
+            complement: null,
+            change: "",
+            fee: 0
+          }
           novoPedidoAlterar.deliveryDTO.motoboy = pedido.deliveryDTO.motoboy;
           novoPedidoAlterar.deliveryDTO.address = pedido.deliveryDTO.address;
           novoPedidoAlterar.deliveryDTO.complement = pedido.deliveryDTO.complement;

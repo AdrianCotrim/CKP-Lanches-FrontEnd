@@ -230,13 +230,13 @@ modalAddItens.addEventListener("click", function (event) {
         const produto = event.target.parentElement.parentElement;
         const nome = produto.querySelector('.nome').textContent;
 
-        pedidoItens.forEach((item) => {
-            if (nome == item.name) {
-                const index = pedidoItens.indexOf(item);
-                produto.remove()
-                pedidoItens.splice(index, 1)
-            };
-        });
+        for (let i = 0; i < pedidoItens.length; i++) {
+            if (nome == pedidoItens[i].name) {
+                produto.remove(); // Remover do DOM
+                pedidoItens.splice(i, 1); // Remover do array
+                break; // Parar o loop após remover o item
+            }
+        }    
     };
 });
 

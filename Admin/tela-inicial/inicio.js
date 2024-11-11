@@ -24,6 +24,8 @@ async function valores() {
     }
 
     const data = await response.json();
+    console.log(data);
+    
     const valuesDTO = data.values || {};  // Garantir que valuesDTO não seja undefined
     const spents = valuesDTO.spents || [];  // Garantir que spents é um array
     const earned = valuesDTO.earned || [];  // Garantir que earned é um array

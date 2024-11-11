@@ -38,7 +38,12 @@ lotes.addEventListener("click", (event) => {
                     const formattedDateCompra = dateTimeCompraString.split('T')[0];
                     document.getElementById("dataValidadeAlterar").value = formattedDate;
                     document.getElementById("dataCompraAlterar").value = formattedDateCompra;
-                    document.getElementById("valorAlterar").value = element.value;
+                    let value = element.value;
+                    value = (parseFloat(value)).toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                    document.getElementById("valorAlterar").value = value;
 
                     AltLotDTO.supplyId = element.supplyTableDTO.id;
                     AltLotDTO.supplierId = element.supplierTableDTO.id;
@@ -111,7 +116,6 @@ btnconcluir.addEventListener("click", (event) => {
     const valor = value.replace(/[^\d,]/g, '');
     const valorReal = parseFloat(valor.replace(',', '.'));
     AltLotDTO.value = valorReal;
-    console.log(AltLotDTO);
 
     fetch(`http://localhost:8080/lots/${lotId}`, {
         headers: {
@@ -123,8 +127,12 @@ btnconcluir.addEventListener("click", (event) => {
         body: JSON.stringify(AltLotDTO)
     })
     .then(response => {
-        console.log(response.json())
+        return response.json()
+    })
+    .then(data => {
         window.location.reload();
+        console.log("Lote atualizado: "+data);
+        
     })
     .catch(erro => {console.log(erro)})
     

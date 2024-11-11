@@ -17,11 +17,6 @@
     background-color: var(--cinza-bg);
 }
 
-.produto:hover{
-    cursor: pointer;
-    background-color: var(--cinza-bg);
-}
-
 .card img{
     border-radius: 1vh;
     height: 22vh;

@@ -53,6 +53,7 @@ var getProdutos = () => {
 var limparProdutos = () => {
     console.log("lool");
     cardapio.innerHTML = '';
+    insumos_alterar = [];
     document.getElementById('listaInsumos-alterar').innerHTML = '';
     document.getElementById('listaInsumos').innerHTML = '';
 }

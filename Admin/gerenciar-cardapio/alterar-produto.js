@@ -5,7 +5,7 @@ let produtoObject = {
     productName: "",
     productValue: 0,
     description: "",
-    supplieNames: ["Hambuguer", "Mirtilo"],
+    supplieNames: [],
     category: ""
 };
 

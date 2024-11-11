@@ -4,7 +4,7 @@ botaoPronto.addEventListener("click", async function(){
     const statusPedido = pedidoSelecionado.children[1];
     statusPedido.style.backgroundColor = "var(--azul)";
 
-    const id = document.getElementById('id-entrega').value;
+    const id = document.getElementById('id-pedido').value;
 
     try{
         const response = await fetch(`http://localhost:8080/pedidos/${id}/orderstatus/pronto`, {

@@ -46,11 +46,17 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                const data = await response.json();
+                // const data = await response.json();
 
-                    console.log('Admin')
-                    document.body.classList.add('visible');
-                
+                // if (data.role != 'ADMIN') {
+                //     window.location.href = "/Tela-de-login/index.html"
+                //     throw new Error(`Você não tem permissão!`);
+                // }
+
+                // else {
+                //     console.log('Admin')
+                //     document.body.classList.add('visible');
+                // }
             }
             catch (erro) {
                 console.error('Erro:', erro);
@@ -84,7 +90,7 @@
                             Registrar pedidos</a></li>
                     <li><a href="/Usuario/gerenciar-entrega/entrega.html"><i class="fas fa-motorcycle pe-2"></i>
                             Entrega</a></li>
-                    <li><a href="/Usuario/Verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
+                    <li><a href="/Usuario/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
                     <li><a href="/Usuario/gerenciar-cardapio/gerenciar-cardapio.html"><i
                                 class="fas fa-utensils pe-2"></i>
@@ -105,6 +111,14 @@
                         <div id="tem-entregas-conteiner">
                             <span>Não há entregas.</span>
                         </div>
+                        <!-- <div class="pedido mt-3 me-2 ms-2 mb-1">
+                            <div class="info-pedido">
+                                <p>Éder Júnior</p>
+                                <label class="pe-5">Nº 26</label>
+                                <label class="valor">R$27,00</label>
+                            </div>
+                        <div class="situacao-pedido" id="statusPedido"></div>
+                        </div> -->
                     </div>
                     <div class="cadastrar d-flex justify-content-evenly">
                         <button class="cadastrar botao botao--vermelho" id="abrirAlterarEndereco" style="display: none; width: 20vh !important;">Alterar</button>
@@ -222,12 +236,13 @@
             </main>
         </div>
     </div>
-    
-    <script src="../script.js"></script>
+
     <script src="entrega.js"></script>
     <script src="conexao-tabela.js"></script>
     <script src="finalizar-entrega.js"></script>
     <script src="deletar-entrega.js"></script>
+    <script src="alterar-entrega.js"></script>
+    <script src="../script.js"></script>
     <script src="pronto-entrega.js"></script>
 </body>
 

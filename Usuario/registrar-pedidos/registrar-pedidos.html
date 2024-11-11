@@ -46,11 +46,17 @@
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
 
-                const data = await response.json();
+                // const data = await response.json();
 
-                    console.log('Admin')
-                    document.body.classList.add('visible');
-                
+                // if (data.role != 'ADMIN') {
+                //     window.location.href = "/Tela-de-login/index.html"
+                //     throw new Error(`Você não tem permissão!`);
+                // }
+
+                // else {
+                //     console.log('Admin')
+                //     document.body.classList.add('visible');
+                // }
             }
             catch (erro) {
                 console.error('Erro:', erro);
@@ -84,7 +90,7 @@
                             Registrar pedidos</a></li>
                     <li><a href="/Usuario/gerenciar-entrega/entrega.html"><i class="fas fa-motorcycle pe-2"></i>
                             Entrega</a></li>
-                    <li><a href="/Usuario/Verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
+                    <li><a href="/Usuario/verificar-estoque/verificar-estoque.html"><i class="fas fa-search pe-3"></i>
                             Verificar estoque</a></li>
                     <li><a href="/Usuario/gerenciar-cardapio/gerenciar-cardapio.html"><i
                                 class="fas fa-utensils pe-2"></i>
@@ -107,9 +113,8 @@
                             <label class="" for="pesquisa-andamento">Filtrar:</label>
                             <select class="col-2 select" name="pesquisa-andamento" id="pesquisa-andamento">
                                 <option value="todos">Todos</option>
-                                <option value="preparando">Preparando</option>
-                                <option value="pedido-pronto">Pedido pronto</option>
-                                <option value="finalizado">Finalizado</option>
+                                <option value="PREPARANDO">Preparando</option>
+                                <option value="PRONTO">Pedido pronto</option>
                             </select>
 
                             <label class="">Buscar:</label>
@@ -189,12 +194,12 @@
                                 </div>
                                 <div class="grupo-form">
                                     <label for="taxa">Taxa:</label>
-                                    <input id="taxa" placeholder="R$0,00" type="text">
+                                    <input id="taxa" oninput="formatCurrency(this)" placeholder="R$0,00" type="text">
                                 </div>
                             </div>
 
                         </form>
-
+                        <div id="msg-erro-adicionar" style="display: none; color: red;">Preencha todos os campos!</div>
                         <footer class="container">
                             <div class="row justify-content-evenly">
                                 <button id="cancelar"
@@ -240,6 +245,7 @@
                                 </select>
                             </div>
                         </form>
+                        <div id="msg-erro-alterar" style="display: none; color: red;"></div>
                         <div class="grupo-form ">
                             <button id="deletar"
                                 class="col-4 botao botao--vazio botao-cancelar mt-4">Deletar</button>
@@ -283,14 +289,14 @@
                             </div>
                             <div class="grupo-form">
                                 <label for="taxaAlterar">Alterar taxa:</label>
-                                <input id="taxaAlterar" placeholder="R$0,00" type="text">
+                                <input id="taxaAlterar" oninput="formatCurrency(this)" placeholder="R$0,00" type="text">
                             </div>
                         </form>
-
+                        <div id="msg-erro-entrega" style="display: none; color: red;">Preencha todos os campos!</div>
                         <footer class="container">
                             <div class="row justify-content-evenly">
                                 <button id="voltar" class="col-4 botao botao--vermelho botao-cancelar">Voltar</button>
-                                <button id="confirmar" class="col-4 botao botao--verde">Alterar</button>
+                                <button id="confirmar-entrega" class="col-4 botao botao--verde" >Alterar</button>
                             </div>
                         </footer>
                     </div>

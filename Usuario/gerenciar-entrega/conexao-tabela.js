@@ -159,5 +159,4 @@ pedidosClass.forEach(pedidoSelecionado => {
         });
     });
 });
-
-
+  

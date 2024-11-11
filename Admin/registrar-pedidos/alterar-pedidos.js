@@ -147,7 +147,7 @@ tipoPedidoSelect.addEventListener('change', (event) => {
       motoboyAlterar.value = pedidoEmQuestao.deliveryDTO.motoboy;
       trocoAlterar.value = pedidoEmQuestao.deliveryDTO.change;
       complementoAlterar.value = pedidoEmQuestao.deliveryDTO.complement;
-      taxaAlterar.value = pedidoEmQuestao.deliveryDTO.fee;
+      taxaAlterar.value = "R$ " + formatNumber(pedidoEmQuestao.deliveryDTO.fee.toFixed(2));
     }
   }
 })
@@ -360,3 +360,14 @@ modalAlterarInfoPedido.addEventListener("click", function (event) {
     tipoPedidoSelect.value = '';
   }
 })
+
+function formatNumber(value) {
+  // Criar um NumberFormat para o locale brasileiro
+  const numberFormat = new Intl.NumberFormat('pt-BR', {
+      minimumFractionDigits: 2, // Número mínimo de casas decimais
+      maximumFractionDigits: 2  // Número máximo de casas decimais
+  });
+
+  // Formatar o número
+  return numberFormat.format(value);
+}

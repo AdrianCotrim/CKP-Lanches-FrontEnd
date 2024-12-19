@@ -17,3 +17,8 @@ The system features an intuitive interface and differentiated access levels:
 - **Administrators** have access to advanced functionalities, such as full inventory control, report generation, and financial performance analysis.  
 
 These tools are designed to optimize operations and improve the establishment's efficiency.
+
+## Navegação / Navigation  
+
+- [Português](README_pt.md)
+- [English](README_en.md)
